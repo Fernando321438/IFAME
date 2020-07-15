@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <p style="font-size:1vw;" style="text-align:center">Do you want to SignUp or SignIn?</p>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="auth-form">
+    <ion-row>
+        <ion-grid>
+            <ion-col align-self-center>
+                <ion-button [routerLink]="['/registration']" expand="block" color="secondary">Users</ion-button>
+
+                <span class="divider line one-line">or</span>
+
+                <ion-button [routerLink]="['/registration-musiccreators']" expand="block" color="secondary">Music creators</ion-button>
+
+                <span class="divider line one-line">or</span>
+
+                <ion-button [routerLink]="['/registration-artist']" expand="block" color="secondary">Artists</ion-button>
+
+                <span class="divider line one-line">or</span>
+
+                <ion-button [routerLink]="['/registration-crypto']" expand="block" color="secondary">Cryptobuyers</ion-button>
+
+            </ion-col>
+        </ion-grid>
+    </ion-row>
+
+
+</ion-content>
+
+<ion-tab-bar slot="bottom">
+    <ion-button [routerLink]="['/login-register']">
+        <ion-icon name="log-out-outline"></ion-icon>
+        <ion-label>Logout</ion-label>
+    </ion-button>
+</ion-tab-bar>

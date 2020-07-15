@@ -1,0 +1,16 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>recorder</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-label>
+        <ion-text>
+            <h1>{{status}}</h1>
+        </ion-text>
+    </ion-label>
+    <ion-button (click)="RecordAudio()">Record</ion-button>
+    <ion-button (click)="StopRecording()" (click)="UploadRecord()">Stop</ion-button>
+
+</ion-content>
