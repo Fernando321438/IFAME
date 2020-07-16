@@ -1,0 +1,8 @@
+{
+  "name": "LABELSCOIN_BLOCKCHAIN",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular"
+}
