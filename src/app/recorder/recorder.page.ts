@@ -30,7 +30,20 @@ this.status = "stopped";
 /* this.afs.ref("music/sound/").put(this.audiofile);
  */
 }
-upload1(){firebase.storage().ref('audio');}
+upload1(){
+    this.audio = this.audiofile;
+    firebase.storage().ref('audio');
+    this.afs.storage.ref('audio').listAll().then(result => {
+        result.items.forEach(async ref => {
+          this.audio.push({
+            name: ref.name,
+            full: ref.fullPath,
+            url: await ref.getDownloadURL(),
+            ref: ref
+          });
+        });
+      });
+}
 
 upload(){
 
