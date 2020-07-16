@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Register</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-item lines="full">
+        <ion-label position="floating">Name</ion-label>
+        <ion-input placeholder="Name" id="user" type="text" class="input" [(ngModel)]="user.name" #name required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+        <ion-label position="floating">Surname</ion-label>
+        <ion-input placeholder="Surname" id="user" type="text" class="input" [(ngModel)]="user.surname" #surname required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+        <ion-label position="floating">Phone Number</ion-label>
+        <ion-input placeholder="Phone Number" id="user" type="text" class="input" [(ngModel)]="user.phone_number" #phone_number required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input placeholder="Email" id="user" type="text" class="input" [(ngModel)]="user.email" #email required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+        <ion-label position="floating">Password</ion-label>
+        <ion-input placeholder="Password" id="user" type="password" class="input" [(ngModel)]="user.password" #password required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+        <ion-label position="floating">Validate Password</ion-label>
+        <ion-input placeholder="Validate Password" id="user" type="password" class="input" [(ngModel)]="user.validatepassword" #validatepassword required></ion-input>
+    </ion-item>
+
+
+    <ion-row>
+        <ion-col>
+            <ion-button type="submit" (click)="signUp(email, password)" expand="block">Register</ion-button>
+        </ion-col>
+    </ion-row>
+
+</ion-content>
+
+<ion-tab-bar slot="bottom">
+    <ion-button [routerLink]="['/login-register']">
+        <ion-icon name="log-out-outline"></ion-icon>
+        <ion-label>Logout</ion-label>
+    </ion-button>
+</ion-tab-bar>
