@@ -1,0 +1,19 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+    <ion-title>
+    
+    </ion-title>
+    </ion-toolbar>
+    </ion-header>
+    
+    <ion-content [fullscreen]="true">
+    <ion-label>
+    <ion-text>
+    <h1>{{status}}</h1>
+    </ion-text>
+    </ion-label>
+    <ion-button (click)="RecordAudio()">Record </ion-button>
+    <ion-button (click)="StopRecording()" (click)="upload()">Stop</ion-button>
+    
+    </ion-content>
+    
