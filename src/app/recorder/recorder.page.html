@@ -12,8 +12,9 @@
     <h1>{{status}}</h1>
     </ion-text>
     </ion-label>
+    <input type="file" id="avatar" />
     <ion-button (click)="RecordAudio()">Record </ion-button>
-    <ion-button (click)="StopRecording()" (click)="upload1()">Stop</ion-button>
-    
+    <ion-button id="avatar" (click)="StopRecording()"  (click)="sendAudio()">Stop</ion-button>
+    <!-- (click)="sendAudioToSomewhere()" -->
     </ion-content>
     

@@ -17,6 +17,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx'
 import { Media} from "@ionic-native/media/ngx";
 import { File} from "@ionic-native/file/ngx";
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
