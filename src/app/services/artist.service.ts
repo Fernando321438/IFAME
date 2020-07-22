@@ -13,6 +13,8 @@ export class Artist {
   My_songs:string;
   Genres:string;
   Royalties: string;
+  recordname: any;
+  
 }
 
 @Injectable({

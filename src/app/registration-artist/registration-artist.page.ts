@@ -9,6 +9,8 @@ import 'firebase/firestore';
 import { ArtistService,Artist } from '../services/artist.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 
+
+
 @Component({
   selector: 'app-registration',
   templateUrl: './registration-artist.page.html',
@@ -18,7 +20,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class RegistrationArtistPage implements OnInit {
 
   artists: any = {};
-  creators: Artist = {
+   Artist = {
     
     Typeartist: '',
     Name: '',

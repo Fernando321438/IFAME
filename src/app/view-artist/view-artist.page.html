@@ -5,7 +5,17 @@
 </ion-header>
 
 <ion-content>
+    <ion-row>
+        <ion-grid>
+            <ion-col align-self-center>
+                <ion-button [routerLink]="['/']" expand="block" color="secondary">Live</ion-button>
 
+                <span class="divider line one-line">or</span>
+
+                <ion-button [routerLink]="['/recorder']" expand="block" color="secondary">Recording</ion-button>
+            </ion-col>
+        </ion-grid>
+    </ion-row>
 </ion-content>
 
 <ion-tab-bar slot="bottom">
