@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+    <ion-title>
+    
+    </ion-title>
+    </ion-toolbar>
+    </ion-header>
+    
+    <ion-content [fullscreen]="true">
+    <ion-label>
+    <ion-text>
+    <h1>{{status}}</h1>
+    </ion-text>
+    </ion-label>
+    <ion-item lines="full">
+        <ion-label position="floating">Record Name</ion-label>
+        <ion-input placeholder="Insert Record Name" id="avatar" type="text" class="input" [(ngModel)]="artistCurrent.recordname" #name required>
+        </ion-input>
+    </ion-item> 
+    <ion-button type="input"  (click)="createCounter()">Counter</ion-button>
+    <ion-button type="input" id="avatar" (click)="SaveNameRecord()">Save Name Record </ion-button>
+    <ion-button (click)="RecordAudio()">Record </ion-button>
+    <ion-button id="avatar" (click)="StopRecording()"  (click)="sendAudio()">Stop</ion-button>
+    <!-- (click)="sendAudioToSomewhere()" -->
+    </ion-content>
+    
