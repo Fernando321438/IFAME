@@ -64,7 +64,7 @@ export class RecorderPage {
 
       const artistFire1 = this.afstore.collection('artist');
       const artistFire2 = artistFire1.ref.doc((await this.authObj.currentUser).uid);
-       artistFire2.collection('Recorders').doc('Record').set(datages).then(() => { //(await this.auth.currentUser).uid
+       artistFire2.collection('Recorders').doc('/' + this.artistCurrent.recordname).set(datages).then(() => { //(await this.auth.currentUser).uid
         this.showToast('Record Added');
         }, err => {
           this.showToast('Record Not Added');
@@ -101,12 +101,29 @@ export class RecorderPage {
     /* this.afs.ref("music/sound/").put(this.audiofile);
      */
   }
+
+
+async upload2(file: any[]):Promise<any>{
+  if(file && file.length){
+    try{
+      file=this.audio;
+      const task = await this.afs.ref('Audio').child((await this.authObj.currentUser).uid).put(file);
+      return this.afs.ref('Audio'+(await this.authObj.currentUser).uid).getDownloadURL().toPromise();
+    } catch(error){console.log(error);}
+  
+  }
+
+}
+
+
+
   //FUNZIONANTE
   async uploadfile() {
-    let file = (<HTMLInputElement>document.getElementById('avatar')).files[0];
-    let ref = this.afs.ref('Audio/' + (await this.auth.currentUser).uid + '/' + file.name);
 
-    ref.put(file).then(res => {
+    let file = (<HTMLInputElement>document.getElementById('avatar')).files[0];
+    let ref = this.afs.ref('Audio/' + (await this.authObj.currentUser).uid + this.audiofile);
+
+    ref.put(file).then(_res => {
 
       ref.getDownloadURL().subscribe(mp3 => {
 
@@ -123,7 +140,7 @@ export class RecorderPage {
 
     var file = this.getFileBlob();
     this.audio = this.audiofile;
-    this.afs.ref('Audio' + (await this.auth.currentUser).uid + '/' + this.audiofile).put(file);
+    this.afs.ref('Audio' + (await this.authObj.currentUser).uid+ '/' + this.audiofile).put(file);
     console.log('Uploaded a blob or file!');
 
 
@@ -140,9 +157,9 @@ export class RecorderPage {
   };
 
   async sendAudio() {
-    const file = (<HTMLInputElement>document.getElementById('avatar')).files[0];
+    const file = (<HTMLElement>document.getElementById('avatar')).files[0];
      new Blob([JSON.stringify(file, null, 2)], { type: 'audio/mp3' }); // usa l'API BLOB o File
-    this.afs.ref('Audio/' + (await this.auth.currentUser).uid + '/' + this.artistCurrent.recordname + '/').put(file);
+    this.afs.ref('Audio/' + (await this.authObj.currentUser).uid+ '/' + this.artistCurrent.recordname + '/').put(file);
     console.log('Uploaded a blob or file!');
 
     /*  this.getFileBlob();
@@ -234,7 +251,7 @@ export class RecorderPage {
       console.log(e);
     })
   }
-  /* upload1(){
+  /* upload3(){
       this.audio = this.audiofile;
       firebase.storage().ref('audio');
       this.afs.storage.ref('audio').listAll().then(result => {
@@ -247,8 +264,8 @@ export class RecorderPage {
             });
           });
         });
-  }
-  */
+  } */
+  
 
   upload() {
 

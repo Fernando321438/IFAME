@@ -17,10 +17,10 @@
         <ion-input placeholder="Insert Record Name" id="avatar" type="text" class="input" [(ngModel)]="artistCurrent.recordname" #name required>
         </ion-input>
     </ion-item> 
-    <ion-button type="input"  (click)="createCounter()">Counter</ion-button>
+
     <ion-button type="input" id="avatar" (click)="SaveNameRecord()">Save Name Record </ion-button>
     <ion-button (click)="RecordAudio()">Record </ion-button>
-    <ion-button id="avatar" (click)="StopRecording()"  (click)="sendAudio()">Stop</ion-button>
-    <!-- (click)="sendAudioToSomewhere()" -->
-    </ion-content>
+    <ion-button  id="avatar" (click)="StopRecording()"(click)="uploadfile()">Stop</ion-button>
+      <!--      (click)="sendAudioToSomewhere()"--> 
+       </ion-content>
     
