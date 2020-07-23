@@ -26,9 +26,11 @@ export class RecorderPage {
   blob: any;
   artist: Artist;
   artistCurrent:any={};
+  numShards:any;
+  count: any;
  
 
-  constructor(private toastCtrl: ToastController, private media: Media, private file: File, private afs: AngularFireStorage, private auth: AngularFireAuth, private artistService: ArtistService, private activatedRoute: ActivatedRoute, private afstore: AngularFirestore, private readonly router: Router) { }
+  constructor(private toastCtrl: ToastController, private media: Media, private file: File, private afs: AngularFireStorage, private auth: AngularFireAuth, private artistService: ArtistService, private activatedRoute: ActivatedRoute, private afstore: AngularFirestore, private readonly router: Router,    private authObj : AngularFireAuth) { }
 
   ngOnInit() {
 
@@ -40,12 +42,42 @@ export class RecorderPage {
     }
   }
 
+   async createCounter(){
+   const db=  firebase.firestore();
+  const increment = firebase.firestore.FieldValue.increment(1);
+  const storyRef = firebase.firestore().collection('artist').doc(((await this.authObj.currentUser).uid + '/Recorders/'+ 'Record'+ this.count));
+  const batch = db.batch();
+  batch.set(storyRef,{record:increment});
+  batch.commit();
+ 
+  }
+ 
+
+  
+
+
   async SaveNameRecord() {
     if (this.artistCurrent.recordname) {
       const datages = {
         Recordname: this.artistCurrent.recordname,
       };
-     this.afstore.collection('Recorders/').add(datages).then(() => { //(await this.auth.currentUser).uid
+
+      const artistFire1 = this.afstore.collection('artist');
+      const artistFire2 = artistFire1.ref.doc((await this.authObj.currentUser).uid);
+       artistFire2.collection('Recorders').doc('Record').set(datages).then(() => { //(await this.auth.currentUser).uid
+        this.showToast('Record Added');
+        }, err => {
+          this.showToast('Record Not Added');
+    
+        }).catch(e => {
+          console.log(e);
+        })
+      } else {
+        this.showToast('Empty Record Field ');
+      }
+
+      
+     /* this.afstore.collection('Recorders/').add(datages).then(() => { //(await this.auth.currentUser).uid
       this.showToast('Record Added');
       }, err => {
         this.showToast('Record Not Added');
@@ -55,7 +87,7 @@ export class RecorderPage {
       })
     } else {
       this.showToast('Empty Record Field ');
-    }
+    } */
   }
 
   RecordAudio() {
@@ -110,7 +142,7 @@ export class RecorderPage {
   async sendAudio() {
     const file = (<HTMLInputElement>document.getElementById('avatar')).files[0];
      new Blob([JSON.stringify(file, null, 2)], { type: 'audio/mp3' }); // usa l'API BLOB o File
-    this.afs.ref('Audio/' + (await this.auth.currentUser).uid + '/' + this.artistCurrent.recordname + '/' + file.name).put(file);
+    this.afs.ref('Audio/' + (await this.auth.currentUser).uid + '/' + this.artistCurrent.recordname + '/').put(file);
     console.log('Uploaded a blob or file!');
 
     /*  this.getFileBlob();

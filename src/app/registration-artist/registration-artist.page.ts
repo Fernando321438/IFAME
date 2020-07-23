@@ -71,14 +71,15 @@ signUp() {
           Alias: this.artists.alias, Id_work: this.artists.id_work, My_songs: this.artists.my_songs, 
           Genres: this.artists.genres, Royalties: this.artists.royalties,createdAt: Date.now()
         };
+        const userId = (await this.authObj.currentUser).uid;
         const artistFire1 = this.afs.collection('artist');
-        await artistFire1.ref.doc().set(datages).then(() => {
+        await artistFire1.ref.doc(userId).set(datages).then(() => {
           this.router.navigateByUrl('/view-artist');
           this.showToast('artist added');
         }).catch(e => {
           console.log(e);
         })
-
+       console.log(userId);
       })
     } else { this.showToast('The two passwords are not associated or has not been filled in some field'); }
 
