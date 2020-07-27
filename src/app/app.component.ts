@@ -10,6 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+  rootPage:any = 'MyFilesPage';
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,

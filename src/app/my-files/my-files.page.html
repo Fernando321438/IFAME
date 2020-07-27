@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar color="primary"></ion-navbar>
+  <ion-toolbar>
+    <ion-title>MyFiles</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-card *ngFor="let file of files | async">
+<ion-card-header>
+{{file.created |date:'medium'}}
+
+</ion-card-header>
+<ion-card-content>
+  <button ion-button block icon-left outline (click)="viewFile(file.url)">
+
+    <ion-icon name="eye"></ion-icon>
+      {{ file.fullPath }}
+   
+  </button>
+
+  <button ion-button block icon-only outline color="danger"(click)="deleteFile(file)">
+
+    <ion-icon name="trash"></ion-icon>
+    
+   
+  </button>
+
+
+
+</ion-card-content>
+
+
+</ion-card>
+
+
+
+
+
+
+
+
+
+
+
+
+  <ion-fab right bottom>
+<button ion-fab color="primary" (click)="addFile()">
+<ion-icon name="cloud-upload">
+
+</ion-icon>
+</button>
+
+
+  </ion-fab>
+</ion-content>

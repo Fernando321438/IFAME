@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'my-files',
+    loadChildren: () => import('./my-files/my-files.module').then( m => m.MyFilesPageModule)
+  },
 ];
 
 @NgModule({
