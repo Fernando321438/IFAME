@@ -24,7 +24,7 @@ export class LivePage {
   is_yt = false;
 
   // PUT YOUR Youtube API KEY!! Below
-  apiKey: string = '';
+  apiKey: string = 'AIzaSyBVlpXbhtVrmh1g6ACo_TC2CrxxW2kqe5o';
 
   // Loading message
   loading = '';
@@ -35,7 +35,7 @@ export class LivePage {
   // MAX results for Youtube fetch
   maxResults = 8;
 
-  // Song Infromation from audd.io API
+  // Song Information from audd.io API
   status: string;
   artist: string;
   album: string;
@@ -53,8 +53,8 @@ export class LivePage {
     this.spinner.show();
     this.loading = "Getting Youtube Data!";
     let url = 'https://www.googleapis.com/youtube/v3/search?key=' + this.apiKey + '&part=snippet&q=' + this.artist + '&type=video&maxResults=' + this.maxResults;
-    await this.http.get(url).subscribe(res => {
-      let search = JSON.parse(JSON.stringify(res))
+    this.http.get(url).subscribe(res => {
+      let search = JSON.parse(JSON.stringify(res));
       console.log(search.items);
       this.youtubedata = search.items;
       this.gotVid = true;
