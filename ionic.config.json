@@ -1,5 +1,7 @@
 {
-  "name": "LSBB",
-  "integrations": {},
+  "name": "LABELSCOIN_BLOCKCHAIN",
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
