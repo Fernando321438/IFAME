@@ -1,0 +1,26 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>view-artist</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-row>
+        <ion-grid>
+            <ion-col align-self-center>
+                <ion-button [routerLink]="['/live']" expand="block" color="secondary">Live</ion-button>
+
+                <span class="divider line one-line">or</span>
+
+                <ion-button [routerLink]="['/recorder']" expand="block" color="secondary">Recording</ion-button>
+            </ion-col>
+        </ion-grid>
+    </ion-row>
+</ion-content>
+
+<ion-tab-bar slot="bottom">
+    <ion-button [routerLink]="['/login-register']">
+        <ion-icon name="log-out-outline"></ion-icon>
+        <ion-label>Logout</ion-label>
+    </ion-button>
+</ion-tab-bar>
