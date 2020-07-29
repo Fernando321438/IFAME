@@ -16,7 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { Geolocation } from '@ionic-native/geolocation/ngx'
 import { Media} from "@ionic-native/media/ngx";
 import { File} from "@ionic-native/file/ngx";
-
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations"
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +28,9 @@ import { File} from "@ionic-native/file/ngx";
     AngularFireDatabaseModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
+    NoopAnimationsModule,
+    BrowserAnimationsModule,
+    
     
   ],
   providers: [
@@ -36,6 +40,9 @@ import { File} from "@ionic-native/file/ngx";
     SplashScreen,
     Media,
     File,
+    BrowserAnimationsModule,
+    NoopAnimationsModule,
+    
   
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy, },
 ],

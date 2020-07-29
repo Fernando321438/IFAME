@@ -4,13 +4,13 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-live',
   templateUrl: 'live.page.html',
   styleUrls: ['live.page.scss'],
 })
 export class LivePage {
 
-  constructor(private http: HttpClient,private toastCtrl: ToastController, private spinner: NgxSpinnerService) { }
+  constructor(private http: HttpClient,private toastCtrl: ToastController, private spinner: NgxSpinnerService, ) { }
 
   // CHANGE THE SERVER PORT TO YOUR SERVER ENV PORT!
   // THIS IS TEST USING LOCALHOST WITH PORT 5000 DEFINED INSIDE WEB SERVER

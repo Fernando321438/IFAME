@@ -1,5 +1,5 @@
 {
-  "name": "LABELSCOIN_BLOCKCHAIN",
+  "name": "fernando_fioritoni",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
@@ -18,7 +18,7 @@
     "@angular/core": "~9.1.6",
     "@angular/fire": "^6.0.2",
     "@angular/forms": "~9.1.6",
-    "@angular/platform-browser": "~9.1.6",
+    "@angular/platform-browser": "^9.1.12",
     "@angular/platform-browser-dynamic": "~9.1.6",
     "@angular/router": "~9.1.6",
     "@firebase/auth": "^0.14.7",
@@ -34,6 +34,7 @@
     "@types/filesystem": "0.0.29",
     "@types/fluent-ffmpeg": "^2.1.14",
     "@types/jquery": "^3.5.0",
+    "angular-animations": "0.0.10",
     "chromaprint": "^0.1.0",
     "cordova-android": "8.1.0",
     "cordova-browser": "^6.0.0",
