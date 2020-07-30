@@ -36,22 +36,22 @@ export class LivePage {
   // CHANGE THE SERVER PORT TO YOUR SERVER ENV PORT!
   // THIS IS TEST USING LOCALHOST WITH PORT 5000 DEFINED INSIDE WEB SERVER
   // IN THIS APP WE ARE USING NODE JS SERVER
-  SERVER_URL = 'http://localhost:5000';
+  SERVER_URL = 'http://localhost:8100';
 
   // ngIf UI Boolean 
   gotVid = false;
   songfailed = false;
   showInfo = false;
-  is_yt = false;
+  is_firebase = false;
 
   // PUT YOUR Youtube API KEY!! Below
-  apiKey: string = 'AIzaSyBVlpXbhtVrmh1g6ACo_TC2CrxxW2kqe5o';
+  apiKey: string = 'AIzaSyCgBpktoh39RCS4cunYdh-Rqx-IQxxqTq4';
 
   // Loading message
   loading ='';
 
   // Youtube Videos Holder
-  youtubedata: any;
+  firebasedata: any;
 
   // MAX results for Youtube fetch
   maxResults = 8;
@@ -73,12 +73,12 @@ export class LivePage {
 
   async search() {
     this.spinner.show();
-    this.loading = "Getting Youtube Data!";
-    let url = 'https://www.googleapis.com/youtube/v3/search?key=' + this.apiKey + '&part=snippet&q=' + this.artist + '&type=video&maxResults=' + this.maxResults;
+    this.loading = "Getting Firebase Data!";
+    let url = 'https://registrazione-utenti-2f9ed.firebaseio.com' + this.apiKey + '&part=snippet&q=' + this.artist + '&type=video&maxResults=' + this.maxResults;
     this.http.get(url).subscribe(res => {
-      let search = JSON.parse(JSON.stringify(res));
-      console.log(search.items);
-      this.youtubedata = search.items;
+      let firebaseio = JSON.parse(JSON.stringify(res));
+      console.log(firebaseio.items);
+      this.apiKey = firebaseio.items;
       this.gotVid = true;
       this.spinner.hide();
     }, err => {
@@ -87,17 +87,17 @@ export class LivePage {
     });
   }
 
-  check(url) {
-    this.is_youtube(url);
-    if (!this.is_yt) {
-      this.showToast("Please input a youtube link");
+  check(url: string) {
+    this.Is_firebase(url);
+    if (this.url=null) { // se questo url non è presente nel database, allora entra nel ciclo (if) ,altrimenti entra nell'altro (else)
+      this.showToast("Please input a firebase link");
     }
     else {
       this.showToast("Correct Link, Click Process Button To Begin");
     }
   }
 
-  async process(url) {
+  async process(url: any) {
     this.spinner.show();
     this.loading = "Processing Video, Please Wait!";
     await this.getBase64AudioServer(url)
@@ -114,28 +114,28 @@ export class LivePage {
       })
   }
 
-  is_youtube(url) {
+  Is_firebase(url: string) {
     var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     var match = url.match(regExp);
     if (match) {
-      this.is_yt = true;
+      this.is_firebase = true;
     }
     else {
-      this.is_yt = false;
+      this.is_firebase = false;
     }
   }
 
-  youtube_parser(url) {
-    var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  Firebase_parser(url: string) {
+    var regExp = /^.*(firebase\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     var match = url.match(regExp);
     if (match && match[2].length == 11) {
       return match[2];
     }
   }
 
-  getBase64AudioServer(url) {
+  getBase64AudioServer(url: any) {
     return new Promise((resolve, reject) => {
-      this.http.get(`${this.SERVER_URL}/api/youtube/?url=${url}`, { responseType: 'text' })
+      this.http.get(`${this.SERVER_URL}/api/firebase/?url=${url}`, { responseType: 'text' })
         .subscribe(res => {
           if (res != undefined && res != null && res != '') {
             this.audio = res;
@@ -173,7 +173,7 @@ export class LivePage {
     });
 
   }
-  showToast(msg) {
+  showToast(msg: string) {
     this.toastCtrl.create({
       message: msg,
       duration: 2000

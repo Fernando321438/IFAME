@@ -11,7 +11,7 @@
         <div class="container has-text-centered">
             <img src="../assets/music.svg" width="100px" height="100px">
             <h1 class="title">
-                Hello There!, its me Song Recognition <i class="fas fa-headphones-alt"></i>
+                Hello There , its me Song Recognition <i class="fas fa-headphones-alt"></i>
             </h1>
             <h2 class="subtitle">
                 Paste any youtube Song video to know it artist info and other related songs
@@ -19,16 +19,16 @@
         </div>
         <div style="margin: 30px">
             <div class="container has-text-centered" style="text-align: center">
-                <input style="width: 50%; max-width: 50%;; margin:5px" class="input is-danger is-rounded" type="text" placeholder="Youtube Link!" [(ngModel)]="url">
+                <input style="width: 50%; max-width: 50%;; margin:5px" class="input is-danger is-rounded" type="text" placeholder="Firebase Link!" [(ngModel)]="url">
                 <a (click)="check(url)" style="margin:5px" class="button is-danger is-rounded"> Check <i style="padding:3px"
             class="fas fa-check"></i></a>
-                <a *ngIf="is_yt" (click)="process(url)" style="margin:5px" class="button is-danger is-rounded">Process <i
+                <a *ngIf="is_firebase" (click)="process(url)" style="margin:5px" class="button is-danger is-rounded">Process <i
             style="padding:3px" class="fas fa-sync"></i></a>
                 <a *ngIf="showInfo" (click)="search()" style="margin:5px" class="button is-danger is-rounded">Get Songs <i
             style="padding:3px" class="fab fa-youtube"></i></a>
             </div><br>
             <div style="margin: 20px" class="container has-text-centered" style="text-align: center">
-             <youtube-player *ngIf="showInfo" [videoId]="youtube_parser(url)">
+             <youtube-player *ngIf="showInfo" [videoId]="Firebase_parser(url)">
         </youtube-player>
       </div>
       <div *ngIf="showInfo" style="margin: 20px" class="container has-text-centered"
@@ -43,7 +43,7 @@
         <h1 class="subtitle">Ops :( We Can't Recognition The Song, sorry</h1>
       </div>
       <div *ngIf="gotVid" class="row">
-        <div class="col-xl-3 col-md-6 mb-4" *ngFor="let video of youtubedata">
+        <div class="col-xl-3 col-md-6 mb-4" *ngFor="let video of firebasedata">
           <youtube-player style="padding:5px" [videoId]="video.id.videoId">
           </youtube-player> -->
           <p class="card-category text-gray">{{video.snippet.title}}</p>
@@ -54,7 +54,7 @@
 </section>
 <footer>
     <div class="container has-text-centered" style="color:#ccc">
-        <p>This Challenge has been developed by Rami Saad @ProximaDev</p>
+        <p>This Challenge has been developed by Labels Coin Team</p>
     </div>
 </footer>
 
