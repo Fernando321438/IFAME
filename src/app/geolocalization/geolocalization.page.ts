@@ -1,7 +1,13 @@
 import { Component } from '@angular/core';
-
 import { CalculateService } from '../services/calculate.service';
-
+import { HttpClient } from '@angular/common/http';
+import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireStorage } from "@angular/fire/storage";
+import * as firebase from 'firebase/app';
+import { Artist, ArtistService } from "../services/artist.service";
+import { AngularFirestore } from "@angular/fire/firestore";
 
 @Component({
   selector: 'app-geolocalization',
@@ -16,7 +22,17 @@ export class GeolocalizationPage {
   travel_duration: any ;
   location: any ;
   
-  constructor(private calculateService : CalculateService) {
+  constructor(
+    private calculateService : CalculateService,
+    private http: HttpClient,
+    public  afAuth: AngularFireAuth,
+    private toastCtrl: ToastController, 
+    private afs: AngularFireStorage, 
+    private auth: AngularFireAuth, 
+    private artistService: ArtistService, 
+    private afstore: AngularFirestore, 
+    private authObj: AngularFireAuth,
+    private readonly router: Router) {
     
 
   }
@@ -54,5 +70,9 @@ export class GeolocalizationPage {
 
   async changeLocation(){
     await this.calculateService.getCurrentLoc();
+  }
+  async logout(){
+    await this.authObj.signOut();
+    this.router.navigateByUrl('/view-artist');
   }
 }

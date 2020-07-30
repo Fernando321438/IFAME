@@ -1,18 +1,29 @@
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  font-family: 'Cairo', sans-serif
+ion-toolbar{
+  justify-content: space-between;
+  --background: #000000;
 }
-
-.infz {
-  color: rgb(231, 18, 71);
-}
-
-span {
-  color: white;
-}
+  .logout{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin-top: 5px;
+    margin-right: 7px;
+    color: #fafaf8;
+  }
+  .icon {
+    font-size: 40px;
+    margin-top: 5px;
+    background: #000000;
+  }
+  .logotoolbar{
+    background-image: url("../../assets/icon/labelscoin.png");
+    margin-left: auto;
+    margin-right: auto;
+    width: 110px;
+    height: 50px;
+    background-position: center;
+    background-size: 100% 100%;
+    position: relative;
+    background-color: #474747;
+  }
+  

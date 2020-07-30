@@ -39,6 +39,8 @@ export class RegistrationCryptoPage implements OnInit {
     private toastCtrl: ToastController,
     private afDB: AngularFireDatabase,
     private authObj : AngularFireAuth,
+    public  afAuth: AngularFireAuth,
+
   ) { }
 
   ngOnInit() { 
@@ -111,5 +113,9 @@ export class RegistrationCryptoPage implements OnInit {
       message: msg,
       duration: 2000
     }).then(toast => toast.present());
+  }
+  async logout(){
+    await this.afAuth.signOut();
+    this.router.navigateByUrl('/login-register');
   }
 }

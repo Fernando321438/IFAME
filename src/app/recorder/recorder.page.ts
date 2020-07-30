@@ -299,4 +299,8 @@ export class RecorderPage {
       duration: 2000
     }).then(toast => toast.present());
   }
+  async logout(){
+    await this.authObj.signOut();
+    this.router.navigateByUrl('/view-artist');
+  }
 }

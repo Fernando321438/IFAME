@@ -42,6 +42,8 @@ export class RegistrationMusiccreatorsPage implements OnInit {
     private toastCtrl: ToastController,
     private afDB: AngularFireDatabase,
     private authObj : AngularFireAuth,
+    public  afAuth: AngularFireAuth,
+
 
   ) { }
 
@@ -117,5 +119,10 @@ export class RegistrationMusiccreatorsPage implements OnInit {
         message: msg,
         duration: 2000
       }).then(toast => toast.present());
+   
+    }
+    async logout(){
+      await this.afAuth.signOut();
+      this.router.navigateByUrl('/login-register');
     }
   }

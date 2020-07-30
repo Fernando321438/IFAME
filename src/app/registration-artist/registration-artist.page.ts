@@ -11,6 +11,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 
 
+
 @Component({
   selector: 'app-registration',
   templateUrl: './registration-artist.page.html',
@@ -42,6 +43,8 @@ export class RegistrationArtistPage implements OnInit {
     private toastCtrl: ToastController,
     private afDB: AngularFireDatabase,
     private authObj : AngularFireAuth,
+    public  afAuth: AngularFireAuth,
+
 
   ) { }
 
@@ -119,5 +122,9 @@ signUp() {
       message: msg,
       duration: 2000
     }).then(toast => toast.present());
+  }
+  async logout(){
+    await this.afAuth.signOut();
+    this.router.navigateByUrl('/login-register');
   }
 }

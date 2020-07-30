@@ -2,6 +2,15 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Media, MediaObject } from "@ionic-native/media/ngx";
+import { File } from "@ionic-native/file/ngx";
+import { AngularFireStorage } from "@angular/fire/storage";
+import * as firebase from 'firebase/app';
+import { Artist, ArtistService } from "../services/artist.service";
+import { AngularFirestore } from "@angular/fire/firestore";
+
 
 @Component({
   selector: 'app-live',
@@ -10,7 +19,19 @@ import { ToastController } from '@ionic/angular';
 })
 export class LivePage {
 
-  constructor(private http: HttpClient,private toastCtrl: ToastController, private spinner: NgxSpinnerService, ) { }
+  constructor(
+    private http: HttpClient,
+    private spinner: NgxSpinnerService, 
+    public  afAuth: AngularFireAuth,
+    private toastCtrl: ToastController, 
+    private media: Media, 
+    private file: File, 
+    private afs: AngularFireStorage, 
+    private auth: AngularFireAuth, 
+    private artistService: ArtistService, 
+    private afstore: AngularFirestore, 
+    private authObj: AngularFireAuth,
+    private readonly router: Router) { }
 
   // CHANGE THE SERVER PORT TO YOUR SERVER ENV PORT!
   // THIS IS TEST USING LOCALHOST WITH PORT 5000 DEFINED INSIDE WEB SERVER
@@ -27,7 +48,7 @@ export class LivePage {
   apiKey: string = 'AIzaSyBVlpXbhtVrmh1g6ACo_TC2CrxxW2kqe5o';
 
   // Loading message
-  loading = '';
+  loading ='';
 
   // Youtube Videos Holder
   youtubedata: any;
@@ -36,6 +57,7 @@ export class LivePage {
   maxResults = 8;
 
   // Song Information from audd.io API
+  
   status: string;
   artist: string;
   album: string;
@@ -156,6 +178,10 @@ export class LivePage {
       message: msg,
       duration: 2000
     }).then(toast => toast.present());
+  }
+  async logout(){
+    await this.authObj.signOut();
+    this.router.navigateByUrl('/view-artist');
   }
 }
 

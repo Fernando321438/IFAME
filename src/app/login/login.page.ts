@@ -24,7 +24,9 @@ export class LoginPage implements OnInit {
     private readonly router: Router,
     public loadingCtrl: LoadingController,
     private readonly toastCtrl: ToastController,
-    private readonly afs: AngularFirestore
+    private readonly afs: AngularFirestore,
+    public  afAuth: AngularFireAuth,
+
   ) { }
 
   async ngOnInit() {}
@@ -137,5 +139,9 @@ export class LoginPage implements OnInit {
       message: msg,
       duration: 4000
     }).then(toast => toast.present());
+  }
+  async logout(){
+    await this.afAuth.signOut();
+    this.router.navigateByUrl('/login-register');
   }
 }
