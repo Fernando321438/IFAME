@@ -1,0 +1,61 @@
+<ion-toolbar>
+  <ion-buttons (click)="logout()" class="logout">
+    <ion-icon class="icon" name="log-out-outline"></ion-icon>
+  </ion-buttons>
+  <ion-header class="logotoolbar">
+  </ion-header>
+</ion-toolbar><meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+<ion-content>
+  <div class="ion-padding">
+  
+    
+
+    <ion-card>
+      <ion-item>
+        <ion-icon name="pin" slot="start"></ion-icon>
+          
+            <ion-input type="text" [(ngModel)]="location" placeholder="Enter Input"></ion-input>
+        
+        <ion-button fill="outline" slot="end" id="printToConsole" (click)="changeDistance(location)" >Find</ion-button>
+        <ion-button fill="outline" color="warning" slot="end"  (click)="reset()" >Reset</ion-button>
+      </ion-item>
+    
+      <ion-card-content>
+        Search anything to find how much distanced it is from you. 
+      </ion-card-content>
+    </ion-card>
+    
+    
+    <ion-card id="result0" *ngIf="origin_address">
+      <ion-item>
+        <ion-icon name="md-arrow-back" slot="start"></ion-icon>
+        <ion-label id="result-label">You are in {{origin_address}}</ion-label>
+      </ion-item>
+    </ion-card>
+
+    <ion-card id="result1" *ngIf="destination_address">
+        <ion-item>
+          <ion-icon name="md-arrow-forward" slot="start"></ion-icon>
+          <ion-label id="result-label">You want to go {{destination_address}}</ion-label>
+        </ion-item>
+      </ion-card>
+
+      <ion-card id="result2" *ngIf="location_distance">
+          <ion-item>
+            <ion-icon name="ios-car" slot="start"></ion-icon>
+            <ion-label id="result-label">Its {{location_distance}} far from you</ion-label>
+          </ion-item>
+        </ion-card>
+
+        <ion-card id="result3" *ngIf="travel_duration">
+            <ion-item>
+              <ion-icon name="md-time" slot="start"></ion-icon>
+              <ion-label id="result-label">It will take {{travel_duration}} to travel</ion-label>
+            </ion-item>
+          </ion-card>
+
+
+          
+  </div>
+</ion-content>

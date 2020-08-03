@@ -1,0 +1,135 @@
+<!-- <ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Register Crypto</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-item lines="full">
+        <ion-label position="floating">Name</ion-label>
+        <ion-input placeholder="Name" id="crypto_buyer" type="text" class="input" [(ngModel)]="crypto_buyer.name" #name required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+        <ion-label position="floating">Surname</ion-label>
+        <ion-input placeholder="Surname" id="crypto_buyer" type="text" class="input" [(ngModel)]="crypto_buyer.surname" #surname required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+        <ion-label position="floating">Address</ion-label>
+        <ion-input placeholder="Address" id="crypto_buyer" type="text" class="input" [(ngModel)]="crypto_buyer.address" #address required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+        <ion-label position="floating">Phone Number</ion-label>
+        <ion-input placeholder="Company name" id="crypto_buyer" type="text" class="input" [(ngModel)]="crypto_buyer.phone_number" #phone_number required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+        <ion-label position="floating">ID passport</ion-label>
+        <ion-input placeholder="Company name" id="crypto_buyer" type="text" class="input" [(ngModel)]="crypto_buyer.id_passport" #id_passport required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+        <ion-label position="floating">Proof of residence</ion-label>
+        <ion-input placeholder="Phone Number" id="crypto_buyer" type="text" class="input" [(ngModel)]="crypto_buyer.proof_of_residence" #proof_of_residence required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+        <ion-label position="floating">Deposite</ion-label>
+        <ion-input placeholder="Genres" id="crypto_buyer" type="text" class="input" [(ngModel)]="crypto_buyer.deposite" #deposite required></ion-input>
+    </ion-item>
+
+
+
+    <ion-item lines="full">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input placeholder="Email" id="crypto_buyer" type="text" class="input" [(ngModel)]="crypto_buyer.email" #email required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+        <ion-label position="floating">Password</ion-label>
+        <ion-input placeholder="Password" id="crypto_buyer" type="password" class="input" [(ngModel)]="crypto_buyer.password" #password required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+        <ion-label position="floating">Validate Password</ion-label>
+        <ion-input placeholder="Validate Password" id="crypto_buyer" type="password" class="input" [(ngModel)]="crypto_buyer.validatepassword" #validatepassword required></ion-input>
+    </ion-item>
+
+
+    <ion-row>
+        <ion-col>
+            <ion-button type="submit" (click)="signUp(email, password)" expand="block">Register</ion-button>
+        </ion-col>
+    </ion-row>
+
+</ion-content> -->
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<ion-buttons (click)="logout()" class="logout">
+    <ion-icon class="icon" name="log-out-outline"></ion-icon>
+  </ion-buttons>
+  <ion-header class="logotoolbar">
+  </ion-header>
+<ion-content class="sfondo">
+    <p class="logo">
+    </p>
+    <div class="login-form">
+        <div class="sign-in-htm">
+
+    
+
+            <div class="group">
+                <input placeholder="Name" id="crypto_buyer" type="text" class="input" [(ngModel)]="crypto_buyer.name">
+            </div>
+            <div class="group">
+                <input placeholder="Surname" id="crypto_buyer" type="text" class="input" [(ngModel)]="crypto_buyer.surname">
+            </div>
+            <div class="group">
+                <input placeholder="Address" id="crypto_buyer" type="text" class="input" [(ngModel)]="crypto_buyer.address">
+            </div>
+            <div class="group">
+                <input placeholder="Phone Number" id="crypto_buyer" type="text" class="input" [(ngModel)]="crypto_buyer.phone_number">
+            </div>
+            <div class="group">
+                <input placeholder="ID passport" id="crypto_buyer" type="text" class="input" [(ngModel)]="crypto_buyer.id_passport">
+            </div>
+            <div class="group">
+                <input placeholder="Proof of residence" id="crypto_buyer" type="text" class="input" [(ngModel)]="crypto_buyer.proof_of_residence">
+            </div>
+            <div class="group">
+                <input placeholder="Deposite" id="crypto_buyer" type="text" class="input" [(ngModel)]="crypto_buyer.deposite">
+            </div>
+           
+
+
+            <div class="group">
+                <input placeholder="Email" id="crypto_buyer" type="text" class="input" [(ngModel)]="crypto_buyer.email">
+            </div>
+            <div class="group">
+                <input placeholder="Password" id="crypto_buyer" type="password" class="input" data-type="password" [(ngModel)]="crypto_buyer.password">
+            </div>
+            <div class="group">
+                <input placeholder="validatepassword" id="crypto_buyer" type="password" class="input" data-type="password" [(ngModel)]="crypto_buyer.validatepassword">
+            </div>
+
+            <div>
+                <button (click)="signUp()" mode="ios" mode="md" class="center">
+          <h1>
+            Registration
+          </h1>
+        </button>
+            </div>
+        </div>
+    </div>
+
+
+</ion-content>
+

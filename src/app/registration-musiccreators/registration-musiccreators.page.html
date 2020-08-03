@@ -1,0 +1,149 @@
+<!-- <ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Register</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-item lines="full">
+        <ion-label position="floating">Name</ion-label>
+        <ion-input placeholder="Name" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.name" #name required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+        <ion-label position="floating">Surname</ion-label>
+        <ion-input placeholder="Surname" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.surname" #surname required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+        <ion-label position="floating">Address</ion-label>
+        <ion-input placeholder="Address" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.address" #address required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+        <ion-label position="floating">Company name</ion-label>
+        <ion-input placeholder="Company name" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.company_name" #company_name required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+        <ion-label position="floating">Contract number</ion-label>
+        <ion-input placeholder="Company name" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.contract_number" #contract_number required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+        <ion-label position="floating">Phone Number</ion-label>
+        <ion-input placeholder="Phone Number" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.phone_number" #phone_number required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+        <ion-label position="floating">Genres</ion-label>
+        <ion-input placeholder="Genres" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.genres" #genres required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+        <ion-label position="floating">Royalties</ion-label>
+        <ion-input placeholder="Royalties" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.royalties" #royalties required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+        <ion-label position="floating">Join</ion-label>
+        <ion-input placeholder="Join" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.join" #join required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input placeholder="Email" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.email" #email required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+        <ion-label position="floating">Password</ion-label>
+        <ion-input placeholder="Password" id="musiccreators" type="password" class="input" [(ngModel)]="musiccreators.password" #password required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+        <ion-label position="floating">Validate Password</ion-label>
+        <ion-input placeholder="Validate Password" id="musiccreators" type="password" class="input" [(ngModel)]="musiccreators.validatepassword" #validatepassword required></ion-input>
+    </ion-item>
+
+
+    <ion-row>
+        <ion-col>
+            <ion-button type="submit" (click)="signUp(email, password)" expand="block">Register</ion-button>
+        </ion-col>
+    </ion-row>
+
+</ion-content> -->
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<ion-buttons (click)="logout()" class="logout">
+    <ion-icon class="icon" name="log-out-outline"></ion-icon>
+  </ion-buttons>
+  <ion-header class="logotoolbar">
+  </ion-header>
+<ion-content class="sfondo">
+    <p class="logo">
+    </p>
+    <div class="login-form">
+        <div class="sign-in-htm">
+
+
+            <div class="group">
+                <input placeholder="Name" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.name">
+            </div>
+            <div class="group">
+                <input placeholder="Surname" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.surname">
+            </div>
+            <div class="group">
+                <input placeholder="Address" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.address">
+            </div>
+
+            <div class="group">
+                <input placeholder="Company_name" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.company_name">
+            </div>
+
+            <div class="group">
+                <input placeholder="Contract_number" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.contract_number">
+            </div>
+
+
+            <div class="group">
+                <input placeholder="Phone Number" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.phone_number">
+            </div>
+            <div class="group">
+                <input placeholder="Genres" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.genres">
+            </div>
+            <div class="group">
+                <input placeholder="Royalties" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.royalties">
+            </div>
+            <div class="group">
+                <input placeholder="Join" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.join">
+            </div>
+
+
+            <div class="group">
+                <input placeholder="Email" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.email">
+            </div>
+            <div class="group">
+                <input placeholder="Password" id="musiccreators" type="password" class="input" data-type="password" [(ngModel)]="musiccreators.password">
+            </div>
+            <div class="group">
+                <input placeholder="validatepassword" id="musiccreators" type="password" class="input" data-type="password" [(ngModel)]="musiccreators.validatepassword">
+            </div>
+
+            <div>
+                <button (click)="signUp()" mode="ios" mode="md" class="center">
+          <h1>
+            Registration
+          </h1>
+        </button>
+            </div>
+        </div>
+    </div>
+
+
+</ion-content>
+
