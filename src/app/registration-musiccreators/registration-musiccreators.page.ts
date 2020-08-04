@@ -21,15 +21,19 @@ export class RegistrationMusiccreatorsPage implements OnInit {
   musiccreators: any = {};
   creators: Musiccreators = {
 
+    Artist: '',
+    Song: '',
+    Songwriter: '',
     Name: '',
     Surname: '',
     Address: '',
-    Company_name: '',
+    Labels: '',
     Contract_Number: '',
     Phone_Number: '',
     Genres: '',
+    Year_Released:'',
+    Producer: '',
     Royalties: '',
-    Join: '',
   }
 
   constructor(
@@ -58,8 +62,8 @@ export class RegistrationMusiccreatorsPage implements OnInit {
 
   signUp() {
     if (this.musiccreators.email && this.musiccreators.password && (this.musiccreators.validatepassword === this.musiccreators.password) 
-    && this.musiccreators.name && this.musiccreators.surname && this.musiccreators.address && this.musiccreators.company_name && this.musiccreators.contract_number
-    && this.musiccreators.phone_number && this.musiccreators.genres && this.musiccreators.royalties && this.musiccreators.join) {
+    && this.musiccreators.artist && this.musiccreators.song && this.musiccreators.songwriter && this.musiccreators.name && this.musiccreators.surname && this.musiccreators.address && this.musiccreators.labels && this.musiccreators.contract_number
+    && this.musiccreators.phone_number && this.musiccreators.genres && this.musiccreators.year_released && this.musiccreators.producer && this.musiccreators.royalties) {
 
 
 
@@ -68,9 +72,10 @@ export class RegistrationMusiccreatorsPage implements OnInit {
   
           const datages = {
             email:this.musiccreators.email,
+            Artist: this.musiccreators.artist, Song:this.musiccreators.song, Songwriter:this.musiccreators.songwriter,
             Name: this.musiccreators.name, Surname: this.musiccreators.surname, Address: this.musiccreators.address,
-            Company_Name: this.musiccreators.company_name, Contract_Number:this.musiccreators.contract_number, Phone_Number: this.musiccreators.phone_number, 
-            Genres: this.musiccreators.genres, Royalties: this.musiccreators.royalties, Join: this.musiccreators.join,createdAt: Date.now()
+            Labels: this.musiccreators.labels, Contract_Number:this.musiccreators.contract_number, Phone_Number: this.musiccreators.phone_number, 
+            Genres: this.musiccreators.genres, Year_Released: this.musiccreators.year_released, Producer: this.musiccreators.producer, Royalties: this.musiccreators.royalties,createdAt: Date.now()
           };
           const musiccreatorsFire1 = this.afs.collection('music-creators');
           await musiccreatorsFire1.ref.doc().set(datages).then(() => {
@@ -86,9 +91,11 @@ export class RegistrationMusiccreatorsPage implements OnInit {
     }
     validation() {
   
-      if (this.musiccreators.email!= null && this.musiccreators.password != null && this.musiccreators.name != null
-        && this.musiccreators.surname != null && this.musiccreators.address != null && this.musiccreators.company_name != null
-        && this.musiccreators.contract_number != null && this.musiccreators.phone_number!= null && this.musiccreators.genres != null && this.musiccreators.royalties != null && this.musiccreators.join != null) {
+      if (this.musiccreators.email!= null && this.musiccreators.password != null && this.musiccreators.artist != null
+        && this.musiccreators.song != null && this.musiccreators.songwriter != null && this.musiccreators.name != null
+        && this.musiccreators.surname != null && this.musiccreators.address != null && this.musiccreators.labels!= null
+        && this.musiccreators.contract_number != null && this.musiccreators.phone_number!= null && this.musiccreators.genres != null 
+        && this.musiccreators.year_released != null && this.musiccreators.producer != null && this.musiccreators.royalties != null) {
         if (this.musiccreators.validatepassword === this.musiccreators.password)
          {
            return true;

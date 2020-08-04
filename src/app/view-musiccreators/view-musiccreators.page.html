@@ -5,14 +5,52 @@
     <ion-header class="logotoolbar">
     </ion-header>
   </ion-toolbar><meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <ion-header [translucent]="true">
+    
+  </ion-header>
 
-<ion-content>
 
+  <ion-content [fullscreen]="true">
+
+   
+
+    <ion-item lines="full">
+        <ion-label position="floating"> Song Name</ion-label>
+        <ion-input placeholder="Insert Song Name" id="avatar" type="text" class="input"
+            [(ngModel)]="musiccreators.songname" #name required>
+        </ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Text Song </ion-label>
+      <ion-input placeholder="Insert Text Song " id="avatar" type="text" class="input"
+          [(ngModel)]="musiccreators.textsongname" #name required>
+      </ion-input>
+  </ion-item>
+
+  <ion-item lines="full">
+    <ion-label position="floating">Songwriter </ion-label>
+    <ion-input placeholder="Insert Name Songwriter " id="avatar" type="text" class="input"
+        [(ngModel)]="musiccreators.songwriter" #name required>
+    </ion-input>
+</ion-item>
+
+<ion-item lines="full">
+  <ion-label position="floating">Producer </ion-label>
+  <ion-input placeholder="Insert Name Producer" id="avatar" type="text" class="input"
+      [(ngModel)]="musiccreators.producer" #name required>
+  </ion-input>
+</ion-item>
+   
+
+    <input type="file" id="id">
+<!--     <ion-button   (click)="sendAudio1()">Send Song </ion-button>
+ -->
+
+<br>
+    <ion-button (click)="SaveNameRecord()">Save Name Record </ion-button>
+<!--     <ion-button (click)="RecordAudio()">Record </ion-button>
+ -->
+<!--     <ion-button id="fileUpload" (click)="StopRecording()" (click)="uploadfile()">Stop</ion-button>
+ -->
 </ion-content>
-
-<!-- <ion-tab-bar slot="bottom">
-    <ion-button [routerLink]="['/login-register']">
-        <ion-icon name="log-out-outline"></ion-icon>
-        <ion-label>Logout</ion-label>
-    </ion-button>
-</ion-tab-bar> -->

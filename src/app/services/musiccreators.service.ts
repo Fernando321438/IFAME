@@ -5,15 +5,22 @@ import { Observable } from 'rxjs';
  
 export class Musiccreators {
   id?:string;
+  Artist: string;
+  Song: string;
+  songwriter: string;
   Name :string;
   Surname: string;
   Address: string;
-  Company_name: string;
+  Labels: string;
   Contract_Number: string;
   Phone_Number: string;
   Genres: string;
+  Year_Released: string;
+  producer: string;
   Royalties: string;
-  Join: string;
+  songname:string;
+  textsongname:string;
+
 }
 
 @Injectable({
@@ -55,7 +62,7 @@ export class MusiccreatorsService {
   }
 
   updateMusiccreators(musiccreators: Musiccreators): Promise<void> {
-    return this.musiccreatorsCollection.doc(musiccreators.id).update({ Name: musiccreators.Name, Surname: musiccreators.Surname, Address: musiccreators.Address , Company_name: musiccreators.Company_name , Contract_Number: musiccreators.Contract_Number , Phone_Number: musiccreators.Phone_Number , Genres: musiccreators.Genres, Royalties: musiccreators.Royalties, Join: musiccreators.Join  });
+    return this.musiccreatorsCollection.doc(musiccreators.id).update({ Artist: musiccreators.Artist, Song: musiccreators.Song, songwriter: musiccreators.songwriter, Name: musiccreators.Name, Surname: musiccreators.Surname, Address: musiccreators.Address , Company_name: musiccreators.Labels , Contract_Number: musiccreators.Contract_Number , Phone_Number: musiccreators.Phone_Number , Genres: musiccreators.Genres, Year_Released: musiccreators.Year_Released, producer: musiccreators.producer, Royalties: musiccreators.Royalties,  });
   }
 
   deleteMusiccreators(musiccreators: Musiccreators): Promise<void> {

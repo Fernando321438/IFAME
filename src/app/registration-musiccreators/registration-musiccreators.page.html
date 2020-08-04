@@ -90,7 +90,15 @@
     <div class="login-form">
         <div class="sign-in-htm">
 
-
+            <div class="group">
+                <input placeholder="Artist" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.artist">
+            </div>
+            <div class="group">
+                <input placeholder="Song" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.song">
+            </div>
+            <div class="group">
+                <input placeholder="Songwriter" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.songwriter">
+            </div>
             <div class="group">
                 <input placeholder="Name" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.name">
             </div>
@@ -102,13 +110,12 @@
             </div>
 
             <div class="group">
-                <input placeholder="Company_name" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.company_name">
+                <input placeholder="Labels" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.labels">
             </div>
 
             <div class="group">
                 <input placeholder="Contract_number" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.contract_number">
             </div>
-
 
             <div class="group">
                 <input placeholder="Phone Number" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.phone_number">
@@ -117,11 +124,15 @@
                 <input placeholder="Genres" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.genres">
             </div>
             <div class="group">
-                <input placeholder="Royalties" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.royalties">
+                <input placeholder="Year_Released" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.year_released">
             </div>
             <div class="group">
-                <input placeholder="Join" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.join">
+                <input placeholder="Producer" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.producer">
             </div>
+            <div class="group">
+                <input placeholder="Royalties" id="musiccreators" type="text" class="input" [(ngModel)]="musiccreators.royalties">
+            </div>
+            
 
 
             <div class="group">
