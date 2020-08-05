@@ -12,45 +12,47 @@
 
   <ion-content [fullscreen]="true">
 
-   
+    
 
     <ion-item lines="full">
         <ion-label position="floating"> Song Name</ion-label>
-        <ion-input placeholder="Insert Song Name" id="avatar" type="text" class="input"
-            [(ngModel)]="musiccreators.songname" #name required>
+        <ion-input placeholder="Insert Song Name"  type="text" class="input"
+            [(ngModel)]="musiccreatorsCurrent.Songname" #name required>
         </ion-input>
     </ion-item>
 
     <ion-item lines="full">
+      <ion-label position="floating"> Genres</ion-label>
+      <ion-input placeholder="Insert Genres" type="text" class="input" [(ngModel)]="musiccreatorsCurrent.Genres" #name required>
+      </ion-input>
+  </ion-item>
+
+    <ion-item lines="full">
       <ion-label position="floating">Text Song </ion-label>
-      <ion-input placeholder="Insert Text Song " id="avatar" type="text" class="input"
-          [(ngModel)]="musiccreators.textsongname" #name required>
+      <ion-input  placeholder="Insert Text Song " type="text" class="input"
+          [(ngModel)]="musiccreatorsCurrent.Textsongname" #name required>
       </ion-input>
   </ion-item>
 
   <ion-item lines="full">
     <ion-label position="floating">Songwriter </ion-label>
-    <ion-input placeholder="Insert Name Songwriter " id="avatar" type="text" class="input"
-        [(ngModel)]="musiccreators.songwriter" #name required>
+    <ion-input placeholder="Insert Name Songwriter " type="text" class="input"
+        [(ngModel)]="musiccreatorsCurrent.Songwriter" #name required>
     </ion-input>
 </ion-item>
 
 <ion-item lines="full">
   <ion-label position="floating">Producer </ion-label>
-  <ion-input placeholder="Insert Name Producer" id="avatar" type="text" class="input"
-      [(ngModel)]="musiccreators.producer" #name required>
+  <ion-input placeholder="Insert Name Producer"  type="text" class="input"
+      [(ngModel)]="musiccreatorsCurrent.Producer" #name required>
   </ion-input>
 </ion-item>
-   
+       
+<ion-item lines="full">
+  <ion-label position="floating">Labels</ion-label>
+  <ion-input placeholder="Insert Labels"  type="text" class="input" [(ngModel)]="musiccreatorsCurrent.Labels" #name required>
+  </ion-input>
+</ion-item>
+    <ion-button   (click)="Savedata()">Send </ion-button>
 
-    <input type="file" id="id">
-<!--     <ion-button   (click)="sendAudio1()">Send Song </ion-button>
- -->
-
-<br>
-    <ion-button (click)="SaveNameRecord()">Save Name Record </ion-button>
-<!--     <ion-button (click)="RecordAudio()">Record </ion-button>
- -->
-<!--     <ion-button id="fileUpload" (click)="StopRecording()" (click)="uploadfile()">Stop</ion-button>
- -->
 </ion-content>

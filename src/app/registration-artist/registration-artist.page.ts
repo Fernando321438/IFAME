@@ -5,6 +5,7 @@ import { AuthService } from "../services/auth.service";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { NavController } from '@ionic/angular';
 import { AngularFireDatabase } from '@angular/fire/database';
+
 import 'firebase/firestore';
 import { ArtistService,Artist } from '../services/artist.service';
 import { AngularFireAuth } from '@angular/fire/auth';

@@ -4,7 +4,6 @@ import { ToastController } from '@ionic/angular';
 import { AuthService } from "../services/auth.service";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { NavController } from '@ionic/angular';
-import { AngularFireDatabase } from '@angular/fire/database';
 import 'firebase/firestore';
 import { MusiccreatorsService,Musiccreators} from '../services/musiccreators.service';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -34,6 +33,8 @@ export class RegistrationMusiccreatorsPage implements OnInit {
     Year_Released:'',
     Producer: '',
     Royalties: '',
+    Textsongname:'',
+    Songname:'',
   }
 
   constructor(
@@ -44,7 +45,6 @@ export class RegistrationMusiccreatorsPage implements OnInit {
     public afs: AngularFirestore,
     private musiccreatorsService: MusiccreatorsService,
     private toastCtrl: ToastController,
-    private afDB: AngularFireDatabase,
     private authObj : AngularFireAuth,
     public  afAuth: AngularFireAuth,
 
@@ -62,23 +62,24 @@ export class RegistrationMusiccreatorsPage implements OnInit {
 
   signUp() {
     if (this.musiccreators.email && this.musiccreators.password && (this.musiccreators.validatepassword === this.musiccreators.password) 
-    && this.musiccreators.artist && this.musiccreators.song && this.musiccreators.songwriter && this.musiccreators.name && this.musiccreators.surname && this.musiccreators.address && this.musiccreators.labels && this.musiccreators.contract_number
-    && this.musiccreators.phone_number && this.musiccreators.genres && this.musiccreators.year_released && this.musiccreators.producer && this.musiccreators.royalties) {
+    && this.musiccreators.artist && this.musiccreators.name && this.musiccreators.surname && this.musiccreators.address  && this.musiccreators.contract_number
+    && this.musiccreators.phone_number && this.musiccreators.year_released && this.musiccreators.royalties) {
 
 
 
         this.authObj.createUserWithEmailAndPassword(this.musiccreators.email, this.musiccreators.password).then(async (ges) => {
           console.log(ges);
   
+          const userId = (await this.authObj.currentUser).uid;
           const datages = {
             email:this.musiccreators.email,
-            Artist: this.musiccreators.artist, Song:this.musiccreators.song, Songwriter:this.musiccreators.songwriter,
+            Artist: this.musiccreators.artist,
             Name: this.musiccreators.name, Surname: this.musiccreators.surname, Address: this.musiccreators.address,
-            Labels: this.musiccreators.labels, Contract_Number:this.musiccreators.contract_number, Phone_Number: this.musiccreators.phone_number, 
-            Genres: this.musiccreators.genres, Year_Released: this.musiccreators.year_released, Producer: this.musiccreators.producer, Royalties: this.musiccreators.royalties,createdAt: Date.now()
+            Contract_Number:this.musiccreators.contract_number, Phone_Number: this.musiccreators.phone_number, 
+            Year_Released: this.musiccreators.year_released,  Royalties: this.musiccreators.royalties,createdAt: Date.now()
           };
           const musiccreatorsFire1 = this.afs.collection('music-creators');
-          await musiccreatorsFire1.ref.doc().set(datages).then(() => {
+          await musiccreatorsFire1.ref.doc(userId).set(datages).then(() => {
             this.router.navigateByUrl('/view-musiccreators');
             this.showToast('musicccreators added');
           }).catch(e => {
@@ -92,10 +93,10 @@ export class RegistrationMusiccreatorsPage implements OnInit {
     validation() {
   
       if (this.musiccreators.email!= null && this.musiccreators.password != null && this.musiccreators.artist != null
-        && this.musiccreators.song != null && this.musiccreators.songwriter != null && this.musiccreators.name != null
-        && this.musiccreators.surname != null && this.musiccreators.address != null && this.musiccreators.labels!= null
-        && this.musiccreators.contract_number != null && this.musiccreators.phone_number!= null && this.musiccreators.genres != null 
-        && this.musiccreators.year_released != null && this.musiccreators.producer != null && this.musiccreators.royalties != null) {
+        && this.musiccreators.name != null
+        && this.musiccreators.surname != null && this.musiccreators.address != null 
+        && this.musiccreators.contract_number != null && this.musiccreators.phone_number!= null
+        && this.musiccreators.year_released != null && this.musiccreators.royalties != null) {
         if (this.musiccreators.validatepassword === this.musiccreators.password)
          {
            return true;

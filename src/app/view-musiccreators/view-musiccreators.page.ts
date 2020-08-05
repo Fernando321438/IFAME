@@ -5,6 +5,7 @@ import { ToastController } from '@ionic/angular';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { MusiccreatorsService, Musiccreators } from '../services/musiccreators.service';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
   selector: 'app-view-musiccreators',
@@ -14,13 +15,16 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class ViewMusiccreatorsPage implements OnInit {
   musiccreators: Musiccreators;
   musiccreatorsCurrent: any = {};
-  
+  dummyList: any[];
+
   constructor(
     private toastCtrl: ToastController,
     private musiccreatorsService: MusiccreatorsService, 
     private activatedRoute: ActivatedRoute, 
     private afstore: AngularFirestore,
      private readonly router: Router, 
+     private afDB: AngularFireDatabase,
+
      private authObj: AngularFireAuth
   ) { }
   ngOnInit() {
@@ -32,32 +36,43 @@ export class ViewMusiccreatorsPage implements OnInit {
       });
     }
   }
-  async SaveNameRecord() {
-    if (this.musiccreators.songname + this.musiccreators.textsongname + this.musiccreators.songwriter + this.musiccreators.producer) {
+  async Savedata() {
+    if (this.musiccreatorsCurrent.Songname + this.musiccreatorsCurrent.Textsongname + this.musiccreatorsCurrent.Songwriter + this.musiccreatorsCurrent.Producer) {
       const datages = {
-        Songname: this.musiccreators.songname,
-        Textsongname: this.musiccreators.textsongname,
-        songwriter: this.musiccreators.songwriter,
-       producer: this.musiccreators.producer,
+      
+       Songname: this.musiccreatorsCurrent.Songname,
+       Genres: this.musiccreatorsCurrent.Genres,
+       Textsongname: this.musiccreatorsCurrent.Textsongname,
+       Songwriter: this.musiccreatorsCurrent.Songwriter,
+       Producer: this.musiccreatorsCurrent.Producer,
+       Labels : this.musiccreatorsCurrent.Labels
 
       };
 
-      const artistFire1 = this.afstore.collection('artist');
+      const artistFire1 = this.afstore.collection('music-creators');
       const artistFire2 = artistFire1.ref.doc((await this.authObj.currentUser).uid);
-      artistFire2.collection('Recorders').doc('/' + this.musiccreatorsCurrent.recordname).set(datages).then(() => { //(await this.auth.currentUser).uid
-        this.showToast('Song Title Added');
+      artistFire2.collection('Song-Information').doc('/' + this.musiccreatorsCurrent.Songname).set(datages).then(() => { 
+        this.showToast('Datas Added');
+       
       }, err => {
-        this.showToast('Song Title Not Added');
+        this.showToast('Datas Not Added');
 
       }).catch(e => {
         console.log(e);
       })
     } else {
-      this.showToast('Empty Record Field ');
+      this.showToast('Empty Data Field ');
     }
 
 
   }
+  doRefresh(event) {  
+    console.log('Pull Event Triggered!');  
+    setTimeout(() => {  
+      this.dummyList = Array(10);  
+      event.target.complete();  
+    }, 2000);  
+  }  
 
   showToast(msg) {
     this.toastCtrl.create({

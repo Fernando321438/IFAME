@@ -7,7 +7,7 @@ export class Musiccreators {
   id?:string;
   Artist: string;
   Song: string;
-  songwriter: string;
+  Songwriter: string;
   Name :string;
   Surname: string;
   Address: string;
@@ -16,10 +16,10 @@ export class Musiccreators {
   Phone_Number: string;
   Genres: string;
   Year_Released: string;
-  producer: string;
+  Producer: string;
   Royalties: string;
-  songname:string;
-  textsongname:string;
+  Songname:string;
+  Textsongname:string;
 
 }
 
@@ -62,7 +62,7 @@ export class MusiccreatorsService {
   }
 
   updateMusiccreators(musiccreators: Musiccreators): Promise<void> {
-    return this.musiccreatorsCollection.doc(musiccreators.id).update({ Artist: musiccreators.Artist, Song: musiccreators.Song, songwriter: musiccreators.songwriter, Name: musiccreators.Name, Surname: musiccreators.Surname, Address: musiccreators.Address , Company_name: musiccreators.Labels , Contract_Number: musiccreators.Contract_Number , Phone_Number: musiccreators.Phone_Number , Genres: musiccreators.Genres, Year_Released: musiccreators.Year_Released, producer: musiccreators.producer, Royalties: musiccreators.Royalties,  });
+    return this.musiccreatorsCollection.doc(musiccreators.id).update({ Artist: musiccreators.Artist, Song: musiccreators.Song, Songwriter: musiccreators.Songwriter, Name: musiccreators.Name, Surname: musiccreators.Surname, Address: musiccreators.Address , Labels: musiccreators.Labels , Contract_Number: musiccreators.Contract_Number , Phone_Number: musiccreators.Phone_Number , Genres: musiccreators.Genres, Year_Released: musiccreators.Year_Released, Producer: musiccreators.Producer, Royalties: musiccreators.Royalties, Songname:musiccreators.Songname, Textsongname:musiccreators.Textsongname });
   }
 
   deleteMusiccreators(musiccreators: Musiccreators): Promise<void> {
