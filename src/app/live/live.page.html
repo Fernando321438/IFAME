@@ -1,0 +1,65 @@
+<ion-toolbar>
+    <ion-buttons (click)="logout()" class="logout">
+        <ion-icon class="icon" name="log-out-outline"></ion-icon>
+    </ion-buttons>
+    <ion-header class="logotoolbar">
+    </ion-header>
+</ion-toolbar>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<section class="hero is-primary is-medium" style="background: #e6dddd">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <img src="../assets/music.svg" width="100px" height="100px">
+            <h1 class="title">
+                Hello There!, its me Song Recognition <i class="fas fa-headphones-alt"></i>
+            </h1>
+            <h2 class="subtitle">
+                Paste any youtube Song video to know it artist info and other related songs
+            </h2>
+        </div>
+        <div style="margin: 30px">
+            <div class="container has-text-centered" style="text-align: center">
+                <input style="width: 50%; max-width: 50%;; margin:5px" class="input is-danger is-rounded" type="text" placeholder="Youtube Link!" [(ngModel)]="url">
+                <a (click)="check(url)" style="margin:5px" class="button is-danger is-rounded"> Check <i style="padding:3px"
+            class="fas fa-check"></i></a>
+                <a *ngIf="is_yt" (click)="process(url)" style="margin:5px" class="button is-danger is-rounded">Process <i
+            style="padding:3px" class="fas fa-sync"></i></a>
+                <a *ngIf="showInfo" (click)="search()" style="margin:5px" class="button is-danger is-rounded">Get Songs <i
+            style="padding:3px" class="fab fa-youtube"></i></a>
+            </div><br>
+            <div style="margin: 20px" class="container has-text-centered" style="text-align: center">
+                <youtube-player *ngIf="showInfo" [videoId]="youtube_parser(url)">
+                </youtube-player>
+            </div>
+            <div *ngIf="showInfo" style="margin: 20px" class="container has-text-centered" style="text-align: center; color: white">
+                <h1 class="infz" style="font-weight: bold">Album: <span>{{album}}</span></h1>
+                <h1 class="infz" style="font-weight: bold">Artist: <span>{{artist}}</span></h1>
+                <h1 class="infz" style="font-weight: bold">Label: <span>{{label}}</span></h1>
+                <h1 class="infz" style="font-weight: bold">Release Date: <span>{{release_date}}</span></h1>
+                <h1 class="infz" style="font-weight: bold">Title: <span>{{title}}</span></h1>
+            </div>
+            <div *ngIf="songfailed" style="margin: 20px" class="container has-text-centered" style="text-align: center"> <br>
+                <h1 class="subtitle">Ops :( We Can't Recognition The Song, sorry</h1>
+            </div>
+            <div *ngIf="gotVid" class="row">
+                <div class="col-xl-3 col-md-6 mb-4" *ngFor="let video of youtubedata">
+                    <youtube-player style="padding:5px" [videoId]="video.id.videoId">
+                    </youtube-player> -->
+                    <p class="card-category text-gray">{{video.snippet.title}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer>
+    <div class="container has-text-centered" style="color:#ccc">
+        <p>This Challenge has been developed by Rami Saad @ProximaDev</p>
+    </div>
+</footer>
+
+<ngx-spinner bdOpacity=0.9 bdColor="rgba(51,51,51,0.53)" size="medium" color="#ffffff" type="pacman" [fullScreen]="true">
+    <p style="color: white; font-weight: bold"> {{loading}} </p>
+</ngx-spinner>
+
+<router-outlet></router-outlet>
