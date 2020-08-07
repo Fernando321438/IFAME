@@ -7,12 +7,12 @@ ion-toolbar{
     top: 0px;
     right: 0px;
     margin-top: 5px;
-    margin-right: 20px;
+    margin-right: 7px;
     color: #fafaf8;
   }
   .icon {
     font-size: 40px;
-    margin-top: 50px;
+    margin-top: 5px;
     background: #000000;
   }
   .logotoolbar{
@@ -31,7 +31,7 @@ ion-toolbar{
   }
 
 
-  ul#menu {
+  ul#menu ul.hidden {
     font-family: Verdana, sans-serif;
     font-size: 11px;
     margin: 0;
@@ -45,7 +45,7 @@ ul#menu li {
     width: 284px;
     height: 50px;
     margin: 2px;
-    float: left; /* elementi su singola riga */
+    float: left;
 }
 ul#menu li a {
     color: #fff;
@@ -58,8 +58,8 @@ ul#menu li a {
     text-align: center;
 }
 ul#menu li.active, ul#menu li:hover {
-    background-color: #52505095;
-    border-bottom: 5px solid #52505095;
+    background-color: #d5111195;
+    border-bottom: 5px solid #d5111195;
 }
 /*   
   .div{
