@@ -27,8 +27,6 @@ export class RecorderPage {
    blob: any; */
   artist: Artist;
   artistCurrent: any = {};
-  /*  numShards:any;
-    aux:File;  */
   count: any;
 
   constructor(
@@ -74,6 +72,8 @@ export class RecorderPage {
     if (this.artistCurrent.recordname) {
       const datages = {
         Recordname: this.artistCurrent.recordname,
+        imgURL: this.artistCurrent.imgURL,
+        createdAt: Date.now(),
       };
 
       const artistFire1 = this.afstore.collection("artist");
@@ -201,9 +201,7 @@ export class RecorderPage {
       "upload/" + (await this.authObj.currentUser).uid + "/" + file.name
     );
 
-    ref
-      .put(file)
-      .then((res) => {
+    ref.put(file).then((res) => {
         ref.getDownloadURL().subscribe((url) => {
           this.artistCurrent.song = url;
           this.showToast("Song added");
@@ -214,6 +212,49 @@ export class RecorderPage {
       });
   }
   //------------------------------------
+
+
+  async uploadLiveImage(){
+    const file = (<HTMLInputElement>document.getElementById('id2')).files[0];
+ 
+    const ref = this.afs.ref('LiveImage/' + (await this.authObj.currentUser).uid + '/' + file.name);
+ 
+    ref.put(file).then(res => {
+ 
+      ref.getDownloadURL().subscribe(url => {
+ 
+        this.artistCurrent.imgURL = url;
+ 
+      })
+    }).catch(e => {
+      console.log(e);
+    })
+ 
+  }
+ 
+
+
+
+  async uploadSongImage(){
+    const file = (<HTMLInputElement>document.getElementById('id2')).files[0];
+ 
+    const ref = this.afs.ref('SongImage/' + (await this.authObj.currentUser).uid + '/' + file.name);
+ 
+    ref.put(file).then(res => {
+ 
+      ref.getDownloadURL().subscribe(url => {
+ 
+        this.artistCurrent.imgURL = url;
+ 
+      })
+    }).catch(e => {
+      console.log(e);
+    })
+ 
+  }
+ 
+ 
+ 
   async sendAudio() {
     const file = (<HTMLInputElement>document.getElementById("avatar")).files[0];
     new Blob([JSON.stringify(file, null, 2)], { type: "audio/mp3" }); // usa l'API BLOB o File

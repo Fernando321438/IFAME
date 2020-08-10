@@ -12,31 +12,24 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+   
     <ion-card button="true">
-        <audio [src]="artistCurrent.song"></audio>
-    </ion-card>
+        <ion-img [src]="artistCurrent.imgURL"></ion-img>
+      </ion-card>
 
-    <ion-label>
-        <ion-text>
-            <h1>{{status}}</h1>
-        </ion-text>
-    </ion-label>
-    <ion-item lines="full">
-        <ion-label position="floating">Record Name</ion-label>
-        <ion-input placeholder="Insert Record Name" id="avatar" type="text" class="input" [(ngModel)]="artistCurrent.recordname" #name required>
-        </ion-input>
-    </ion-item>
-
-
+   
+    
+    <label for="id2">Choose your Image of Song:</label>
+    <input  type="file" id="id2">
+    <br><br><br>
+    <label for="id">Choose your Song:</label>
     <input type="file" id="id">
-    <ion-button (click)="sendAudio1()" [routerLink]="['/geolocalization']">Send Song </ion-button>
 
-
+    <ion-button id="id2" (click)="uploadSongImage()" >Save Song Image  </ion-button>
+   
     <br>
-    <ion-button (click)="SaveNameRecord()">Save Name Record </ion-button>
-    <ion-button (click)="RecordAudio()">Record </ion-button>
 
-    <ion-button id="fileUpload" (click)="StopRecording()" (click)="uploadfile()" [routerLink]="['/geolocalization']">
-        Stop</ion-button>
+     <ion-button id="id" (click)="sendAudio1()" [routerLink]="['/geolocalization']">Send Song </ion-button>
+
 
 </ion-content>

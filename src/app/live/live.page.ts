@@ -1,186 +1,347 @@
-import { Component } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { NgxSpinnerService } from "ngx-spinner";
-import { ToastController } from "@ionic/angular";
-import { Router } from "@angular/router";
-import { AngularFireAuth } from "@angular/fire/auth";
+import { Component, OnInit } from "@angular/core";
 import { Media, MediaObject } from "@ionic-native/media/ngx";
 import { File } from "@ionic-native/file/ngx";
 import { AngularFireStorage } from "@angular/fire/storage";
 import * as firebase from "firebase/app";
+import { ToastController } from "@ionic/angular";
 import { Artist, ArtistService } from "../services/artist.service";
+import { AngularFireAuth } from "@angular/fire/auth";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AngularFirestore } from "@angular/fire/firestore";
 
 @Component({
-  selector: "app-live",
+  selector: "app-home",
   templateUrl: "live.page.html",
   styleUrls: ["live.page.scss"],
 })
 export class LivePage {
+  status: string = "";
+  audiofile: MediaObject = this.media.create(
+    this.file.externalRootDirectory + "/audiofile.mp3"
+  );
+  audio: any = {};
+  /*  Uri: any;
+   UploadTask: any;
+   cb: any;
+   url: string;
+   blob: any; */
+  artist: Artist;
+  artistCurrent: any = {};
+  count: any;
+
   constructor(
-    private http: HttpClient,
-    private spinner: NgxSpinnerService,
-    public afAuth: AngularFireAuth,
     private toastCtrl: ToastController,
     private media: Media,
     private file: File,
     private afs: AngularFireStorage,
     private auth: AngularFireAuth,
     private artistService: ArtistService,
+    private activatedRoute: ActivatedRoute,
     private afstore: AngularFirestore,
-    private authObj: AngularFireAuth,
-    private readonly router: Router
+    private readonly router: Router,
+    private authObj: AngularFireAuth
   ) {}
 
-  // CHANGE THE SERVER PORT TO YOUR SERVER ENV PORT!
-  // THIS IS TEST USING LOCALHOST WITH PORT 5000 DEFINED INSIDE WEB SERVER
-  // IN THIS APP WE ARE USING NODE JS SERVER
-  SERVER_URL = "http://localhost:5000";
+  ngOnInit() {
+    let id = this.activatedRoute.snapshot.paramMap.get("id");
+    if (id) {
+      this.artistService.getArtist(id).subscribe((artist) => {
+        this.artist = artist;
+      });
+    }
+  }
 
-  // ngIf UI Boolean
-  gotVid = false;
-  songfailed = false;
-  showInfo = false;
-  is_yt = false;
+  async createCounter() {
+    const db = firebase.firestore();
+    const increment = firebase.firestore.FieldValue.increment(1);
+    const storyRef = firebase
+      .firestore()
+      .collection("artist")
+      .doc(
+        (await this.authObj.currentUser).uid +
+          "/Recorders/" +
+          "Record" +
+          this.count
+      );
+    const batch = db.batch();
+    batch.set(storyRef, { record: increment });
+    batch.commit();
+  }
 
-  // PUT YOUR Youtube API KEY!! Below
-  apiKey: string = "AIzaSyBVlpXbhtVrmh1g6ACo_TC2CrxxW2kqe5o";
+  async SaveNameRecord() {
+    if (this.artistCurrent.recordname) {
+      const datages = {
+        Recordname: this.artistCurrent.recordname,
+        createdAt: Date.now(),
+      };
 
-  // Loading message
-  loading = "";
+      const artistFire1 = this.afstore.collection("artist");
+      const artistFire2 = artistFire1.ref.doc(
+        (await this.authObj.currentUser).uid
+      );
+      artistFire2
+        .collection("Recorders")
+        .doc("/" + this.artistCurrent.recordname)
+        .set(datages)
+        .then(
+          () => {
+            //(await this.auth.currentUser).uid
+            this.showToast("Song Title Added");
+          },
+          (err) => {
+            this.showToast("Song Title Not Added");
+          }
+        )
+        .catch((e) => {
+          console.log(e);
+        });
+    } else {
+      this.showToast("Empty Record Field ");
+    }
+  }
 
-  // Youtube Videos Holder
-  youtubedata: any;
+  RecordAudio() {
+    this.audiofile.startRecord();
+    this.status = "recording...";
+  }
+  StopRecording() {
+    this.audiofile.stopRecord();
+    this.status = "stopped";
+    this.showToast("Record Added");
+    (err) => {
+      this.showToast("Record Not Added");
+    };
+    /*     this.afs.ref("music/sound/").put(this.audiofile);
+     */
+  }
 
-  // MAX results for Youtube fetch
-  maxResults = 8;
+  async upload2(file: any[]): Promise<any> {
+    if (file && file.length) {
+      try {
+        file = this.audio;
+        const task = await this.afs
+          .ref("Audio")
+          .child((await this.authObj.currentUser).uid)
+          .put(file);
+        this.afs
+          .ref("Audio" + (await this.authObj.currentUser).uid)
+          .getDownloadURL()
+          .toPromise();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
 
-  // Song Information from audd.io API
+  //FUNZIONANTE
+  async uploadfile() {
+    console.dir(this.file.externalDataDirectory);
 
-  status: string;
-  artist: string;
-  album: string;
-  label: string;
-  release_date: string;
-  title: string;
+    /*     var artistCurrent = {name:`${this.audiofile}.mp3`};
+     */
 
-  // AUDIO Binery Holder
-  audio = "";
+    const fileName = {
+      name: `${this.file.externalDataDirectory}/${this.artistCurrent}.mp3`,
+    };
+    const metadata = { contentType: "audio/mp3" };
 
-  // SAVE URL FROM NGModel (Form input)
-  url = "";
-
-  async search() {
-    this.spinner.show();
-    this.loading = "Getting Youtube Data!";
-    let url =
-      "https://www.googleapis.com/youtube/v3/search?key=" +
-      this.apiKey +
-      "&part=snippet&q=" +
-      this.artist +
-      "&type=video&maxResults=" +
-      this.maxResults;
-    this.http.get(url).subscribe(
-      (res) => {
-        let search = JSON.parse(JSON.stringify(res));
-        console.log(search.items);
-        this.youtubedata = search.items;
-        this.gotVid = true;
-        this.spinner.hide();
+    var blob = new Blob([fileName.name], { type: "audio/mp3" }); // pass a useful mime type here
+    const uploadAudio = this.afs.storage
+      .ref(
+        "Audio/" +
+          (await this.authObj.currentUser).uid +
+          "/" +
+          this.artistCurrent.recordname
+      )
+      .put(blob, metadata);
+    // Listen for state changes, errors, and completion of the upload.
+    return uploadAudio.on(
+      firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
+      (snapshot) => {},
+      (error) => {
+        console.dir(error);
       },
-      (err) => {
-        this.spinner.hide();
-        this.showToast("Error at featching youtube data!");
+      () => {
+        // Upload completed successfully, now we can get the download URL
+        var downloadURL = uploadAudio.snapshot.downloadURL;
+        console.dir(downloadURL);
+        return new Promise((resolve, reject) => {
+          resolve(downloadURL);
+        });
       }
     );
   }
+  //
 
-  check(url) {
-    this.is_youtube(url);
-    if (!this.is_yt) {
-      this.showToast("Please input a youtube link");
-    } else {
-      this.showToast("Correct Link, Click Process Button To Begin");
-    }
+  async uploadToStorage() {
+    var file = this.getFileBlob();
+    this.audio = this.audiofile;
+    this.afs
+      .ref(
+        "Audio" + (await this.authObj.currentUser).uid + "/" + this.audiofile
+      )
+      .put(file);
+    console.log("Uploaded a blob or file!");
   }
 
-  async process(url) {
-    this.spinner.show();
-    this.loading = "Processing Video, Please Wait!";
-    await this.getBase64AudioServer(url)
-      .then((data) => {
-        if (data) {
-          this.loading = "Start Recoginztion";
-          console.log("Start Recoginztion");
-          this.getSongInfo();
-        }
+  getFileBlob() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", this.audio);
+    xhr.responseType = "blob";
+    xhr.addEventListener("load", function () {});
+    xhr.send();
+  }
+
+  //--------------------------
+  async sendAudio1() {
+    let file = (<HTMLInputElement>document.getElementById("id")).files[0];
+
+    let ref = this.afs.ref(
+      "upload/" + (await this.authObj.currentUser).uid + "/" + file.name
+    );
+
+    ref.put(file).then((res) => {
+        ref.getDownloadURL().subscribe((url) => {
+          this.artistCurrent.song = url;
+          this.showToast("Song added");
+        });
       })
-      .catch((err) => {
-        console.log(err);
-        this.spinner.hide();
-        this.showToast("Server Error can't process url");
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+  //------------------------------------
+
+
+  async uploadLiveImage(){
+    const file = (<HTMLInputElement>document.getElementById('id3')).files[0];
+ 
+    const ref = this.afs.ref('LiveImage/' + (await this.authObj.currentUser).uid+ '/' + file.name);
+ 
+    ref.put(file).then(res => {
+ 
+      ref.getDownloadURL().subscribe(url => {
+ 
+        this.artistCurrent.imgURL = url;
+ 
+      })
+    }).catch(e => {
+      console.log(e);
+    })
+ 
+  }
+ 
+
+
+
+  async uploadSongImage(){
+    const file = (<HTMLInputElement>document.getElementById('id')).files[0];
+ 
+    const ref = this.afs.ref('SongImage/' + (await this.authObj.currentUser).uid + '/' + file.name);
+ 
+    ref.put(file).then(res => {
+ 
+      ref.getDownloadURL().subscribe(url => {
+ 
+        this.artistCurrent.imgURL = url;
+ 
+      })
+    }).catch(e => {
+      console.log(e);
+    })
+ 
+  }
+ 
+ 
+ 
+  async sendAudio() {
+    const file = (<HTMLInputElement>document.getElementById("avatar")).files[0];
+    new Blob([JSON.stringify(file, null, 2)], { type: "audio/mp3" }); // usa l'API BLOB o File
+    this.afs
+      .ref(
+        "Audio/" +
+          (await this.authObj.currentUser).uid +
+          "/" +
+          this.artistCurrent.recordname +
+          "/"
+      )
+      .put(file);
+    console.log("Uploaded a blob or file!");
+
+    /*  this.getFileBlob();
+     this. uploadToStorage(); 
+ */
+  }
+
+  async sendAudioToSomewhere() {
+    const base64 = await this.getAudio();
+    const blob = this.b64toBlob(base64, "audio/mp3", 512);
+    await this.sendRemotely(blob);
+    alert("done");
+  }
+
+  async getAudio() {
+    var base64 = this.audio;
+    await this.afs.storage
+      .ref("Audio")
+      .list()
+      .then((record) => {
+        this.audio = record;
+      });
+
+    this.audio = this.audiofile;
+    /*  this.afs.ref(base64.name).getMetadata().subscribe(mp3 => {
+
+        this.audio = mp3;
+
+    }) */
+
+    return base64;
+  }
+
+  b64toBlob(b64Data, contentType, sliceSize) {
+    this.audio = b64Data;
+    contentType = contentType || "";
+    sliceSize = sliceSize || 512;
+
+    var byteCharacters = btoa(b64Data);
+    var byteArrays = [];
+
+    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+      var byteNumbers = new Array(slice.length);
+      for (var i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+
+      var byteArray = new Uint8Array(byteNumbers);
+
+      byteArrays.push(byteArray);
+    }
+
+    var blob = new Blob(byteArrays, { type: contentType });
+    return blob;
+  }
+
+  async sendRemotely(blob: Blob) {
+    let traccia = this.audio;
+    let ref = this.afs.ref(
+      "Audio/" + (await this.auth.currentUser).uid + "/" + this.audiofile
+    );
+
+    ref
+      .put(traccia)
+      .then((res) => {
+        ref.getDownloadURL().subscribe((mp3) => {
+          this.audiofile = mp3;
+        });
+      })
+      .catch((e) => {
+        console.log(e);
       });
   }
 
-  is_youtube(url) {
-    var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-    var match = url.match(regExp);
-    if (match) {
-      this.is_yt = true;
-    } else {
-      this.is_yt = false;
-    }
-  }
-
-  youtube_parser(url) {
-    var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-    var match = url.match(regExp);
-    if (match && match[2].length == 11) {
-      return match[2];
-    }
-  }
-
-  getBase64AudioServer(url) {
-    return new Promise((resolve, reject) => {
-      this.http
-        .get(`${this.SERVER_URL}/api/youtube/?url=${url}`, {
-          responseType: "text",
-        })
-        .subscribe((res) => {
-          if (res != undefined && res != null && res != "") {
-            this.audio = res;
-            resolve(true);
-          } else {
-            reject("SERVER ERROR MAYBE?!");
-          }
-        });
-    });
-  }
-
-  getSongInfo() {
-    const formData = new FormData();
-    formData.append("audio", this.audio);
-    this.http.post("https://api.audd.io", formData).subscribe((res) => {
-      let json = JSON.parse(JSON.stringify(res));
-      console.log(json);
-      console.log(json.status);
-      this.status = json.status;
-      this.spinner.hide();
-      if (this.status == "success" && json.result != null) {
-        this.album = json.result.album;
-        this.artist = json.result.artist;
-        this.label = json.result.label;
-        this.release_date = json.result.release_date;
-        this.title = json.result.title;
-        this.showInfo = true;
-      } else {
-        this.songfailed = true;
-        this.showInfo = false;
-        this.gotVid = false;
-        this.showToast("We can't recoginztion this song");
-      }
-    });
-  }
   showToast(msg) {
     this.toastCtrl
       .create({

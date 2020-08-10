@@ -28,14 +28,9 @@ export class ViewUsersPage implements OnInit {
     private afStorage:AngularFireStorage,
     private readonly router: Router,
   ) {
-    const ref = this.afStorage.ref('upload/'+ (await this.afAuth.currentUser).uid);
  
  
-      ref.listAll().subscribe(mpeg => {
- 
-        this.musics.mpeg = mpeg;
-        console.log(mpeg)
-      })
+  
    
    /*  afStorage.ref('/upload').listAll()
     .subscribe(musics => {
@@ -44,7 +39,16 @@ export class ViewUsersPage implements OnInit {
 
     }) */
    }
-  ngOnInit() {
+  async ngOnInit() {
+    const ref = this.afStorage.ref('upload/'+ (await this.afAuth.currentUser).uid);
+
+    ref.getDownloadURL().subscribe(mp3 => {
+ 
+      this.musics.mp3= mp3 ;
+      console.log(mp3)
+    })
+ 
+
   }
 
   async segmentChanged(ev){
