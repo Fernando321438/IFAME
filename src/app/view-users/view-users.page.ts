@@ -21,33 +21,33 @@ export class ViewUsersPage implements OnInit {
     initialSlide: 0,
     speed: 400 */
   
-    musics: any[0];
-
+    
+    artistCurrent: any[0];
   constructor(
     public  afAuth: AngularFireAuth,
     private afStorage:AngularFireStorage,
+    private afs: AngularFirestore,
     private readonly router: Router,
   ) {
  
  
   
    
-   /*  afStorage.ref('/upload').listAll()
-    .subscribe(musics => {
-      this.musics = musics;
-      console.log(this.musics);
+     afs.collection('/artist').valueChanges()
+    .subscribe(artistCurrent => {
+      this.artistCurrent = artistCurrent;
+      console.log(this.artistCurrent);
 
-    }) */
+    }) 
    }
   async ngOnInit() {
-    const ref = this.afStorage.ref('upload/'+ (await this.afAuth.currentUser).uid);
-
-    ref.getDownloadURL().subscribe(mp3 => {
+    this.afStorage.ref('LiveImage'+ (await this.afAuth.currentUser).uid)
+    .getDownloadURL().subscribe(url=> {
  
-      this.musics.mp3= mp3 ;
-      console.log(mp3)
+      this.artistCurrent.imgURL= url ;
+      console.log(url);
     })
- 
+
 
   }
 

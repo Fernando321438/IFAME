@@ -25,17 +25,23 @@
 </ul>
 
 
-<ion-content>
+<ion-content class="cards-background-page">
 
   <ion-slides #slides pager=false [options]="sliderOptions" (ionSlideDidChange)="slideShanged(slides)"
     (ionSlidesDidLoad)="slideShanged(slides)">
     <ion-slide>
-      <ion-card  button="true">
+      <ion-card *ngFor="let artist of artistCurrent" button="true">
+        <ion-img src={{artist.imgURL}} [routerLink]="['/']"></ion-img>
+          <div class="card_content">
+            <p class="card-title">{{artist.recordname}}</p>
+          </div>
+    </ion-card> 
+      <!-- <ion-card  button="true">
         <audio src={{musics.mp3}} [routerLink]="['/']"></audio>
         <div class="card_content">
           <p class="card-title">{{musics.name}}</p>
         </div>
-      </ion-card>
+      </ion-card> -->
     </ion-slide>
     <ion-slide>2</ion-slide>
     <ion-slide>3</ion-slide>

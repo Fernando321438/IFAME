@@ -61,6 +61,92 @@ ul#menu li.active, ul#menu li:hover {
     background-color: #d5111195;
     border-bottom: 5px solid #d5111195;
 }
+//-------------------------------
+.cards-background-page{
+  display: grid;
+  grid-template-columns: 1fr repeat(6, minmax(auto, 60px)) 1fr;
+  padding: 5px 5px 5px 5px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 10px;
+  --background:linear-gradient( #474747, #000000);
+
+}
+ion-card{
+  margin: 10px;
+  display: grid;
+  grid-template-rows: flex;
+  grid-template-areas: "image" "text" "stats";
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border-radius: 18px;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.9);
+  text-align: center;
+  // margin: 0 auto; 
+  float: none; 
+  flex: 0 1 100%;
+}
+ion-img{
+  grid-area: image;
+  background-size: cover;
+}
+.card_content{
+  padding: 20px;
+}
+.card-subtitle{
+ margin-bottom: 25px;
+ margin-top: auto;
+ font-weight: bold;
+ color: white;
+ font-size: 25px;
+ display: flex;
+ font-family: Arial, Helvetica, sans-serif;
+}
+.card-title{
+  display: flex;
+  font-weight: 500;
+  color: white;
+  font-size: 18px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.card-street{
+  display: flex;
+  font-weight: normal;
+  color: white;
+  font-size: 17px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+@media screen and (min-width: 40em) {
+  .cards-background-page {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+ }
+
+ ion-card{
+    flex: 0 1 calc(25% - 1em);
+  }
+}
+
+ion-icon{
+color: #ffba00;
+}
+
+ion-tab-button{
+--color-selected:#ffba00;
+}
+
+.header-md::after {
+display: none;
+}
+
+.tab{
+background-color: #000000;
+}
+
+.button{
+background-color: #000000;
+}
+//---------------------------------------------
 /*   
   .div{
     width: 100%;
