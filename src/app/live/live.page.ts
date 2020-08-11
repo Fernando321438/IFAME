@@ -69,9 +69,10 @@ export class LivePage {
   }
 
   async SaveNameRecord() {
-    if (this.artistCurrent.recordname) {
+    if (this.artistCurrent.recordname && this.artistCurrent.imgURL) {
       const datages = {
         Recordname: this.artistCurrent.recordname,
+        imgURL: this.artistCurrent.imgURL,
         createdAt: Date.now(),
       };
 
@@ -80,7 +81,7 @@ export class LivePage {
         (await this.authObj.currentUser).uid
       );
       artistFire2
-        .collection("Recorders")
+        .collection("Live Record")
         .doc("/" + this.artistCurrent.recordname)
         .set(datages)
         .then(
@@ -95,7 +96,7 @@ export class LivePage {
         .catch((e) => {
           console.log(e);
         });
-    } else {
+    }  else {
       this.showToast("Empty Record Field ");
     }
   }
@@ -115,24 +116,6 @@ export class LivePage {
      */
   }
 
-  async upload2(file: any[]): Promise<any> {
-    if (file && file.length) {
-      try {
-        file = this.audio;
-        const task = await this.afs
-          .ref("Audio")
-          .child((await this.authObj.currentUser).uid)
-          .put(file);
-        this.afs
-          .ref("Audio" + (await this.authObj.currentUser).uid)
-          .getDownloadURL()
-          .toPromise();
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  }
-
   //FUNZIONANTE
   async uploadfile() {
     console.dir(this.file.externalDataDirectory);
@@ -148,10 +131,7 @@ export class LivePage {
     var blob = new Blob([fileName.name], { type: "audio/mp3" }); // pass a useful mime type here
     const uploadAudio = this.afs.storage
       .ref(
-        "Audio/" +
-          (await this.authObj.currentUser).uid +
-          "/" +
-          this.artistCurrent.recordname
+        'Live' +'/'+(await this.authObj.currentUser).uid+ '/' + this.artistCurrent.recordname + '/' +this.artistCurrent.recordname 
       )
       .put(blob, metadata);
     // Listen for state changes, errors, and completion of the upload.
@@ -171,73 +151,11 @@ export class LivePage {
       }
     );
   }
-  //
-
-  async uploadToStorage() {
-    var file = this.getFileBlob();
-    this.audio = this.audiofile;
-    this.afs
-      .ref(
-        "Audio" + (await this.authObj.currentUser).uid + "/" + this.audiofile
-      )
-      .put(file);
-    console.log("Uploaded a blob or file!");
-  }
-
-  getFileBlob() {
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", this.audio);
-    xhr.responseType = "blob";
-    xhr.addEventListener("load", function () {});
-    xhr.send();
-  }
-
-  //--------------------------
-  async sendAudio1() {
-    let file = (<HTMLInputElement>document.getElementById("id")).files[0];
-
-    let ref = this.afs.ref(
-      "upload/" + (await this.authObj.currentUser).uid + "/" + file.name
-    );
-
-    ref.put(file).then((res) => {
-        ref.getDownloadURL().subscribe((url) => {
-          this.artistCurrent.song = url;
-          this.showToast("Song added");
-        });
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }
   //------------------------------------
-
-
   async uploadLiveImage(){
-    const file = (<HTMLInputElement>document.getElementById('id3')).files[0];
- 
-    const ref = this.afs.ref('LiveImage/' + (await this.authObj.currentUser).uid+ '/' + file.name);
- 
-    ref.put(file).then(res => {
- 
-      ref.getDownloadURL().subscribe(url => {
- 
-        this.artistCurrent.imgURL = url;
- 
-      })
-    }).catch(e => {
-      console.log(e);
-    })
- 
-  }
- 
-
-
-
-  async uploadSongImage(){
     const file = (<HTMLInputElement>document.getElementById('id')).files[0];
  
-    const ref = this.afs.ref('SongImage/' + (await this.authObj.currentUser).uid + '/' + file.name);
+    const ref = this.afs.ref('Live' +'/'+(await this.authObj.currentUser).uid+ '/' + this.artistCurrent.recordname +'/' + file.name);
  
     ref.put(file).then(res => {
  
@@ -251,97 +169,7 @@ export class LivePage {
     })
  
   }
- 
- 
- 
-  async sendAudio() {
-    const file = (<HTMLInputElement>document.getElementById("avatar")).files[0];
-    new Blob([JSON.stringify(file, null, 2)], { type: "audio/mp3" }); // usa l'API BLOB o File
-    this.afs
-      .ref(
-        "Audio/" +
-          (await this.authObj.currentUser).uid +
-          "/" +
-          this.artistCurrent.recordname +
-          "/"
-      )
-      .put(file);
-    console.log("Uploaded a blob or file!");
-
-    /*  this.getFileBlob();
-     this. uploadToStorage(); 
- */
-  }
-
-  async sendAudioToSomewhere() {
-    const base64 = await this.getAudio();
-    const blob = this.b64toBlob(base64, "audio/mp3", 512);
-    await this.sendRemotely(blob);
-    alert("done");
-  }
-
-  async getAudio() {
-    var base64 = this.audio;
-    await this.afs.storage
-      .ref("Audio")
-      .list()
-      .then((record) => {
-        this.audio = record;
-      });
-
-    this.audio = this.audiofile;
-    /*  this.afs.ref(base64.name).getMetadata().subscribe(mp3 => {
-
-        this.audio = mp3;
-
-    }) */
-
-    return base64;
-  }
-
-  b64toBlob(b64Data, contentType, sliceSize) {
-    this.audio = b64Data;
-    contentType = contentType || "";
-    sliceSize = sliceSize || 512;
-
-    var byteCharacters = btoa(b64Data);
-    var byteArrays = [];
-
-    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-      var slice = byteCharacters.slice(offset, offset + sliceSize);
-
-      var byteNumbers = new Array(slice.length);
-      for (var i = 0; i < slice.length; i++) {
-        byteNumbers[i] = slice.charCodeAt(i);
-      }
-
-      var byteArray = new Uint8Array(byteNumbers);
-
-      byteArrays.push(byteArray);
-    }
-
-    var blob = new Blob(byteArrays, { type: contentType });
-    return blob;
-  }
-
-  async sendRemotely(blob: Blob) {
-    let traccia = this.audio;
-    let ref = this.afs.ref(
-      "Audio/" + (await this.auth.currentUser).uid + "/" + this.audiofile
-    );
-
-    ref
-      .put(traccia)
-      .then((res) => {
-        ref.getDownloadURL().subscribe((mp3) => {
-          this.audiofile = mp3;
-        });
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }
-
+   //------------------------------------
   showToast(msg) {
     this.toastCtrl
       .create({

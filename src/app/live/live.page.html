@@ -29,13 +29,13 @@
         <ion-input placeholder="Insert Record Name"  type="text" class="input" [(ngModel)]="artistCurrent.recordname" #name required>
         </ion-input>
     </ion-item>
-    <label for="id3">Choose your Image of Song:</label>
-    <input  type="file" id="id3">
+    <label for="id">Choose your Image of Song:</label>
+    <input class="upload" type="file" id="id" >
     <br><br><br>
+    <ion-button (click)="uploadLiveImage()" >Upload Live Image </ion-button>
+    <ion-button  (click)="SaveNameRecord()">Save Name Record </ion-button>
 
-    <ion-button id="id3"(click)="SaveNameRecord()" (click)="uploadLiveImage()" >Save Name Record </ion-button>
-
-    <br>
+    <br><br><br> 
     <ion-button (click)="RecordAudio()">Record </ion-button>
 
     <ion-button id="fileUpload" (click)="StopRecording()" (click)="uploadfile()" [routerLink]="['/geolocalization']">

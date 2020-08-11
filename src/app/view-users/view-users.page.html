@@ -31,10 +31,12 @@
     (ionSlidesDidLoad)="slideShanged(slides)">
     <ion-slide>
       <ion-card *ngFor="let artist of artistCurrent" button="true">
+        <ion-card *ngFor="let record of records" button="true">
         <ion-img src={{artist.imgURL}} [routerLink]="['/']"></ion-img>
           <div class="card_content">
-            <p class="card-title">{{artist.recordname}}</p>
+            <p class="card-title">{{record.recordname}}</p>
           </div>
+        </ion-card>    
     </ion-card> 
       <!-- <ion-card  button="true">
         <audio src={{musics.mp3}} [routerLink]="['/']"></audio>

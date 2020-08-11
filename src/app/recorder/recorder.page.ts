@@ -68,10 +68,10 @@ export class RecorderPage {
     batch.commit();
   }
 
-  async SaveNameRecord() {
-    if (this.artistCurrent.recordname) {
+  async SaveNameSong() {
+    if (this.artistCurrent.songname && this.artistCurrent.imgURL) {
       const datages = {
-        Recordname: this.artistCurrent.recordname,
+        Songname: this.artistCurrent.songname,
         imgURL: this.artistCurrent.imgURL,
         createdAt: Date.now(),
       };
@@ -81,8 +81,8 @@ export class RecorderPage {
         (await this.authObj.currentUser).uid
       );
       artistFire2
-        .collection("Recorders")
-        .doc("/" + this.artistCurrent.recordname)
+        .collection("Digital Record")
+        .doc("/" + this.artistCurrent.songname)
         .set(datages)
         .then(
           () => {
@@ -172,7 +172,7 @@ export class RecorderPage {
       }
     );
   }
-  //
+  
 
   async uploadToStorage() {
     var file = this.getFileBlob();
@@ -198,7 +198,7 @@ export class RecorderPage {
     let file = (<HTMLInputElement>document.getElementById("id")).files[0];
 
     let ref = this.afs.ref(
-      "upload/" + (await this.authObj.currentUser).uid + "/" + file.name
+      'Digital/' + (await this.authObj.currentUser).uid +'/'+ this.artistCurrent.songname + '/' + file.name
     );
 
     ref.put(file).then((res) => {
@@ -213,39 +213,17 @@ export class RecorderPage {
   }
   //------------------------------------
 
-
-  async uploadLiveImage(){
-    const file = (<HTMLInputElement>document.getElementById('id2')).files[0];
- 
-    const ref = this.afs.ref('LiveImage/' + (await this.authObj.currentUser).uid + '/' + file.name);
- 
-    ref.put(file).then(res => {
- 
-      ref.getDownloadURL().subscribe(url => {
- 
-        this.artistCurrent.imgURL = url;
- 
-      })
-    }).catch(e => {
-      console.log(e);
-    })
- 
-  }
- 
-
-
-
   async uploadSongImage(){
     const file = (<HTMLInputElement>document.getElementById('id2')).files[0];
  
-    const ref = this.afs.ref('SongImage/' + (await this.authObj.currentUser).uid + '/' + file.name);
+    const ref = this.afs.ref('Digital/' + (await this.authObj.currentUser).uid +'/'+ this.artistCurrent.songname + '/' + file.name);
  
     ref.put(file).then(res => {
  
       ref.getDownloadURL().subscribe(url => {
  
         this.artistCurrent.imgURL = url;
- 
+        this.showToast("Song Image Added");
       })
     }).catch(e => {
       console.log(e);

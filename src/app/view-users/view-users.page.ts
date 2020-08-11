@@ -21,7 +21,7 @@ export class ViewUsersPage implements OnInit {
     initialSlide: 0,
     speed: 400 */
   
-    
+    records:any[0];
     artistCurrent: any[0];
   constructor(
     public  afAuth: AngularFireAuth,
@@ -33,10 +33,10 @@ export class ViewUsersPage implements OnInit {
  
   
    
-     afs.collection('/artist').valueChanges()
-    .subscribe(artistCurrent => {
-      this.artistCurrent = artistCurrent;
-      console.log(this.artistCurrent);
+     afs.collection('/artist/').valueChanges()
+    .subscribe(records => {
+      this.records = records;
+      console.log(this.records);
 
     }) 
    }
