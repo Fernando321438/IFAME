@@ -14,7 +14,6 @@ export class Artist {
   Surname: string;
   Alias: string;
   Id_work: string;
-  My_songs: string;
   Genres: string;
   Royalties: string;
   recordname: any;
@@ -68,7 +67,6 @@ export class ArtistService {
         Surname: artist.Surname,
         Alias: artist.Alias,
         Id_work: artist.Id_work,
-        My_songs: artist.My_songs,
         Genres: artist.Genres,
         Royalties: artist.Royalties,
       });

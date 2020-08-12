@@ -23,7 +23,6 @@ export class RegistrationArtistPage implements OnInit {
     Surname: "",
     Alias: "",
     Id_work: "",
-    My_songs: "",
     Genres: "",
     Royalties: "",
   };
@@ -60,7 +59,6 @@ export class RegistrationArtistPage implements OnInit {
       this.artists.surname &&
       this.artists.alias &&
       this.artists.id_work &&
-      this.artists.my_songs &&
       this.artists.genres &&
       this.artists.royalties
     ) {
@@ -79,7 +77,6 @@ export class RegistrationArtistPage implements OnInit {
             Surname: this.artists.surname,
             Alias: this.artists.alias,
             Id_work: this.artists.id_work,
-            My_songs: this.artists.my_songs,
             Genres: this.artists.genres,
             Royalties: this.artists.royalties,
             createdAt: Date.now(),
@@ -113,7 +110,6 @@ export class RegistrationArtistPage implements OnInit {
       this.artists.surname != null &&
       this.artists.alias != null &&
       this.artists.id_work != null &&
-      this.artists.my_songs != null &&
       this.artists.genres != null &&
       this.artists.royalties != null
     ) {

@@ -11,6 +11,9 @@ import { AngularFireStorage } from '@angular/fire/storage';
 })
 export class ViewUsersPage implements OnInit {
   selectedSlide: any;
+  user: any = {};
+  immagine = [];
+
   segment = 0;
   sliderOptions={
     initialSlide:0,
@@ -38,17 +41,24 @@ export class ViewUsersPage implements OnInit {
       this.records = records;
       console.log(this.records);
 
-    }) 
+    })  
+    
    }
   async ngOnInit() {
-    this.afStorage.ref('LiveImage'+ (await this.afAuth.currentUser).uid)
+    this.afStorage.ref('/Live/'+ (await this.afAuth.currentUser).uid)
     .getDownloadURL().subscribe(url=> {
  
       this.artistCurrent.imgURL= url ;
       console.log(url);
     })
+   this.afStorage.ref('/Live/' + (await this.afAuth.currentUser).uid).getDownloadURL().subscribe((usersnap: any) => {
+      this.user = { 'imgURL': usersnap.imgURL, ...usersnap.payload.val() };
+      console.log(this.user);
 
-
+    })
+    this.immagine.push({
+      url: this.user.imgURL
+    })
   }
 
   async segmentChanged(ev){

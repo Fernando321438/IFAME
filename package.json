@@ -36,6 +36,7 @@
     "@types/jquery": "^3.5.0",
     "angular-animations": "0.0.10",
     "chromaprint": "^0.1.0",
+    "cordova": "^10.0.0",
     "cordova-android": "8.1.0",
     "cordova-browser": "^6.0.0",
     "cordova-ios": "5.1.1",
