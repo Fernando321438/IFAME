@@ -1,0 +1,90 @@
+<ion-toolbar>
+  <ion-buttons (click)="logout()" class="logout">
+    <ion-icon class="icon" name="log-out-outline"></ion-icon>
+  </ion-buttons>
+  <ion-header class="logotoolbar">
+  </ion-header>
+</ion-toolbar>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<ul>
+  <ion-segment mod="md" [(ngModel)]="segment" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="0">
+      <ion-icon name="Headset"></ion-icon>
+      Live
+    </ion-segment-button>
+    <ion-segment-button value="1">
+      <ion-icon name="musical-notes"></ion-icon>
+      Music
+    </ion-segment-button>
+    <ion-segment-button value="2">
+      <ion-icon name="Search"></ion-icon>
+      Search
+    </ion-segment-button>
+  </ion-segment>
+</ul>
+
+
+<ion-content class="cards-background-page">
+
+  <ion-slides #slides pager=false [options]="sliderOptions" (ionSlideDidChange)="slideShanged(slides)"
+    (ionSlidesDidLoad)="slideShanged(slides)">
+    <ion-slide>
+      <ion-card *ngFor="let artist of artistCurrent" button="true">
+        <ion-card *ngFor="let record of records" button="true">
+        <ion-img src={{artist.imgURL}} [routerLink]="['/']"></ion-img>
+          <div class="card_content">
+            <p class="card-title">{{record.recordname}}</p>
+          </div>
+        </ion-card>    
+    </ion-card> 
+      <!-- <ion-card  button="true">
+        <audio src={{musics.mp3}} [routerLink]="['/']"></audio>
+        <div class="card_content">
+          <p class="card-title">{{musics.name}}</p>
+        </div>
+      </ion-card> -->
+    </ion-slide>
+    <ion-slide>2</ion-slide>
+    <ion-slide>3</ion-slide>
+
+  </ion-slides>
+
+</ion-content>
+<!--<ul id="menu" ><ion-slides  [options]="slideOpts" >
+  <ion-slide><h2><li><a href="view-users">Musica</a></li></h2> </ion-slide>
+   <ion-slide> <h2><li><a href="view-users">Live</a></li></h2></ion-slide>
+    <ion-slide><h2><li><a href="view-users">Search</a></li></h2></ion-slide>
+     <li><a href="#">Portfolio</a></li>
+    <li><a href="#">Contact</a></li> 
+</ion-slides>
+  </ul> -->
+
+
+
+
+
+<!-- <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="schedule">
+        <ion-icon name="calendar"></ion-icon>
+        <ion-label>Schedule</ion-label>
+        <ion-badge>6</ion-badge>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="speakers">
+        <ion-icon name="person-circle"></ion-icon>
+        <ion-label>Speakers</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="map">
+        <ion-icon name="map"></ion-icon>
+        <ion-label>Map</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="about">
+        <ion-icon name="information-circle"></ion-icon>
+        <ion-label>About</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs> -->

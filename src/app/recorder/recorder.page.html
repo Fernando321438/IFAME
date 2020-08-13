@@ -1,0 +1,43 @@
+<ion-toolbar>
+    <ion-buttons (click)="logout()" class="logout">
+        <ion-icon class="icon" name="log-out-outline"></ion-icon>
+    </ion-buttons>
+    <ion-header class="logotoolbar">
+    </ion-header>
+</ion-toolbar>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<ion-header [translucent]="true">
+
+</ion-header>
+
+<ion-content [fullscreen]="true">
+   
+    <ion-card button="true">
+        <ion-img [src]="artistCurrent.imgURL"></ion-img>
+      </ion-card>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Song Name</ion-label>
+        <ion-input placeholder="Insert  Song Name"  type="text" class="input" [(ngModel)]="artistCurrent.songname" #name required>
+        </ion-input>
+    </ion-item>
+   
+    <label for="id2">Choose your Image of Song:</label>
+    <input  type="file" id="id2">
+    <br><br><br>
+    <label for="id">Choose your Song:</label>
+    <input type="file" id="id">
+
+    <br>
+    <ion-button (click)="uploadSongImage()" >Upload Song Image  </ion-button>
+    <ion-button (click)="SaveNameSong()">Save Song Name</ion-button>
+    <br>
+    
+
+     <ion-button id="id" (click)="sendAudio1()" [routerLink]="['/geolocalization']">Send Song </ion-button>
+
+    <br>
+
+
+</ion-content>
