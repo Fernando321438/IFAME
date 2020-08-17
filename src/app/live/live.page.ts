@@ -76,14 +76,13 @@ export class LivePage {
         createdAt: Date.now(),
       };
 
-      const artistFire1 = this.afstore.collection("artist");
+      const artistFire1 = this.afstore.collection("Live Record");
       const artistFire2 = artistFire1.ref.doc(
         (await this.authObj.currentUser).uid
-      );
-      artistFire2
-        .collection("Live Record")
-        .doc("/" + this.artistCurrent.recordname)
-        .set(datages)
+      ).set(datages)
+     /*  artistFire2
+        .collection(this.artistCurrent.recordname)
+        .add(datages) */
         .then(
           () => {
             //(await this.auth.currentUser).uid

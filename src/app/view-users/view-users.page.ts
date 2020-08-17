@@ -27,55 +27,54 @@ export class ViewUsersPage implements OnInit {
   /* slideOpts = {
     initialSlide: 0,
     speed: 400 */
- 
+  recordname:any;
   records: any[0];
-  
+  artistCurrent: any[0];
   imgURL:any=[];
-
+  
   constructor(
-
     public afAuth: AngularFireAuth,
     private afStorage: AngularFireStorage,
     private afs: AngularFirestore,
     private activatedRoute: ActivatedRoute,
+    private afstore: AngularFirestore,
     private afDB: AngularFireDatabase,
     private authObj: AngularFireAuth,
     private media: Media,
     private readonly router: Router,
     
   ) {
-   
-   }
-
-  async ngOnInit() {
-  this.immagineLive();
+ 
+ 
   
    
-    
-  /*  this.afs.collection('/artist/').doc ('/' +(await this.afAuth.currentUser).uid).snapshotChanges().subscribe((usersnap: any) => {
-      this.user = { 'imgURL': usersnap.imgURL, ...usersnap.payload.val() };
-
-    })
-    this.immagine.push({
-      url: this.user.imgURL,
-      
-    }) 
-   */
-  }
-
-  async immagineLive(){
-    this.afs.collection('/artist/').valueChanges()
+     afs.collection('/Live Record').valueChanges()
     .subscribe(records => {
       this.records = records;
       console.log(this.records);
 
     })  
-  /*   this.afStorage.ref('/Live/'+ (await this.afAuth.currentUser).uid + this.artistCurrent.recordname)
+    
+   }
+  async ngOnInit() {
+    this.immagineLive();
+    this.afStorage.ref('/Live/' + (await this.afAuth.currentUser).uid + this.artistCurrent.recordname).getDownloadURL().subscribe((usersnap: any) => {
+      this.user = { 'imgURL': usersnap.imgURL, ...usersnap.payload.val() };
+      console.log(this.user);
+
+    })
+    this.immagine.push({
+      url: this.user.imgURL
+    })
+  }
+
+  async immagineLive(){
+    this.afStorage.ref('/Live/'+ (await this.afAuth.currentUser).uid + this.artistCurrent.recordname)
     .getDownloadURL().subscribe(url=> {
  
       this.artistCurrent.imgURL= url ;
       console.log(this.artistCurrent.imgURL);
-    }) */
+    })
   }
 
   async segmentChanged(ev){
