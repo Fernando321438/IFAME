@@ -61,6 +61,55 @@ ul#menu li.active, ul#menu li:hover {
     background-color: #d5111195;
     border-bottom: 5px solid #d5111195;
 }
+ion-card{
+  margin: 10px;
+  display: grid;
+  grid-template-rows: flex;
+  grid-template-areas: "image" "text" "stats";
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border-radius: 18px;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+  text-align: center;
+  float: none; 
+  flex: 0 1 100%;
+}
+ion-fab-button{
+  --background: #ffba00;
+}
+ion-fab{
+  --background: #ffba00;
+}
+ion-img{
+  grid-area: image;
+  background-size: cover;
+}
+.titolo {
+  text-align: center;
+}
+.inner {
+  width: 2000px;
+  height: 100%;
+  ion-card {
+    display: table-cell;
+    border: solid 1px #ccc;
+  }
+}
+.container {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+  height: 300%;
+  ion-card {
+    border-radius: 8px;
+    height: 100%;
+    background-color: lightgrey;
+    width: 300px;
+    border: 15px solid rgb(0, 0, 0);
+    padding: 12px;
+    margin: 1.5px;
+  }
+}
 //-------------------------------
 /* .cards-background-page{
   display: grid;
@@ -146,10 +195,10 @@ background-color: #000000;
 height: 36px;
 position:absolute;
 top:100px; 
-left:200px; */
+left:200px; 
 
   
-  /* .cards-background-page{
+  .cards-background-page{
       display: grid;
       grid-template-columns: 1fr repeat(6, minmax(auto, 60px)) 1fr;
       padding: 5px 5px 5px 5px;
