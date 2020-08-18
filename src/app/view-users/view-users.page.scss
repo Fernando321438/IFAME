@@ -61,7 +61,33 @@ ul#menu li.active, ul#menu li:hover {
     background-color: #d5111195;
     border-bottom: 5px solid #d5111195;
 }
-ion-card{
+/* ion-slides{
+
+  margin: 20px;
+  display: grid;
+  grid-template-rows: flex;
+  grid-template-areas: "image" "text" "stats";
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border-radius: 18px;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+  text-align: center;
+  float: none; 
+  flex: 0 1 100%;
+
+} */
+.card_content{
+  padding: 20px;
+}
+.card-title{
+  display: flex;
+  font-weight: 500;
+  color: rgb(19, 19, 19);
+  font-size: 18px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  
+}
+
+ ion-card{
   margin: 10px;
   display: grid;
   grid-template-rows: flex;
@@ -72,7 +98,20 @@ ion-card{
   text-align: center;
   float: none; 
   flex: 0 1 100%;
-}
+
+} 
+@media screen and (min-width: 40em) {
+  .cards-background-page {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+ }
+
+ ion-card{
+    flex: 0 1 calc(46% - 1em);
+  }
+} 
+
 ion-fab-button{
   --background: #ffba00;
 }

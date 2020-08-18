@@ -28,12 +28,12 @@
 <ion-content class="cards-background-page">
 
   <ion-slides #slides pager=false [options]="sliderOptions" (ionSlideDidChange)="slideShanged(slides)"
-    (ionSlidesDidLoad)="slideShanged(slides)">
-    <ion-slide>
-        <ion-card *ngFor="let record of records" button="true">
+    (ionSlidesDidLoad)="slideShanged(slides)"  *ngFor="let record of records">
+    <ion-slide >
+        <ion-card  button="true">
         <ion-img src={{record.imgURL}} [routerLink]="['/']"></ion-img>
           <div class="card_content">
-            <p class="card-title">{{record.recordname}}</p>
+            <p class="card-title">{{record.Recordname}}</p>
           </div>
         </ion-card>    
       <!-- <ion-card  button="true">

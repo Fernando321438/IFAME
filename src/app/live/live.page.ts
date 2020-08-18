@@ -78,7 +78,7 @@ export class LivePage {
 
       const artistFire1 = this.afstore.collection("Live Record");
       const artistFire2 = artistFire1.ref.doc(
-        (await this.authObj.currentUser).uid
+        (await this.authObj.currentUser).uid + this.artistCurrent.recordname
       ).set(datages)
      /*  artistFire2
         .collection(this.artistCurrent.recordname)
