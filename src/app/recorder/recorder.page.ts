@@ -28,6 +28,7 @@ export class RecorderPage {
   artist: Artist;
   artistCurrent: any = {};
   count: any;
+  records:any=[];
 
   constructor(
     private toastCtrl: ToastController,
@@ -40,7 +41,10 @@ export class RecorderPage {
     private afstore: AngularFirestore,
     private readonly router: Router,
     private authObj: AngularFireAuth
-  ) {}
+  ) {
+   
+    
+  }
 
   ngOnInit() {
     let id = this.activatedRoute.snapshot.paramMap.get("id");
@@ -69,21 +73,21 @@ export class RecorderPage {
   }
 
   async SaveNameSong() {
-    if (this.artistCurrent.songname && this.artistCurrent.imgURL) {
+    if (this.artistCurrent.songname && this.artistCurrent.imageURL) {
       const datages = {
         Songname: this.artistCurrent.songname,
-        imgURL: this.artistCurrent.imgURL,
+        imageURL: this.artistCurrent.imageURL,
         createdAt: Date.now(),
       };
 
-      const artistFire1 = this.afstore.collection("artist");
+      const artistFire1 = this.afstore.collection("Digital Record");
       const artistFire2 = artistFire1.ref.doc(
-        (await this.authObj.currentUser).uid
-      );
-      artistFire2
+        (await this.authObj.currentUser).uid + this.artistCurrent.songname
+        ).set(datages)
+      /* artistFire2
         .collection("Digital Record")
         .doc("/" + this.artistCurrent.songname)
-        .set(datages)
+        .set(datages) */
         .then(
           () => {
             //(await this.auth.currentUser).uid
@@ -222,7 +226,7 @@ export class RecorderPage {
  
       ref.getDownloadURL().subscribe(url => {
  
-        this.artistCurrent.imgURL = url;
+        this.artistCurrent.imageURL = url;
         this.showToast("Song Image Added");
       })
     }).catch(e => {

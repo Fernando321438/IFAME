@@ -28,12 +28,13 @@
 <ion-content class="cards-background-page">
 
   <ion-slides #slides pager=false [options]="sliderOptions" (ionSlideDidChange)="slideShanged(slides)"
-    (ionSlidesDidLoad)="slideShanged(slides)"  *ngFor="let record of records">
+  (ionSlidesDidLoad)="slideShanged(slides)"  *ngFor="let record of records"
+    >
     <ion-slide >
         <ion-card  button="true">
         <ion-img src={{record.imgURL}} [routerLink]="['/']"></ion-img>
           <div class="card_content">
-            <p class="card-title">{{record.Recordname}}</p>
+            <p class="card-title">{{record.recordname}}</p>
           </div>
         </ion-card>    
       <!-- <ion-card  button="true">
@@ -43,10 +44,19 @@
         </div>
       </ion-card> -->
     </ion-slide>
-    <ion-slide>2</ion-slide>
-    <ion-slide>3</ion-slide>
 
+    <ion-slide >
+      <ion-card  button="true">
+      <ion-img src={{record.imageURL}} [routerLink]="['/']"></ion-img>
+        <div class="card_content">
+          <p class="card-title">{{record.songname}}</p>
+        </div>
+      </ion-card>    
+    </ion-slide>
+
+    <ion-slide>3</ion-slide>
   </ion-slides>
+
 
 </ion-content>
 <!--<ul id="menu" ><ion-slides  [options]="slideOpts" >
