@@ -73,10 +73,10 @@ export class RecorderPage {
   }
 
   async SaveNameSong() {
-    if (this.artistCurrent.songname && this.artistCurrent.imageURL) {
+    if (this.artistCurrent.songname && this.artistCurrent.imgURL) {
       const datages = {
         Songname: this.artistCurrent.songname,
-        imageURL: this.artistCurrent.imageURL,
+        imgURL: this.artistCurrent.imgURL,
         createdAt: Date.now(),
       };
 
@@ -207,7 +207,7 @@ export class RecorderPage {
 
     ref.put(file).then((res) => {
         ref.getDownloadURL().subscribe((url) => {
-          this.artistCurrent.song = url;
+          this.artistCurrent.songname = url;
           this.showToast("Song added");
         });
       })
@@ -226,7 +226,7 @@ export class RecorderPage {
  
       ref.getDownloadURL().subscribe(url => {
  
-        this.artistCurrent.imageURL = url;
+        this.artistCurrent.imgURL = url;
         this.showToast("Song Image Added");
       })
     }).catch(e => {

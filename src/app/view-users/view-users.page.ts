@@ -16,8 +16,6 @@ import {LivePage} from "../live/live.page";
 export class ViewUsersPage implements OnInit {
   selectedSlide: any;
   user: any = {};
-  user2: any = {};
-
   immagine = [];
 
   segment = 0;
@@ -60,9 +58,9 @@ export class ViewUsersPage implements OnInit {
     })  
     
     afs.collection('/Digital Record').valueChanges()
-    .subscribe(records => {
-      this.records = records;
-      console.log(this.records);
+    .subscribe(songs => {
+      this.songs = songs;
+      console.log(this.songs);
 
     })  
    }
@@ -76,14 +74,13 @@ export class ViewUsersPage implements OnInit {
     this.immagine.push({
       url: this.user.imgURL
     })
-
     this.immagineDigital();
     this.afStorage.ref('/Digital/' + (await this.afAuth.currentUser).uid + this.artistCurrent.songname).getDownloadURL().subscribe((usersnap: any) => {
-      this.user2 = { 'imageURL': usersnap.imageURL, ...usersnap.payload.val() };
-      console.log(this.user2);
+      this.user = { 'imgURL': usersnap.imgURL, ...usersnap.payload.val() };
+      console.log(this.user);
     })
     this.immagine.push({
-      url: this.user2.imageURL
+      url: this.user.imgURL
     })
 
   }
@@ -100,8 +97,8 @@ export class ViewUsersPage implements OnInit {
     this.afStorage.ref('/Digital/'+ (await this.afAuth.currentUser).uid + this.artistCurrent.songname)
     .getDownloadURL().subscribe(url=> {
  
-      this.artistCurrent.imageURL= url ;
-      console.log(this.artistCurrent.imageURL);
+      this.artistCurrent.imgURL= url ;
+      console.log(this.artistCurrent.imgURL);
     })
   }
 

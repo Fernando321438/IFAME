@@ -44,19 +44,18 @@
         </div>
       </ion-card> -->
     </ion-slide>
-
-    <ion-slide >
+    <ion-slide  *ngFor="let song of songs" >
       <ion-card  button="true">
-      <ion-img src={{record.imageURL}} [routerLink]="['/']"></ion-img>
-        <div class="card_content">
-          <p class="card-title">{{record.songname}}</p>
-        </div>
-      </ion-card>    
+        <ion-img src={{song.imgURL}} [routerLink]="['/']"></ion-img>
+          <div class="card_content">
+            <p class="card-title">{{song.songname}}</p>
+          </div>
+        </ion-card>    
     </ion-slide>
-
     <ion-slide>3</ion-slide>
-  </ion-slides>
 
+  </ion-slides>
+  
 
 </ion-content>
 <!--<ul id="menu" ><ion-slides  [options]="slideOpts" >
