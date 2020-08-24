@@ -70,11 +70,13 @@
 
 
     <div *ngIf="search">
-        <ion-searchbar (ionInput)="immagineDigital()"></ion-searchbar>
+        <ion-searchbar (ionInput)="filterList($event)"></ion-searchbar>
     </div>
     <div class="ion-padding">
         <ion-list>
-            <ion-item (click)="selectedCards(item.song)" *ngFor="let record of records"></ion-item>
+            <ion-item *ngFor="let record of records">
+                <h3>{{record.name}}</h3>
+            </ion-item>
         </ion-list>
 
 

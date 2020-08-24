@@ -7,6 +7,7 @@ import { AngularFireStorage } from "@angular/fire/storage";
 import { AngularFireDatabase } from "@angular/fire/database";
 import { Media, MediaObject } from "@ionic-native/media/ngx";
 import {LivePage} from "../live/live.page";
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: "app-view-users",
@@ -88,8 +89,16 @@ export class ViewUsersPage implements OnInit {
     this.immagine.push({
       url: this.user.imgURL
     })
-
-  }
+  
+    this.records = await this.initializeItems();
+}
+async initializeItems(): Promise<any> {
+  const records = await this.afs.collection('Live')
+    .valueChanges().pipe(first()).toPromise();
+  return records;
+}
+    
+  
 
   async immagineLive(){
     this.afStorage.ref('/Live/'+ (await this.afAuth.currentUser).uid + this.artistCurrent.recordname)
@@ -107,10 +116,23 @@ export class ViewUsersPage implements OnInit {
       console.log(this.artistCurrent.imgURL);
     })
   }
+  async filterList(evt) {
+    this.records = await this.initializeItems();
+    const searchTerm = evt.srcElement.value;
+
+    if(!searchTerm) {
+      return;
+    }
+    this.records = this.records.filter(records => {
+      if (records.name && searchTerm) {
+        return (records.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
+      }
+    });
+  }
 
   segmentChanged(event)
    {
-     var segment = event.target.value;
+     var segment = event.target.value; 
      if(segment == "Live")
      {
        this.live= true;
