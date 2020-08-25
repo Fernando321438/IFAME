@@ -25,6 +25,7 @@
     "@firebase/firestore": "^1.15.5",
     "@ionic-native/core": "^5.0.7",
     "@ionic-native/file": "^5.27.0",
+    "@ionic-native/file-transfer": "^5.28.0",
     "@ionic-native/geolocation": "^5.27.0",
     "@ionic-native/media": "^5.27.0",
     "@ionic-native/native-audio": "^5.27.0",
@@ -74,6 +75,7 @@
     "@types/node": "^12.11.1",
     "codelyzer": "^5.1.2",
     "cordova-plugin-device": "^2.0.2",
+    "cordova-plugin-file-transfer": "^1.7.1",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
     "cordova-plugin-ionic-webview": "^4.2.1",
     "cordova-plugin-splashscreen": "^5.0.2",
@@ -103,7 +105,8 @@
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-file-transfer": {}
     },
     "platforms": [
       "browser",

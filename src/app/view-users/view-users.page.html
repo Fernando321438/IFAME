@@ -45,7 +45,7 @@
     <ion-infinite-scroll>
         <div *ngIf="live">
             <ion-card *ngFor="let record of records" button="true">
-                <ion-img src={{record.imgURL}} [routerLink]="['/']"></ion-img>
+                <ion-img src={{record.imgURL}} [routerLink]="['/view-users2']"></ion-img>
                 <div class="card_content">
                     <p class="card-title">{{record.Recordname}}</p>
                 </div>
@@ -59,7 +59,7 @@
         <div *ngIf="music">
             <ion-card *ngFor="let song of songs" button="true">
 
-                <ion-img src={{song.imgURL}} [routerLink]="['/']"></ion-img>
+                <ion-img src={{song.imgURL}} [routerLink]="['/view-users2']"></ion-img>
                 <div class="card_content">
                     <p class="card-title">{{song.Songname}}</p>
                 </div>

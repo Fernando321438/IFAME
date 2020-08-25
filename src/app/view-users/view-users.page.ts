@@ -54,13 +54,7 @@ export class ViewUsersPage implements OnInit {
     
   ) {
  
- /* 
-    this.activatedRoute.data
-    .subscribe((
-      data: { projectListData: any }) => {
-      this.records = data.projectListData;
-    });
- */
+
    
      afs.collection('/Live Record').valueChanges()
     .subscribe(records => {
@@ -77,50 +71,17 @@ export class ViewUsersPage implements OnInit {
     })  
    }
   async ngOnInit() {
-    this.immagineLive();
-    this.afStorage.ref('/Live/' + (await this.afAuth.currentUser).uid + this.artistCurrent.recordname).getDownloadURL().subscribe((usersnap: any) => {
-      this.user = { 'imgURL': usersnap.imgURL, ...usersnap.payload.val() };
-      console.log(this.user);
-
-    })
-    this.immagine.push({
-      url: this.user.imgURL
-    })
-    this.immagineDigital();
-    this.afStorage.ref('/Digital/' + (await this.afAuth.currentUser).uid + this.artistCurrent.songname).getDownloadURL().subscribe((usersnap: any) => {
-      this.user = { 'imgURL': usersnap.imgURL, ...usersnap.payload.val() };
-      console.log(this.user);
-    })
-    this.immagine.push({
-      url: this.user.imgURL
-    })
   
     this.records = await this.initializeItems();
 }
+
+
 async initializeItems(): Promise<any> {
   const records = await this.afs.collection('Live Record')
     .valueChanges().pipe(first()).toPromise();
   return records;
 }
-    
   
-
-  async immagineLive(){
-    this.afStorage.ref('/Live/'+ (await this.afAuth.currentUser).uid + this.artistCurrent.recordname)
-    .getDownloadURL().subscribe(url=> {
- 
-      this.artistCurrent.imgURL= url ;
-      console.log(this.artistCurrent.imgURL);
-    })
-  }
-  async immagineDigital(){
-    this.afStorage.ref('/Digital/'+ (await this.afAuth.currentUser).uid + this.artistCurrent.songname)
-    .getDownloadURL().subscribe(url=> {
- 
-      this.artistCurrent.imgURL= url ;
-      console.log(this.artistCurrent.imgURL);
-    })
-  }
   async filterList(evt) {
     this.records = await this.initializeItems();
     const searchTerm = evt.srcElement.value;

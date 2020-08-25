@@ -18,6 +18,10 @@ import { Media} from "@ionic-native/media/ngx";
 import { File} from "@ionic-native/file/ngx";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations"
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {FileTransfer,FileTransferObject} from '@ionic-native/file-transfer/ngx';
+import { DatePipe } from '@angular/common';
+import {LoadingController,Platform,ToastController} from '@ionic/angular';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,6 +34,7 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
     AngularFireStorageModule,
     NoopAnimationsModule,
     BrowserAnimationsModule,
+
     
     
   ],
@@ -42,6 +47,12 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
     File,
     BrowserAnimationsModule,
     NoopAnimationsModule,
+    FileTransfer,
+    FileTransferObject,
+    DatePipe,
+    LoadingController,
+    Platform,
+    ToastController,
     
   
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy, },

@@ -72,6 +72,10 @@ const routes: Routes = [
     path: 'live',
     loadChildren: () => import('./live/live.module').then( m => m.LivePageModule)
   },
+  {
+    path: 'view-users2',
+    loadChildren: () => import('./view-users2/view-users2.module').then( m => m.ViewUsers2PageModule)
+  },
   
   
   
