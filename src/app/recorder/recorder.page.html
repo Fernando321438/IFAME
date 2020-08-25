@@ -27,16 +27,16 @@
     <input  type="file" id="id2" required>
     <br><br><br>
     <label for="id">Choose your Song:</label>
-    <input type="file" id="id"  [(ngModel)]="artistCurrent.digitalaudio" required>
+    <input type="file" id="id"  required>
 
     <br>
     <ion-button (click)="uploadSongImage()" >Upload Song Image  </ion-button>
-    <ion-button (click)="SaveNameSong()">Save Song Name</ion-button>
+    <ion-button id="id" (click)="sendAudio1()" >Send Song </ion-button>
     <br>
     
 
-     <ion-button id="id" (click)="sendAudio1()" [routerLink]="['/geolocalization']">Send Song </ion-button>
-
+     
+     <ion-button (click)="SaveNameSong()"[routerLink]="['/geolocalization']">Save Song Name</ion-button>
     <br>
 
 

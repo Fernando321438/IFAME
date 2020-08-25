@@ -9,18 +9,19 @@
 
 <ion-content class="ion-padding">
   <!-- Playback section -->
-  <div text-center >
+  <div text-center *ngFor="let song of songs">
     <!-- File name -->
-    <div *ngFor="let song of songs">
+   
     <br>
     <h1>{{song.Songname}}</h1>
     <br>
+  
     <!-- avatar -->
-    <div  display: flex; justify-content: center; align-items: center;">
-      <img src={{song.imgURL}} alt="ihaveadream" style="width: 80%; " />
-    </div>
+    
+      <ion-img src={{song.imgURL}} alt="ihaveadream" style="width: 80%; "></ion-img>
+    
     <br>
-</div>
+
     <!-- control bar -->
     <div>
       <ion-range min="0" max="{{duration}}" [(ngModel)]="position">
@@ -32,7 +33,10 @@
     </div>
     <br>
 
-    <ion-grid>
+    <ion-grid >
+      <div *ngFor="let song of songs">
+        <audio src={{song.digitalaudio}}></audio>
+      
       <ion-row class="ion-align-items-center ion-justify-content-center" style="height: 100%">
         <ion-col>
           <!-- Backwards -->
@@ -61,7 +65,8 @@
           </ion-fab-button>
         </ion-col>
       </ion-row>
+    </div>
     </ion-grid>
-
+</div>
   
 </ion-content>

@@ -205,8 +205,8 @@ export class RecorderPage {
     const ref = this.afs.ref('Digital/' + (await this.authObj.currentUser).uid +'/'+ this.artistCurrent.songname + '/' + file.name);
 
     ref.put(file).then(res => {
-        ref.getDownloadURL().subscribe(mp3 => {
-          this.artistCurrent.digitalaudio = mp3;
+        ref.getDownloadURL().subscribe(url => {
+          this.artistCurrent.digitalaudio = url;
           this.showToast("Song added");
         })
    }).catch((e) => {
