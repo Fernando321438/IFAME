@@ -1,0 +1,8 @@
+{
+  "name": "Prova_Audio",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}
