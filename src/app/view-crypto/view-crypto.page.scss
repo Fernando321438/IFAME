@@ -1,0 +1,115 @@
+ion-toolbar{
+    justify-content: space-between;
+    --background: #000000;
+  }
+  .logout{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin-top: 5px;
+    margin-right: 7px;
+    color: #ffba00;
+  }
+  .icon {
+    font-size: 40px;
+    margin-top: 5px;
+    background: #000000;
+  }
+  .logotoolbar{
+    background-image: url("../../assets/icon/labelscoin.png");
+    margin-left: auto;
+    margin-right: auto;
+    width: 110px;
+    height: 50px;
+    background-position: center;
+    background-size: 100% 100%;
+    position: relative;
+    background-color: #474747;
+  }
+  
+  
+  
+  .cards-background-page{
+      display: grid;
+      grid-template-columns: 1fr repeat(6, minmax(auto, 60px)) 1fr;
+      padding: 5px 5px 5px 5px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-top: 10px;
+      --background:linear-gradient( #474747, #000000);
+  
+  }
+    ion-card{
+      margin: 10px;
+      display: grid;
+      grid-template-rows: flex;
+      grid-template-areas: "image" "text" "stats";
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      border-radius: 18px;
+      box-shadow: 5px 5px 15px rgba(0,0,0,0.9);
+      text-align: center;
+      // margin: 0 auto; 
+      float: none; 
+      flex: 0 1 100%;
+    }
+    ion-img{
+      grid-area: image;
+      background-size: cover;
+    }
+    .card_content{
+      padding: 20px;
+    }
+    .card-subtitle{
+     margin-bottom: 25px;
+     margin-top: auto;
+     font-weight: bold;
+     color: white;
+     font-size: 25px;
+     display: flex;
+     font-family: Arial, Helvetica, sans-serif;
+    }
+    .card-title{
+      display: flex;
+      font-weight: 500;
+      color: white;
+      font-size: 18px;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    .card-street{
+      display: flex;
+      font-weight: normal;
+      color: white;
+      font-size: 17px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    @media screen and (min-width: 40em) {
+      .cards-background-page {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+     }
+   
+     ion-card{
+        flex: 0 1 calc(25% - 1em);
+      }
+  }
+  
+  ion-icon{
+    color: #faf9f7;
+  }
+  
+  ion-tab-button{
+    --color-selected:#ffba00;
+  }
+  
+  .header-md::after {
+    display: none;
+  }
+  
+  .tab{
+    background-color: #000000;
+  }
+  
+  .button{
+    background-color: #000000;
+  }
