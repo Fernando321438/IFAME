@@ -1,0 +1,80 @@
+<ion-toolbar>
+    <ion-buttons (click)="logout()" class="logout">
+        <ion-icon class="icon" name="log-out-outline"></ion-icon>
+    </ion-buttons>
+    <ion-header class="logotoolbar">
+    </ion-header>
+</ion-toolbar>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<ion-content class="ion-padding">
+    <!-- Playback section -->
+    <div text-center *ngFor="let song of songs">
+        <!-- File name -->
+
+        <br>
+        <h1>{{song.Songname}}</h1>
+        <br>
+
+        <!-- avatar -->
+
+        <ion-img 
+        src={{song.imgURL}} alt="ihaveadream" style="width: 80%; "></ion-img>
+
+        <br>
+
+        <!-- control bar -->
+        <div>
+            <ion-range min="0" [max]="duration" [value]="currentTime" (ionChange)="seek($event)" color="light">
+                <ion-label color="light" slot="start">{{ currentTime }}</ion-label>
+                <ion-label color="light" slot="end">{{ duration }}</ion-label>
+            </ion-range>
+        </div>
+        <br>
+        <!-- <div *ngFor="let song of songs">
+            <audio>
+              <source src={{song.digitalaudio}}>
+            </audio>
+        </div> -->
+        <audio controls>
+            <source #player src={{audio.src}}>
+        </audio>
+
+        <ion-grid>
+
+
+
+        <!--     <ion-row class="ion-align-items-center ion-justify-content-center" style="height: 100%">
+                <ion-col>
+                    <!
+                    <ion-fab-button class="skip-btn" color="primary" [disabled]="!is_ready || !is_in_play"
+                        (click)="controlSeconds('back')">
+
+                        <ion-icon name="skip-backward"></ion-icon>
+                    </ion-fab-button>
+                </ion-col>
+                <ion-col> -->
+                    <!-- Play/Pause -->
+                    <ion-fab-button class="play-pause-btn" (click)="playAudio()" color="primary" *ngIf="!isLoading "
+                        > 
+                        <ion-icon  [name]="isPlaying ? 'pause' : 'play'"></ion-icon>
+
+                </ion-fab-button>
+
+                    <ion-fab-button class="play-pause-btn" (click)="stopAudio()" color="secondary" *ngIf="!isLoading ">
+                        
+                        <ion-icon [name]="!isPlaying ? 'pause' : 'play'"></ion-icon>
+                    </ion-fab-button>
+                
+                <ion-col>
+
+                  
+                </ion-col>
+            
+           
+        </ion-grid>
+
+    </div>
+
+
+</ion-content>
