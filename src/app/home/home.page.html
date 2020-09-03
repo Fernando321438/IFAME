@@ -1,20 +1,100 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<!-- PRESS THE MENU BUTTON TO TRIGGER ANIMATION -->
+<!-- PRESS PLAY BUTTON TO LISTEN THE DEMO SONG -->
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<!-- As seen on: "https://dribbble.com/shots/2144866-Day-5-Music-Player-Rebound/" -->
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<!-- THANK YOU! -->
+
+<article class="screen">
+  <audio >
+    <source #player src={{audio.src}}>
+    </audio>
+  <input type="checkbox" value="None" id="magicButton" name="check" />
+  <label class="main" for="magicButton"></label>
+
+  <div class="coverImage"></div>
+  <div class="search"></div>
+  <div class="bodyPlayer"></div>
+
+  <table class="list">
+    <tr class="song">
+
+      <h5>1<h5> </h5></h5>
+
+          <input type="checkbox" id="heart" /><label class="zmr" for="heart"></label>
+
+</tr>
+    <tr class="song">
+      <td class="nr">
+        <h5>2<h5></h5></h5></td>
+      <td class="title">
+        <h6 style="color: #ff564c;">StressedOut<h6></h6></h6></td>
+      <td class="length">
+        <h5>3:22<h5></h5></h5></td>
+      <td><input type="checkbox" id="heart1" checked /><label class="zmr" for="heart1"></label></td>
+    </tr>
+      
+   
+  </table>
+
+  <div class="shadow"></div>
+
+  <div class="bar"></div>
+
+  <div class="info">
+    <h4>STRESSED OUT</h4>
+    <h3>twenty one pilots - Blurryface</h3>
   </div>
-</ion-content>
+  <audio preload="auto" id="audio" controls>
+    <source src="http://www.jplayer.org/audio/mp3/Miaow-02-Hidden.mp3">
+    <source src="http://www.jplayer.org/audio/mp3/Miaow-02-Hidden.ogg">
+  </audio>
+  <table class="player">
+    <td><ion-fab-button class="backward" id="backward"> <ion-icon name ="arrow-back"></ion-icon></ion-fab-button></td>
+    <td><ion-fab-button class="play-pause-btn" (click)="playAudio()" color="primary" *ngIf="!isLoading "
+      > 
+      <ion-icon [name]="isPlaying ? 'pause' : 'play'"></ion-icon>
+      
+      </ion-fab-button></td>
+        <td><ion-fab-button class="play-pause-btn" (click)="stopAudio()" color="secondary" *ngIf="!isLoading ">
+          <ion-icon [name]="!isPlaying ? 'pause' : 'play'"></ion-icon>
+          </ion-fab-button></td>
+          <td><ion-fab-button class="backward" id="backward"> <ion-icon name ="arrow-forward"></ion-icon></ion-fab-button></td>
+  </table>
+
+  
+    <ion-tabs >
+      <!-- Tab bar -->
+    
+      <ion-tab-bar slot="bottom">
+        <td>
+        <ion-tab-button id="love" >
+          <ion-icon name="heart"></ion-icon>
+          <ion-label>Favourite</ion-label>
+        </ion-tab-button></td>
+        <td>
+        <ion-tab-button id="shuffle" tab="shuffle">
+          <ion-icon name="shuffle"></ion-icon>
+          <ion-label>Shuffle</ion-label>
+        </ion-tab-button></td>
+        <td>
+        <ion-tab-button id="repeat"tab="repeat">
+          <ion-icon name="repeat"></ion-icon>
+          <ion-label>Repeat</ion-label>
+        </ion-tab-button></td>
+        <td>
+        <ion-tab-button id="options" tab="options">
+          <ion-icon name="options"></ion-icon>
+          <ion-label>Options</ion-label>
+        </ion-tab-button></td>
+      </ion-tab-bar> 
+    </ion-tabs>
+  
+  
+
+  <div class="current">
+    <h2>STRESSED OUT</h2>
+  </div>
+
+
+</article> 
