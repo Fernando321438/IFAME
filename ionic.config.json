@@ -1,0 +1,7 @@
+{
+  "name": "Cazzimma",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
