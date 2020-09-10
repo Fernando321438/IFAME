@@ -30,6 +30,33 @@
 </ion-content>
 
 <div class="ion-text-center" id="fullPlayer">
+  
+  <ion-tabs >
+    <!-- Tab bar -->
+  
+    <ion-tab-bar slot="bottom">
+      <td>
+      <ion-tab-button id="love" >
+        <ion-icon name="heart"></ion-icon>
+        <ion-label>Favourite</ion-label>
+      </ion-tab-button></td>
+      <td>
+      <ion-tab-button id="shuffle" tab="shuffle">
+        <ion-icon name="shuffle"></ion-icon>
+        <ion-label>Shuffle</ion-label>
+      </ion-tab-button></td>
+      <td>
+      <ion-tab-button id="repeat"tab="repeat">
+        <ion-icon name="repeat"></ion-icon>
+        <ion-label>Repeat</ion-label>
+      </ion-tab-button></td>
+      <td>
+      <ion-tab-button id="options" tab="options">
+        <ion-icon name="options"></ion-icon>
+        <ion-label>Options</ion-label>
+      </ion-tab-button></td>
+    </ion-tab-bar> 
+  </ion-tabs>
 
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -43,6 +70,7 @@
       </ion-button>
 
     </ion-buttons>
+
   </ion-toolbar>
   <img src="{{currImage}}" alt="" id="currImg">
   <h2>
@@ -105,8 +133,6 @@
       </p>
     </ion-label>
   </ion-item>
-
-
 
 </div>
 
