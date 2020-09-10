@@ -74,7 +74,7 @@
     <ion-icon name="play-skip-back-outline" style="font-size: 30px;"></ion-icon>
   </ion-button>
 
-  <ion-button fill="clear" mode="ios" *ngIf="!isPlaying" (click)="play()">
+  <ion-button fill="clear" mode="ios" *ngIf="!isPlaying " (click)="play()">
     <ion-icon name="play" style="font-size: 40px;"></ion-icon>
   </ion-button>
 
@@ -82,7 +82,7 @@
     <ion-icon name="pause" style="font-size: 40px;"></ion-icon>
   </ion-button>
 
-  <ion-button fill="clear" mode="ios"  (click)="playNext()">
+  <ion-button fill="clear" mode="ios"   (click)="playNext()">
     <ion-icon name="play-skip-forward-outline" style="font-size: 30px;"></ion-icon>
   </ion-button>
   
@@ -122,7 +122,7 @@
       <ion-icon name="play" style="font-size: x-large;"></ion-icon>
     </ion-button>
 
-    <ion-button fill="clear" mode="ios" *ngIf="!isPlaying" (click)="pause()">
+    <ion-button fill="clear" mode="ios" *ngIf="isPlaying" (click)="pause()">
       <ion-icon name="pause" style="font-size: x-large;"></ion-icon>
     </ion-button>
 

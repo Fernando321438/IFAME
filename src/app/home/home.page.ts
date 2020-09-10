@@ -38,8 +38,8 @@ export class HomePage  implements OnInit{
   currImage;
 
   progress= 0;
-  isPlaying = false;
-
+  isPlaying =true;
+  
   isTouched = false;
 
   currSecsText;
@@ -91,7 +91,7 @@ export class HomePage  implements OnInit{
     this.upNextTitle = this.songs[index +1].title;
     this.upNextSubtitle = this.songs[index +1].subtitle;
   }
-  this.isPlaying = false;
+  this.isPlaying = true;
   })
 
   this.currSong.addEventListener("timeupdate", () => {
@@ -118,16 +118,19 @@ padZero(v) {
 }
       
 playNext(){
+  
+ 
   var index = this.songs.findIndex(x => x.title == this.currTitle);
 
   if ((index + 1 )== this.songs.length){
     this.playSong(this.songs[0].title, this.songs[0].subtitle,this.songs[0].img, this.songs[0].path);
-    
   }
   else {
     var nextIndex = index +1;
     this.playSong(this.songs[nextIndex].title, this.songs[nextIndex].subtitle,this.songs[nextIndex].img, this.songs[nextIndex].path);
+
   }
+
 }
 
 playPrev(){
@@ -182,7 +185,7 @@ touchMove(){
   this.currSecsText = this.sToTime(this.range.value);
 }
 touchEnd(){
-this.isTouched = false;
+this.isTouched = true;
 this.currSong.currentTime = Number(this.range.value);
 this.currSecsText = this.sToTime(this.currSong.currentTime)
 this.currRangeTime = Number(this.currSong.currentTime.toFixed(2).toString().substring(0,  5 ));
