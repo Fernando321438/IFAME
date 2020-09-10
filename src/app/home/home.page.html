@@ -12,8 +12,8 @@
   <ion-item lines="nome" *ngFor="let song of songs" (click)="playSong(song.title,song.subtitle,song.img,song.path)">
 
     <ion-thumbnail slot="start">
-      <img src="{{song.img}}"/>
-      
+      <img src="{{song.img}}" />
+
     </ion-thumbnail>
     <ion-label>
       <h2>
@@ -22,20 +22,21 @@
       <p>
         {{song.subtitle}}
       </p>
-      
+
     </ion-label>
   </ion-item>
-  
-    
+
+
 </ion-content>
 
 <div class="ion-text-center" id="fullPlayer">
 
   <ion-toolbar>
-    <ion-buttons slot="end">
+    <ion-buttons slot="start">
       <ion-button (click)="minimize()">
-        <svg style="width:24px;height:24;" viewbox="0 0 24 24" slot="icon-only">
-          <path fill="currentColor">
+        <ion-icon name ="chevron-down-outline" ></ion-icon>
+        <svg style="width:24px;height:24;" viewbox="0 0 24 24" slot="icon-only" >
+          <path fill="currentColor"  >
 
           </path>
         </svg>
@@ -51,14 +52,15 @@
     {{currSubtitle}}
   </p>
   <ion-item lines="nome">
-    <ion-range #range (touchmove)="touchMove()" (touchend)="touchEnd()" (touchstart)="touchStart()" max="{{maxRangeValue}}" [(ngModel)]="currRangeTime"  >
+    <ion-range #range (touchmove)="touchMove()" (touchend)="touchEnd()" (touchstart)="touchStart()"
+      max="{{maxRangeValue}}" [(ngModel)]="currRangeTime">
       <ion-label slot="start">
         <ion-text>
           <b>
-          {{currSecsText}}
+            {{currSecsText}}
           </b>
         </ion-text>
-      
+
       </ion-label>
       <ion-label slot="end">
         <ion-text>
@@ -82,27 +84,27 @@
     <ion-icon name="pause" style="font-size: 40px;"></ion-icon>
   </ion-button>
 
-  <ion-button fill="clear" mode="ios"   (click)="playNext()">
+  <ion-button fill="clear" mode="ios" (click)="playNext()">
     <ion-icon name="play-skip-forward-outline" style="font-size: 30px;"></ion-icon>
   </ion-button>
-  
+
   <ion-list-header>
     up Next
   </ion-list-header>
-<ion-item>
-  <ion-thumbnail slot="start">
-    <img src="{{upNextImg}}"/>
+  <ion-item>
+    <ion-thumbnail slot="start">
+      <img src="{{upNextImg}}" />
 
-  </ion-thumbnail>
-  <ion-label>
-    <h2>
-      {{upNextTitle}}
-    </h2>
-    <p>
-      {{upNextSubtitle}}
-    </p>
-  </ion-label>
-</ion-item>
+    </ion-thumbnail>
+    <ion-label>
+      <h2>
+        {{upNextTitle}}
+      </h2>
+      <p>
+        {{upNextSubtitle}}
+      </p>
+    </ion-label>
+  </ion-item>
 
 
 
@@ -111,7 +113,7 @@
 <ion-toolbar id="miniPlayer">
   <ion-item>
     <ion-thumbnail slot="start" (click)="maximize()">
-      <img src="{{currImage}}"/>
+      <img src="{{currImage}}" />
     </ion-thumbnail>
     <ion-label (click)="maximize()">
       <h2>{{currTitle}}</h2>
