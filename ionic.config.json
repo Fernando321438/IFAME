@@ -1,5 +1,8 @@
 {
-  "name": "Wallet",
-  "integrations": {},
-  "type": "angular"
+	"name": "Labescoin-ionic",
+	"integrations": {
+		"cordova": {}
+	},
+	"type": "angular",
+	"id": "efb289f2"
 }

@@ -1,0 +1,88 @@
+<ion-header class="ion-no-border ion-no-shadow">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>
+			{{ 'TRANSACTIONS_PAGE.SEND_TRANSACTION' | translate }}
+		</ion-title>
+		<ion-buttons slot="end">
+			<ion-button fill="clear" (click)="toggleSendAll()" color="primary"
+				>{{ 'TRANSACTIONS_PAGE.SEND_ALL' | translate }}
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="ion-padding">
+	<form [formGroup]="sendForm" class="h-full">
+		<ion-grid class="h-full flex flex-col">
+			<ion-row class="row-contacts">
+				<ion-col>
+					<input-address
+						formControlName="recipientId"
+						(inputAddressContactClick)="toggleWalletPickerModal()"
+						(inputAddressQRCodeClick)="scanQRCode()"
+					></input-address>
+				</ion-col>
+			</ion-row>
+			<input-amount></input-amount>
+			<ion-row>
+				<ion-col>
+					<ion-item>
+						<ion-label position="floating"
+							>{{ 'TRANSACTIONS_PAGE.SMART_BRIDGE' | translate
+							}}</ion-label
+						>
+						<ion-input
+							type="text"
+							formControlName="vendorField"
+							name="vendorField"
+							[maxlength]="vendorFieldLength"
+						></ion-input>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+			<ion-row class="flex-grow">
+				<ion-col>
+					<input-fee
+						[parent]="sendForm"
+						[isStatic]="nodeFees.isStatic"
+						[min]="nodeFees.min"
+						[avg]="nodeFees.avg"
+						[max]="nodeFees.max"
+						(inputFeeUpdate)="onFeeChange($event)"
+					></input-fee>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col class="text-center">
+					<ion-button
+						(click)="send()"
+						[disabled]="hasSent || hasFeeError"
+					>
+						{{ 'TRANSACTIONS_PAGE.SEND' | translate }}
+					</ion-button>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</form>
+</ion-content>
+
+<bottom-drawer
+	[bottomOffset]="0"
+	[isOpen]="isWalletPickerModalOpen"
+	[buttonClose]="false"
+	(buttonDrawerOnClose)="closeWalletPickerModal()"
+	(buttonDrawerOnBackdropTap)="closeWalletPickerModal()"
+>
+	<wallet-picker-modal
+		(walletPickerModalOnPick)="onPickWallet($event)"
+	></wallet-picker-modal>
+</bottom-drawer>
+
+<confirm-transaction
+	[wallet]="currentWallet"
+	#confirmTransaction
+></confirm-transaction>
+<qr-scanner (success)="onScanQRCode($event)" #qrScanner></qr-scanner>

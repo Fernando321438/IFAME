@@ -1,0 +1,195 @@
+#close-scanner-button {
+	display: none;
+}
+
+ion-app {
+	background-color: var(--ion-background-color);
+}
+
+.backdrop-no-scroll[style*="background-color: black"] ion-app {
+	background-color: black !important;
+}
+
+.u-backdrop-blur {
+	backdrop-filter: blur(3px);
+}
+
+.c-avatar {
+	@apply w-10 h-10 mr-2 rounded-full flex justify-center items-center font-bold text-base;
+	background-color: var(--ion-color-light-shade);
+	color: var(--ion-color-light-contrast);
+}
+
+.c-avatar--large {
+	@apply w-12 h-12 mr-4 text-lg;
+}
+
+.c-avatar--highlight {
+	background-color: var(--ion-color-danger);
+	color: var(--ion-color-danger-contrast);
+}
+
+.c-auth-modal {
+	@apply u-backdrop-blur;
+	--backdrop-opacity: 0.3 !important;
+
+	.modal-wrapper {
+		height: calc(100% - 8rem) !important;
+	}
+}
+
+.c-wallet-picker-modal {
+	--overflow: vertical;
+	--backdrop-opacity: 0.5 !important;
+
+	.modal-wrapper {
+		height: 250px !important;
+	}
+
+	.ion-page {
+		@apply rounded-t-lg;
+	}
+}
+
+.transaction-vote-modal {
+	@apply u-backdrop-blur;
+	--backdrop-opacity: 0.3 !important;
+
+	.modal-wrapper {
+		height: calc(100% - 20rem) !important;
+	}
+}
+
+.dark-theme .pane {
+	background: var(--ion-background-color) !important;
+	color: var(--ion-text-color) !important;
+	box-shadow: none !important;
+
+	.close-button {
+		background: var(--ion-color-light-tint);
+	}
+}
+
+.o-overlay--open ion-app {
+	filter: blur(3px);
+}
+
+.c-modal-dragger {
+	@apply w-8 h-1 rounded-md mx-auto bg-light mt-2 mb-4;
+}
+
+.c-delegate-search-modal {
+	--backdrop-opacity: 0.3 !important;
+
+	.modal-wrapper {
+		height: calc(100% - 15rem) !important;
+	}
+}
+
+html.qr-scanner-open {
+	ion-app,
+	ion-content {
+		height: 70px !important;
+	}
+
+	ion-content {
+		--overflow: hidden !important;
+	}
+
+	ion-header,
+	ion-footer,
+	ion-content > *:not(#close-scanner-button) {
+		display: none;
+	}
+
+	#close-scanner-button {
+		display: block;
+	}
+}
+
+/*
+ * Workaround to fix the Ionic bug that did not process
+ * collapse headers on Android even setting mode="ios"
+ */
+.ios {
+	ion-header {
+		display: block;
+		position: relative;
+		-ms-flex-order: -1;
+		order: -1;
+		width: 100%;
+		z-index: 10;
+	}
+	ion-header ion-toolbar:first-of-type {
+		padding-top: var(--ion-safe-area-top, 0);
+	}
+	.header-ios ion-toolbar:last-of-type {
+		--border-width: 0 0 0.55px;
+	}
+	@supports (
+		(-webkit-backdrop-filter: blur(0)) or (backdrop-filter: blur(0))
+	) {
+		.header-background {
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			position: absolute;
+			-webkit-backdrop-filter: saturate(180%) blur(20px);
+			backdrop-filter: saturate(180%) blur(20px);
+		}
+		.header-translucent-ios ion-toolbar {
+			--opacity: 0.8;
+		}
+		.header-collapse-condense-inactive .header-background {
+			-webkit-backdrop-filter: blur(20px);
+			backdrop-filter: blur(20px);
+		}
+	}
+	.header-ios.ion-no-border ion-toolbar:last-of-type {
+		--border-width: 0;
+	}
+	.header-collapse-condense {
+		z-index: 9;
+	}
+	.header-collapse-condense ion-toolbar {
+		position: -webkit-sticky;
+		position: sticky;
+		top: 0;
+	}
+	.header-collapse-condense ion-toolbar:first-of-type {
+		padding-top: 7px;
+		z-index: 1;
+	}
+	.header-collapse-condense ion-toolbar {
+		--background: var(--ion-background-color, #fff);
+		z-index: 0;
+	}
+	.header-collapse-condense ion-toolbar ion-searchbar {
+		height: 48px;
+		padding-top: 0px;
+		padding-bottom: 13px;
+	}
+	.header-collapse-main ion-toolbar.in-toolbar ion-title,
+	.header-collapse-main ion-toolbar.in-toolbar ion-buttons {
+		-webkit-transition: all 0.2s ease-in-out;
+		transition: all 0.2s ease-in-out;
+	}
+	.header-collapse-condense-inactive:not(.header-collapse-condense)
+		ion-toolbar.in-toolbar
+		ion-title,
+	.header-collapse-condense-inactive:not(.header-collapse-condense)
+		ion-toolbar.in-toolbar
+		ion-buttons.buttons-collapse {
+		opacity: 0;
+		pointer-events: none;
+	}
+	.header-collapse-condense-inactive.header-collapse-condense
+		ion-toolbar.in-toolbar
+		ion-title,
+	.header-collapse-condense-inactive.header-collapse-condense
+		ion-toolbar.in-toolbar
+		ion-buttons.buttons-collapse {
+		visibility: hidden;
+	}
+}

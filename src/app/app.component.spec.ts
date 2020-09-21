@@ -1,47 +1,72 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { TestBed, async } from '@angular/core/testing';
+import { RouterModule } from "@angular/router";
+import { Keyboard } from "@ionic-native/keyboard/ngx";
+import { Network } from "@ionic-native/network/ngx";
+import { ScreenOrientation } from "@ionic-native/screen-orientation/ngx";
+import { SplashScreen } from "@ionic-native/splash-screen/ngx";
+import { StatusBar } from "@ionic-native/status-bar/ngx";
+import { IonicModule, NavController } from "@ionic/angular";
+import {
+	byTestId,
+	createComponentFactory,
+	mockProvider,
+	Spectator,
+} from "@ngneat/spectator";
+import { TranslateModule } from "@ngx-translate/core";
+import { NgxsModule } from "@ngxs/store";
+import { of, Subject } from "rxjs";
 
-import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { PipesModule } from "@/pipes/pipes.module";
 
-import { AppComponent } from './app.component';
+import { AppComponent } from "./app.component";
+import { ArkApiProvider } from "./services/ark-api/ark-api";
+import { AuthProvider } from "./services/auth/auth";
+import { EventBusProvider } from "./services/event-bus/event-bus";
+import { SettingsDataProvider } from "./services/settings-data/settings-data";
+import { UserDataService } from "./services/user-data/user-data.interface";
 
-describe('AppComponent', () => {
+describe("App Component", () => {
+	let spectator: Spectator<AppComponent>;
+	const createComponent = createComponentFactory({
+		component: AppComponent,
+		imports: [
+			IonicModule.forRoot(),
+			NgxsModule.forRoot([]),
+			TranslateModule.forRoot(),
+			RouterModule.forRoot([]),
+			PipesModule,
+		],
+		mocks: [
+			SplashScreen,
+			StatusBar,
+			NavController,
+			ArkApiProvider,
+			ScreenOrientation,
+			Keyboard,
+		],
+		providers: [
+			mockProvider(UserDataService, {
+				onCreateWallet$: new Subject(),
+			}),
+			mockProvider(AuthProvider, {
+				onLogin$: new Subject(),
+				onLogout$: new Subject(),
+			}),
+			mockProvider(SettingsDataProvider, {
+				settings: of({}),
+				onUpdate$: new Subject(),
+			}),
+			mockProvider(Network, {
+				onDisconnect: () => new Subject(),
+			}),
+			mockProvider(EventBusProvider, {
+				$subject: new Subject(),
+			}),
+		],
+	});
 
-  let statusBarSpy, splashScreenSpy, platformReadySpy, platformSpy;
+	beforeEach(() => (spectator = createComponent()));
 
-  beforeEach(async(() => {
-    statusBarSpy = jasmine.createSpyObj('StatusBar', ['styleDefault']);
-    splashScreenSpy = jasmine.createSpyObj('SplashScreen', ['hide']);
-    platformReadySpy = Promise.resolve();
-    platformSpy = jasmine.createSpyObj('Platform', { ready: platformReadySpy });
-
-    TestBed.configureTestingModule({
-      declarations: [AppComponent],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      providers: [
-        { provide: StatusBar, useValue: statusBarSpy },
-        { provide: SplashScreen, useValue: splashScreenSpy },
-        { provide: Platform, useValue: platformSpy },
-      ],
-    }).compileComponents();
-  }));
-
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  });
-
-  it('should initialize the app', async () => {
-    TestBed.createComponent(AppComponent);
-    expect(platformSpy.ready).toHaveBeenCalled();
-    await platformReadySpy;
-    expect(statusBarSpy.styleDefault).toHaveBeenCalled();
-    expect(splashScreenSpy.hide).toHaveBeenCalled();
-  });
-
-  // TODO: add more tests!
-
+	it("should create", () => {
+		expect(spectator.query(byTestId("c-app"))).toBeVisible();
+	});
 });
