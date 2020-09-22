@@ -2,6 +2,16 @@ ion-toolbar{
     justify-content: space-between;
     --background: #000000;
   }
+  ion-content{
+ text-align: center;
+ align-content: flex-end;
+ position:bottom;
+  ion-searchbar{
+    
+    position:bottom;
+  }
+
+ }
   .logout{
     position: absolute;
     top: 0px;

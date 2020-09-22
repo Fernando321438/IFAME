@@ -7,7 +7,7 @@
 </ion-toolbar>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<ion-content class="cards-background-page">
+<ion-content class="cards-background-page" >
     <ion-segment scrollable color=d anger value="Live" (ionChange)="segmentChanged($event)">
         <ion-segment-button value="Live">
             <ion-icon name="Headset"></ion-icon>
@@ -17,10 +17,10 @@
             <ion-icon name="musical-notes"></ion-icon>
             Music
         </ion-segment-button>
-        <ion-segment-button value="Search">
+        <!-- <ion-segment-button value="Search">
             <ion-icon name="Search"></ion-icon>
             Search
-        </ion-segment-button>
+        </ion-segment-button> -->
     </ion-segment>
 
 
@@ -42,7 +42,7 @@
   </ion-segment-button>
   
 </ion-segment> -->
-    <ion-infinite-scroll>
+    <ion-infinite-scroll >
         <div *ngIf="live">
             <ion-card *ngFor="let record of records" button="true">
                 <ion-img src={{record.imgURL}} [routerLink]="['/view-users3']"></ion-img>
@@ -55,7 +55,10 @@
 
     </ion-infinite-scroll>
 
-    <ion-infinite-scroll>
+
+
+    
+    <ion-infinite-scroll >
         <div *ngIf="music">
             <ion-card *ngFor="let song of songs" button="true">
 
@@ -67,42 +70,24 @@
         </div>
     </ion-infinite-scroll>
 
+</ion-content>
 
-    <ion-infinite-scroll>
+    <ion-infinite-scroll-content>
 
-        <ion-searchbar showcancelbutton="" (ionChange)="filterList($event)"(ionChange)="filterList2($event)"></ion-searchbar>
+        <ion-searchbar showcancelbutton="" [(ngModel)]="searchTerm" (ionChange)="setFiltered()"></ion-searchbar>
         <ion-list *ngIf="search">
             <ion-item *ngFor="let record of records">{{record.Recordname}} </ion-item>
-            <ion-item *ngFor="let song of songs" >{{song.Songname}} </ion-item>
+            <ion-item *ngFor="let song of songs">{{song.Songname}} </ion-item>
+           
         </ion-list>
         
-    </ion-infinite-scroll>
-
-
-
-
-    <!-- <ion-card  button="true">
-        <audio src={{musics.mp3}} [routerLink]="['/']"></audio>
-        <div class="card_content">
-          <p class="card-title">{{musics.name}}</p>
-        </div>
-      </ion-card> -->
+    </ion-infinite-scroll-content>
 
 
 
 
 
 
-
-</ion-content>
-<!--<ul id="menu" ><ion-slides  [options]="slideOpts" >
-  <ion-slide><h2><li><a href="view-users">Musica</a></li></h2> </ion-slide>
-   <ion-slide> <h2><li><a href="view-users">Live</a></li></h2></ion-slide>
-    <ion-slide><h2><li><a href="view-users">Search</a></li></h2></ion-slide>
-     <li><a href="#">Portfolio</a></li>
-    <li><a href="#">Contact</a></li> 
-</ion-slides>
-  </ul> -->
 
 
 
