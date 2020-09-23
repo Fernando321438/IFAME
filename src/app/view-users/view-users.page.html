@@ -44,8 +44,8 @@
 </ion-segment> -->
     <ion-infinite-scroll >
         <div *ngIf="live">
-            <ion-card *ngFor="let record of records" button="true">
-                <ion-img src={{record.imgURL}} [routerLink]="['/view-users3']"></ion-img>
+            <ion-card *ngFor="let record of records" button="true" (click)="playSong(record.Recordname,record.artistname,record.imgURL,record.liveaudio)">
+                <ion-img src={{record.imgURL}} ></ion-img>
                 <div class="card_content">
                     <p class="card-title">{{record.Recordname}}</p>
                 </div>
@@ -60,9 +60,9 @@
     
     <ion-infinite-scroll >
         <div *ngIf="music">
-            <ion-card *ngFor="let song of songs" button="true">
+            <ion-card *ngFor="let song of songs" button="true" (click)="playSong(song.Songname,song.artistname,song.imgURL,song.digitalaudio)">
 
-                <ion-img src={{song.imgURL}} [routerLink]="['/view-users2']"></ion-img>
+                <ion-img src={{song.imgURL}} ></ion-img>
                 <div class="card_content">
                     <p class="card-title">{{song.Songname}}</p>
                 </div>
@@ -72,6 +72,155 @@
 
 </ion-content>
 
+
+
+<div class="ion-text-center" id="fullPlayer">
+
+  <ion-tabs>
+      <!-- Tab bar -->
+
+      <ion-tab-bar slot="bottom">
+          <td>
+              <ion-tab-button id="love">
+                  <ion-icon name="heart"></ion-icon>
+                  <ion-label>Favourite</ion-label>
+              </ion-tab-button>
+          </td>
+          <td>
+              <ion-tab-button id="shuffle" tab="shuffle">
+                  <ion-icon name="shuffle"></ion-icon>
+                  <ion-label>Shuffle</ion-label>
+              </ion-tab-button>
+          </td>
+          <td>
+              <ion-tab-button id="repeat" tab="repeat">
+                  <ion-icon name="repeat"></ion-icon>
+                  <ion-label>Repeat</ion-label>
+              </ion-tab-button>
+          </td>
+          <td>
+              <ion-tab-button id="options" tab="options">
+                  <ion-icon name="options"></ion-icon>
+                  <ion-label>Options</ion-label>
+              </ion-tab-button>
+          </td>
+      </ion-tab-bar>
+  </ion-tabs>
+
+  <ion-toolbar>
+      <ion-buttons class="searches">
+          <ion-icon class="iconsearch" name="search"></ion-icon>
+      </ion-buttons>
+      <ion-buttons slot="start">
+          <ion-button (click)="minimize()">
+              <ion-icon class="iconback" name="chevron-down-outline"></ion-icon>
+              <svg style="width:24px;height:24;" viewbox="0 0 24 24" slot="icon-only">
+          <path fill="currentColor"  >
+
+          </path>
+        </svg>
+          </ion-button>
+
+      </ion-buttons>
+
+  </ion-toolbar>
+
+  <img src="{{currImage}}" alt="" id="currImg">
+
+
+  <p>
+      {{currSongname}}
+  </p>
+  <u>
+      {{currArtistname}}
+  </u>
+
+  <ion-item lines="nome">
+      <ion-range #range (touchmove)="touchMove()" (touchend)="touchEnd()" (touchstart)="touchStart()" max="{{maxRangeValue}}" [(ngModel)]="currRangeTime">
+          <ion-label slot="start">
+              <ion-text>
+                  <b>
+            {{currSecsText}}
+          </b>
+              </ion-text>
+
+          </ion-label>
+          <ion-label slot="end">
+              <ion-text>
+                  <b>
+            {{durationText}}
+          </b>
+              </ion-text>
+          </ion-label>
+
+      </ion-range>
+  </ion-item>
+  <ion-button fill="clear" mode="ios" (click)="playPrev()">
+      <ion-icon name="play-skip-back-outline" style="font-size: 30px;"></ion-icon>
+  </ion-button>
+
+  <ion-button fill="clear" mode="ios" *ngIf="!isPlaying " (click)="play()">
+      <ion-icon name="play" style="font-size: 40px;"></ion-icon>
+  </ion-button>
+
+  <ion-button fill="clear" mode="ios" *ngIf="isPlaying" (click)="pause()">
+      <ion-icon name="pause" style="font-size: 40px;"></ion-icon>
+  </ion-button>
+
+  <ion-button fill="clear" mode="ios" (click)="playNext()">
+      <ion-icon name="play-skip-forward-outline" style="font-size: 30px;"></ion-icon>
+  </ion-button>
+
+  <ion-list-header>
+      up Next
+  </ion-list-header>
+  <ion-item>
+      <ion-thumbnail slot="start">
+          <img src="{{upNextImg}}" />
+
+      </ion-thumbnail>
+      <ion-label>
+          <h2>
+              {{upNextSongname}}
+          </h2>
+          <p>
+              {{upNextArtistname}}
+          </p>
+      </ion-label>
+  </ion-item>
+
+</div> 
+<div id="miniPlayer" *ngIf="isPlaying">
+<ion-toolbar >
+  <ion-item>
+      <ion-thumbnail slot="start" (click)="maximize()">
+          <img src="{{currImage}}" />
+      </ion-thumbnail>
+      <ion-label (click)="maximize()">
+          <h2>
+              {{currSongname}}
+          </h2>
+          <p>{{currArtistname}}</p>
+
+      </ion-label>
+      <ion-button fill="clear" mode="ios" *ngIf="!isPlaying" (click)="play()">
+          <ion-icon name="play" style="font-size: x-large;"></ion-icon>
+      </ion-button>
+
+      <ion-button fill="clear" mode="ios" *ngIf="isPlaying" (click)="pause()">
+          <ion-icon name="pause" style="font-size: x-large;"></ion-icon>
+      </ion-button>
+
+      <ion-button fill="clear" mode="ios" (click)="cancel()">
+          <ion-icon name="close" style="font-size: x-large;"></ion-icon>
+      </ion-button>
+
+
+  </ion-item>
+
+  <ion-progress-bar value="{{progress}}"></ion-progress-bar>
+</ion-toolbar> 
+</div>
     <ion-infinite-scroll-content>
 
         <ion-searchbar showcancelbutton="" [(ngModel)]="searchTerm" (ionChange)="setFiltered()"></ion-searchbar>
@@ -82,7 +231,6 @@
         </ion-list>
         
     </ion-infinite-scroll-content>
-
 
 
 
