@@ -1,0 +1,50 @@
+<ion-toolbar>
+    <ion-buttons (click)="logout()" class="logout">
+        <ion-icon class="icon" name="log-out-outline"></ion-icon>
+    </ion-buttons>
+    <ion-header class="logotoolbar">
+    </ion-header>
+</ion-toolbar>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<ion-header [translucent]="true">
+
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+    <ion-card button="true">
+        <ion-img [src]="artistCurrent.imgURL"></ion-img>
+    </ion-card>
+
+    <ion-label>
+        <ion-text>
+            <h1>{{status}}</h1>
+        </ion-text>
+    </ion-label>
+    
+    <ion-item lines="full">
+        <ion-label position="floating">Artist Name</ion-label>
+        <ion-input placeholder="Insert  Artist Name"  type="text" class="input" [(ngModel)]="artistCurrent.artistname" #name required>
+        </ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+        <ion-label position="floating">Record Name</ion-label>
+        <ion-input placeholder="Insert Record Name" type="text" class="input" [(ngModel)]="artistCurrent.recordname" #name required>
+        </ion-input>
+    </ion-item>
+    <label for="id">Choose your Image of Song:</label>
+    <input class="upload" type="file" id="id">
+    <br><br><br>
+    <ion-button (click)="uploadLiveImage()">Upload Live Image </ion-button>
+
+
+    <br><br><br>
+    <ion-button (click)="RecordAudio()">Record </ion-button>
+
+    <ion-button id="fileUpload" (click)="StopRecording()" (click)="uploadfile()">
+        Stop</ion-button>
+    <br><br><br>
+    <ion-button (click)="SaveNameRecord()" [routerLink]="['/geolocalization']">Save Name Record </ion-button>
+</ion-content>
