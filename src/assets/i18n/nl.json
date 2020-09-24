@@ -90,13 +90,13 @@
 		"FAST_EASY": "Snel en Makkelijk",
 		"GET_STARTED": "Aan de slag",
 		"SECURITY": "Beveiliging",
-		"TEXT_1": "Wij leveren alle hulpmiddelen die je nodig hebt om je ARK tokens te beheren, altijd, overal, wereldwijd!",
+		"TEXT_1": "Wij leveren alle hulpmiddelen die je nodig hebt om je LABELSCOIN tokens te beheren, altijd, overal, wereldwijd!",
 		"TEXT_2": "Alle gevoelige data is veilig opgeslagen met behulp van het PBKDF2 algoritme en AES-256 encryptie beschermd door je pincode",
 		"TEXT_3": "Veeg tussen profielen en wallets, controleer je saldo, verzend en ontvang saldo en nog veel meer",
 		"WELCOME": "Welkom aan boord"
 	},
 	"SIGN_IN_PAGE": {
-		"ARK_WALLET": "ARK Wallet",
+		"ARK_WALLET": "Labelscoin Wallet",
 		"CREATE_PROFILE": "Account aanmaken",
 		"SLOGAN": "Welkom bij het ARK Ecosysteem"
 	},

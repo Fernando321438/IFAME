@@ -74,9 +74,9 @@ describe("Market State", () => {
 			}),
 		);
 		await store
-			.dispatch(new MarketActions.FetchMarket("ark", "BTC"))
+			.dispatch(new MarketActions.FetchMarket("LABELSCOIN", "BTC"))
 			.toPromise();
-		const state = store.selectSnapshot(MarketState.getMarket("ark", "BTC"));
+		const state = store.selectSnapshot(MarketState.getMarket("LABELSCOIN", "BTC"));
 		expect(state).toEqual(btcMarket);
 	});
 });

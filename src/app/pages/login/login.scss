@@ -1,6 +1,6 @@
 :host {
 	.content-background {
-		background-image: url("/assets/img/ppp.png");
+		background-image: url();
 		background-repeat: no-repeat;
 		background-position: top center;
 	}
@@ -8,6 +8,5 @@
 
 :host-context(.dark-theme) {
 	.content-background {
-		background-image: url("/assets/img/ppp.png");
-	}
-}
+		
+	}}

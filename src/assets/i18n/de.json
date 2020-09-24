@@ -90,13 +90,13 @@
 		"FAST_EASY": "Schnell und einfach",
 		"GET_STARTED": "Beginnen",
 		"SECURITY": "Sicherheit",
-		"TEXT_1": "Wir bieten alle Werkzeuge um deine ARK Token zu verwalten, jederzeit, überall, weltweit!",
+		"TEXT_1": "Wir bieten alle Werkzeuge um deine LABELSCOIN Token zu verwalten, jederzeit, überall, weltweit!",
 		"TEXT_2": "All deine vertraulichen Daten sind mittels des PBKDF2 Algorithmus und einer AES-256 Verschlüsselung sicher gespeichert und werden zusätzlich durch deinen PIN Code geschützt",
 		"TEXT_3": "Wechsle zwischen Profilen und Wallets, prüfe deinen Kontostand, sende und empfange Guthaben und vieles mehr",
 		"WELCOME": "Willkommen an Board"
 	},
 	"SIGN_IN_PAGE": {
-		"ARK_WALLET": "ARK Wallet",
+		"ARK_WALLET": "Labelscoin Wallet",
 		"CREATE_PROFILE": "Erstelle ein Profil",
 		"SLOGAN": "Willkommen beim ARK Ecosystem"
 	},

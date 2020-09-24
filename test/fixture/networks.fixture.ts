@@ -1,13 +1,13 @@
 export const mainnet = {
 	type: 0,
 	name: "mainnet",
-	token: "ARK",
+	token: "Labelscoin",
 	version: 21,
 };
 
 export const devnet = {
 	type: 1,
 	name: "devnet",
-	token: "DARK",
+	token: "D-Labelscoin",
 	version: 30,
 };

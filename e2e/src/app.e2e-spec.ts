@@ -9,6 +9,6 @@ describe("new App", () => {
 
 	it("should have a title", () => {
 		page.navigateTo();
-		expect(page.getTitle()).toEqual("Mobile ARK");
+		expect(page.getTitle()).toEqual("LABELSCOIN ARK");
 	});
 });
