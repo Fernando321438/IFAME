@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            popopopo
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding>
+<ion-button expand="full" (click)="StartBackgroundTracking()">StartBackgroundTracking</ion-button><br />
+<ion-button expand="full" (click)="StopBackgroundGeolocation()">StopBackgroundGeolocation</ion-button><br />
+<ion-button expand="full" (click)="GetLocations()">GetLocations</ion-button><br />
+<ion-button expand="full" (click)="ClearLocations()">ClearLocations</ion-button><br />
+<ion-list *ngFor="let location of locations">
+    <ion-item><ion-label><b>
+        Latitude:
+    </b>{{location.latitude}}</ion-label></ion-item>
+    <ion-item><ion-label><b>
+        Longitude:
+    </b>{{location.longitude}}</ion-label></ion-item>
+    <ion-item><ion-label><b>
+        Speed:
+    </b>{{location.speed}}</ion-label></ion-item>
+    <ion-item><ion-label><b>
+        Time:
+    </b>{{location.time}}</ion-label></ion-item>
+</ion-list>
+
+</ion-content>
