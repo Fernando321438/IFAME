@@ -27,7 +27,12 @@ import { digest } from '@angular/compiler/src/i18n/digest';
 export class ViewUsersPage implements OnInit {
   public searchTerm: string = "";
   public items: any;
-
+//////////////////////////////////////////////////////
+currRecordname;
+currRecord: HTMLAudioElement;
+upNextRecordname;
+upPrevLiveaudio;
+///////////////////////////////////////////////////////
   selectedCards: any;
   user: any = {};
   immagine = [];
@@ -316,7 +321,151 @@ this.isPlaying = true;  */
    if (this.isPlaying){
      this.currSong.play();
    }
+  }  
+  
+  //recordio
+
+
+  playSong2(Recordname, artistname, imgURL, record) {
+    if(this.currRecord !=null){
+      this.currRecord.pause(); 
+     }
+   
+   
+     document.getElementById("fullPlayer").style.bottom = "0px";
+     this.currRecordname = Recordname;
+     this.currArtistname = artistname;
+     this.currImage = imgURL;
+     
+    
+     this.currRecord = new Audio(record);
+     
+     this.currRecord.play().then(() => {
+     this.durationText = this.sToTime2(this.currRecord.duration);
+     this.maxRangeValue = Number(this.currRecord.duration.toFixed(2).toString().substring(0, 5));
+   
+     var index= this.records.findIndex(x => x.Recordname == this.currRecordname);
+     
+   
+     if((index +1) == this.records.length) {
+       this.upNextImg = this.records[0].imgURL;
+       this.upNextRecordname = this.records[0].Recordname;
+       this.upNextArtistname = this.records[0].artistname;
+       this.upNextDigitalaudio = this.records[0].liveaudio;
+     }
+     else{
+       this.upNextImg = this.records[index +1].imgURL;
+       this.upNextRecordname = this.records[index +1].Recordname;
+       this.upNextArtistname = this.records[index +1].artistname;
+       this.upNextDigitalaudio = this.records[index +1].liveaudio;
+     }
+     this.isPlaying = true;
+
+})
+     
+
+     
+     this.currRecord.addEventListener("timeupdate", () => {
+      if(!this.isTouched){
+     this.currRangeTime = Number(this.currRecord.currentTime.toFixed(2).toString().substring(0,  5));
+     this.currSecsText = this.sToTime2(this.currRecord.currentTime);
+     this.progress = (Math.floor(this.currRecord.currentTime) / Math.floor(this.currRecord.duration));
+   
+   
+     if (this.currRecord.currentTime == this.currRecord.duration) {
+       this.playNext2();
+     }
+    }
+     });
+    
+   
+     }
+     sToTime2(t){
+       return this.padZero(parseInt(String((t / (60)) % 60)))+ ":"+
+       this.padZero(parseInt(String((t) % 60)));
+     }
+   padZero2(v) {
+     return (v < 10) ? "0" +v : v;
+   }
+         
+   playNext2(){
+     
+    
+     var index = this.records.findIndex(x => x.Recordname == this.currRecordname);
+   
+     if ((index + 1 )== this.records.length){
+       this.playSong2(this.records[0].Recordname, this.records[0].artistname,this.records[0].imgURL,this.records[0].liveaudio);
+     }
+     else {
+       var nextIndex = index +1;
+       this.playSong2(this.records[nextIndex].Songname, this.records[nextIndex].artistname,this.records[nextIndex].imgURL,this.records[nextIndex].liveaudio);
+   
+     }
+   
+   }
+   
+   playPrev2(){
+     var index = this.records.findIndex(x => x.Recordname == this.currRecordname);
+   
+     if (index == 0) {
+      var lastIndex = this.records.length - 1;
+       this.playSong2(this.records[lastIndex].Recordname, this.records[lastIndex].artistname,this.records[lastIndex].imgURL, this.records[lastIndex].liveaudio);
+   
+   }
+     
+   else {
+     var prevIndex = index -1;
+     this.playSong2(this.records[prevIndex].Recordname, this.records[prevIndex].artistname,this.records[prevIndex].imgURL, this.records[prevIndex].liveaudio);
+   
+   }
+   
+   }
+   
+   minimize2(){
+     document.getElementById("fullPlayer").style.bottom = "-1000px";
+     document.getElementById("miniPlayer").style.bottom = "0px";
+   }
+   maximize2(){
+     document.getElementById("fullPlayer").style.bottom = "0px";
+     document.getElementById("miniPlayer").style.bottom = "-100px";
+   
+   }
+   pause2(){
+     this.currRecord.pause();
+     this.isPlaying = false;
+   }
+   play2(){
+     this.currRecord.play();
+     this.isPlaying = true;
+   }
+   cancel2(){
+    document.getElementById("miniPlayer").style.bottom = "-100px";
+    this.currImage = "";
+    this.currRecordname = "";
+    this.currArtistname = "";
+    this.progress = 0;
+    this.currRecord.pause();
+    this.isPlaying = false;
   }
+  
+   touchStart2(){
+     this.isTouched = true;
+     this.currRangeTime = Number(this.range.value);
+   }
+   touchMove2(){
+     this.currSecsText = this.sToTime2(this.range.value);
+   }
+   touchEnd2(){
+   this.isTouched = false;
+   this.currRecord.currentTime = Number(this.range.value);
+   this.currSecsText = this.sToTime2(this.currRecord.currentTime)
+   this.currRangeTime = Number(this.currRecord.currentTime.toFixed(2).toString().substring(0,  5 ));
+   if (this.isPlaying){
+     this.currRecord.play();
+   }
+  }
+
+
 
    async logout(){
      if( this.isPlaying = true){
