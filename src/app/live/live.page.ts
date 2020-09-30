@@ -103,7 +103,7 @@ export class LivePage {
  
   RecordAudio() {
     this.audiofile = this.media.create
-    (this.file.externalRootDirectory + "/audiofile.mp3"
+    (this.file.externalRootDirectory + this.artistCurrent.recordname
     );
     this.audiofile.startRecord();
     this.status = "recording...";
@@ -121,33 +121,32 @@ export class LivePage {
      */
   }
 
+
+
+
+
   //FUNZIONANTE
   async uploadfile() {
-    console.dir(this.file.externalDataDirectory);
+    const file = (<HTMLInputElement>document.getElementById("id")).files[0];
+    
+    const ref = this.afs.ref('Live' +'/'+(await this.authObj.currentUser).uid+ '/' + this.artistCurrent.recordname + '/'  + file.name);
 
-    /*     var artistCurrent = {name:`${this.audiofile}.mp3`};
-     */
-
-    const fileName = {
-      liveaudio: this.artistCurrent.liveaudio,
-    };
-    const metadata = { contentType: "audio/mp3" };
-
-    var blob = new Blob([fileName.liveaudio], { type: "audio/mp3" }); // pass a useful mime type here
-    const uploadAudio = this.afs.storage
-      .ref(
-        'Live' +'/'+(await this.authObj.currentUser).uid+ '/' + this.artistCurrent.recordname + '/' +this.artistCurrent.recordname 
-      );
-      uploadAudio.put(blob, metadata).then(res => {
-        uploadAudio.getDownloadURL().then(url => {
+    ref.put(file).then(res => {
+        ref.getDownloadURL().subscribe(url => {
           this.artistCurrent.liveaudio = url;
           this.showToast("Live added");
         })
    }).catch((e) => {
         console.log(e);
       });
-     console.log(fileName);
+    }
+    /*     var artistCurrent = {name:`${this.audiofile}.mp3`};
+     */
 
+   
+
+   
+    
      
     /*   const uri = await firebase
         .storage()
@@ -177,7 +176,7 @@ export class LivePage {
     );
      */
    
-  }
+  
   
  
   //------------------------------------

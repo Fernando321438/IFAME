@@ -46,5 +46,9 @@
     <ion-button id="fileUpload" (click)="StopRecording()" >
         Stop</ion-button>
     <br><br><br>
+    <input type="file" id="id"  required>
+    <ion-button id="id" (click)="uploadfile()" >Send Live Song </ion-button>
+    <br><br><br>
+    
     <ion-button (click)="SaveNameRecord()" [routerLink]="['/geolocalization']">Save Name Record </ion-button>
 </ion-content>

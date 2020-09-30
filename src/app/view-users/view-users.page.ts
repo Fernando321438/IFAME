@@ -323,7 +323,7 @@ this.isPlaying = true;  */
    }
   }  
   
-  //recordio
+  //record
 
 
   playSong2(Recordname, artistname, imgURL, record) {
