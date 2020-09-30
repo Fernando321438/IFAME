@@ -1,0 +1,64 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<ion-buttons (click)="logout()" class="logout">
+    <ion-icon class="icon" name="log-out-outline"></ion-icon>
+</ion-buttons>
+<ion-header class="logotoolbar">
+</ion-header>
+<ion-content class="sfondo">
+    <p class="logo">
+    </p>
+    <div class="login-form">
+        <div class="sign-in-htm">
+
+            <div class="group">
+                <ion-select placeholder="Select Type Artist" id="artist" type="text" class="input" [(ngModel)]="artists.typeartist">
+                    <ion-select-option value="Owner">Owner</ion-select-option>
+                    <ion-select-option value="Performer">Performer</ion-select-option>
+                </ion-select>
+            </div>
+
+            <div class="group">
+                <input placeholder="Name" id="artist" type="text" class="input" [(ngModel)]="artists.name">
+            </div>
+            <div class="group">
+                <input placeholder="Surname" id="artist" type="text" class="input" [(ngModel)]="artists.surname">
+            </div>
+            <div class="group">
+                <input placeholder="Alias" id="artist" type="text" class="input" [(ngModel)]="artists.alias">
+            </div>
+            <div class="group">
+                <input placeholder="id_word" id="artist" type="text" class="input" [(ngModel)]="artists.id_work">
+            </div>
+            <div class="group">
+                <input placeholder="Phone Number" id="artist" type="text" class="input" [(ngModel)]="artists.phone_number">
+            </div>
+            <div class="group">
+                <input placeholder="genres" id="artist" type="text" class="input" [(ngModel)]="artists.genres">
+            </div>
+            <div class="group">
+                <input placeholder="Royalties" id="artist" type="text" class="input" [(ngModel)]="artists.royalties">
+            </div>
+
+
+            <div class="group">
+                <input placeholder="Email" id="artist" type="text" class="input" [(ngModel)]="artists.email">
+            </div>
+            <div class="group">
+                <input placeholder="Password" id="artist" type="password" class="input" data-type="password" [(ngModel)]="artists.password">
+            </div>
+            <div class="group">
+                <input placeholder="validatepassword" id="artist" type="password" class="input" data-type="password" [(ngModel)]="artists.validatepassword">
+            </div>
+
+            <div>
+                <button (click)="signUp()" mode="ios" mode="md" class="center">
+                    <h1>
+                        Registration
+                    </h1>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+</ion-content>
