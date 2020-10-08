@@ -1,23 +1,61 @@
-import { Component, OnInit,ElementRef, ViewChild, Input } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { Router } from '@angular/router';
+import { Component, OnInit,ElementRef, ViewChild, Input  } from "@angular/core";
+import { Router, ActivatedRoute } from "@angular/router";
+import { AngularFireAuth } from "@angular/fire/auth";
+import { IonSlides, IonSlide, IonCard } from "@ionic/angular";
+import { AngularFirestore } from "@angular/fire/firestore";
+import { AngularFireStorage } from "@angular/fire/storage";
+import { AngularFireDatabase } from "@angular/fire/database";
+import { Media, MediaObject } from "@ionic-native/media/ngx";
+import {LivePage} from "../live/live.page";
+import { first } from 'rxjs/operators';
+import { DataService } from "../services/data.service";
+
 import { LoadingController,Platform,ToastController } from '@ionic/angular';
 import { DatePipe, PathLocationStrategy } from '@angular/common';
 import {IonRange} from '@ionic/angular';
 
 import {FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
-import { Media, MediaObject } from '@ionic-native/media/ngx';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireStorage } from '@angular/fire/storage';
 import { digest } from '@angular/compiler/src/i18n/digest';
 
+
 @Component({
-  selector: 'app-view-users2',
-  templateUrl: './view-users2.page.html',
-  styleUrls: ['./view-users2.page.scss'],
+  selector: "app-view-users",
+  templateUrl: "./view-users2.page.html",
+  styleUrls: ["./view-users2.page.scss"],
 })
 export class ViewUsers2Page implements OnInit {
+  public searchTerm: string = "";
+  public items: any;
+//////////////////////////////////////////////////////
+currRecordname;
+currRecord: HTMLAudioElement;
+upNextRecordname;
+upPrevLiveaudio;
+///////////////////////////////////////////////////////
+  selectedCards: any;
+  user: any = {};
+  immagine = [];
+
+  segment = 0;
+  sliderOptions = {
+    initialSlide: 0,
+    slidesPerView: 1,
+    speed: 400,
+  };
+  
+  /* slideOpts = {
+    initialSlide: 0,
+    speed: 400 */
+  recordname:any;
+  records: any;
+  songs: any;
+  imgURL:any=[];
+  
+  live:boolean=true;
+  music:boolean=false;
+  search:boolean=false;
+
   @Input() src: string;
 
   @ViewChild("range", {static:false}) range: IonRange;
@@ -30,6 +68,8 @@ export class ViewUsers2Page implements OnInit {
   isPlaying =false;
   
   isTouched = false;
+
+  isShow=true;
 
   currSecsText;
   durationText;
@@ -51,47 +91,92 @@ export class ViewUsers2Page implements OnInit {
 
   audio:any;
 
-  songs:any;
   message: any;
   mp3s: any[0];
   artistCurrent: any = {};
-/*   audio:any; 
- */
+  currRecord2: any;
+  currRecordname2: any;
+  currArtistname2: any;
+  currImage2: any;
+  maxRangeValue2: number;
+  durationText2: string;
+  upNextImg2: any;
+  upNextRecordname2: any;
+  upNextArtistname2: any;
+  upNextLiveaudio: any;
+  currRangeTime2: number;
+  currSecsText2: string;
+
   constructor(private afs:AngularFirestore,private platform: Platform,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
     private file: File,
    
-    private media: Media,
     private datePipe: DatePipe, 
-    private afAuth: AngularFireAuth,
-    private router: Router,
-    private afStorage:AngularFireStorage,
-    private authObj: AngularFireAuth)
+    public afAuth: AngularFireAuth,
+    private afStorage: AngularFireStorage,
+    private activatedRoute: ActivatedRoute,
+    private afDB: AngularFireDatabase,
+    private media: Media,
+    private readonly router: Router,
+    private dataService: DataService
+  ) {
     
+      this.afs.collection('/Live Record').valueChanges()
+      .subscribe(records => {
+        this.records = records;
+        console.log(this.records);
   
-    
-    
-    
-    {afs.collection('/Digital Record').valueChanges()
-    .subscribe(songs => {
-      this.songs = songs;
-      console.log(this.songs);
-
-    })  
-    }
-
+      })  
       
-    
-    
+     this.afs.collection('/Digital Record').valueChanges()
+      .subscribe(songs => {
+        this.songs = songs;
+        console.log(this.songs);
   
-  ngOnInit() {
-  /*   this.audio = new Audio();
-    this.audio.src = "";
-    this.audio.load();
-    this.audio */
-  }
+      })  
+    
+ 
 
+   
+   
+   }
+  async ngOnInit() {
+  
+    this.setFiltered();
+}
+setFiltered() {
+  this.records = this.dataService.filterRecords(this.searchTerm);
+  this.songs = this.dataService.filterSongs(this.searchTerm);
+}
+
+
+
+
+  segmentChanged(event)
+   {
+     var segment = event.target.value; 
+     if(segment == "Live")
+     {
+       this.live= true;
+       this.music= false;
+       this.search= false;
+     }
+     else if (segment == "Music")
+     {
+      this.live= false;
+      this.music= true;
+      this.search= false;
+    }
+    else if (segment == "Search")
+    {
+     this.live= false;
+     this.music= false;
+     this.search= true;
+   }
+  }
+    
+ 
   playSong(Songname, artistname, imgURL, song) {
     if(this.currSong !=null){
       this.currSong.pause(); 
@@ -215,10 +300,12 @@ this.isPlaying = true;  */
    pause (){
      this.currSong.pause();
      this.isPlaying = false;
+     this.isShow=false;
    }
    play(){
      this.currSong.play();
      this.isPlaying = true;
+     this.isShow=true;
    }
    
    cancel(){
@@ -229,6 +316,7 @@ this.isPlaying = true;  */
      this.progress = 0;
      this.currSong.pause();
      this.isPlaying = false;
+     this.isShow=true;
    }
    touchStart(){
      this.isTouched = true;
@@ -245,12 +333,77 @@ this.isPlaying = true;  */
    if (this.isPlaying){
      this.currSong.play();
    }
-  }
-  async logout(){
-    this.currSong.pause();
+  }  
+
+
+
+  
+  playSong2(Recordname, artistname2, imgURL2, record) {
+    if(this.currRecord2 !=null){
+      this.currRecord2.pause(); 
+     }
+   
+   
+     document.getElementById("fullPlayer").style.bottom = "0px";
+     this.currRecordname2 = Recordname;
+     this.currArtistname2 = artistname2;
+     this.currImage2 = imgURL2;
+     
+    
+     this.currRecord2 = new Audio(record);
+     
+     this.currRecord2.play().then(() => {
+     this.durationText2 = this.sToTime(this.currRecord2.duration);
+     this.maxRangeValue2= Number(this.currRecord2.duration.toFixed(2).toString().substring(0, 5));
+   
+     var index= this.records.findIndex(x => x.Recordname == this.currRecordname2);
+     
+   
+     if((index +1) == this.records.length) {
+       this.upNextImg2 = this.records[0].imgURL2;
+       this.upNextRecordname2 = this.records[0].Recordname;
+       this.upNextArtistname2 = this.records[0].artistname2;
+       this.upNextLiveaudio = this.records[0].liveaudio;
+     }
+     else{
+       this.upNextImg2 = this.records[index +1].imgURL2;
+       this.upNextRecordname2 = this.records[index +1].Recordname;
+       this.upNextArtistname2 = this.records[index +1].artistname2;
+       this.upNextLiveaudio = this.records[index +1].liveaudio;
+     }
+     this.isPlaying = true;
+
+})
+     
+
+     
+     this.currRecord2.addEventListener("timeupdate", () => {
+      if(!this.isTouched){
+     this.currRangeTime2 = Number(this.currRecord2.currentTime.toFixed(2).toString().substring(0,  5));
+     this.currSecsText2 = this.sToTime(this.currRecord2.currentTime);
+     this.progress = (Math.floor(this.currRecord2.currentTime) / Math.floor(this.currRecord2.duration));
+   
+   
+     if (this.currRecord2.currentTime == this.currRecord2.duration) {
+       this.playNext();
+     }
+    }
+     });
+    
+   
+     }
+
+
+   async logout(){
+     if( this.isPlaying = true){
+      this.currSong.pause();
+      await this.afAuth.signOut();
+      this.router.navigateByUrl('/login-register');
+     }
+     else{
     await this.afAuth.signOut();
-    this.router.navigateByUrl('/view-users');
+    this.router.navigateByUrl('/login-register');}
+    
   }
+
 }
-
-

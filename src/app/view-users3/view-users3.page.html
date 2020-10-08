@@ -1,39 +1,13 @@
 <ion-toolbar>
     <ion-buttons (click)="logout()" class="logout">
-        <ion-icon class="iconlogout" name="log-out-outline"></ion-icon>
+        <ion-icon class="icon" name="log-out-outline"></ion-icon>
     </ion-buttons>
     <ion-header class="logotoolbar">
     </ion-header>
 </ion-toolbar>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<ion-content>
-    <ion-list-header>
-        <ion-label>Songs</ion-label>
-    </ion-list-header>
-    <ion-item lines="nome" *ngFor="let record of records" (click)="playSong(record.Recordname,record.artistname,record.imgURL,record.liveaudio)">
-
-        <ion-thumbnail slot="start">
-            <img src="{{record.imgURL}}" />
-
-        </ion-thumbnail>
-
-        <ion-label>
-            <p>
-                {{record.Recordname}}
-            </p>
-            <u>
-                {{record.artistname}} 
-            </u>
-
-        </ion-label>
-    </ion-item>
-
-
-</ion-content>
-
-
-
+<ion-content *ngFor="let record of records" button="true" (click)="playSong2(record.Recordname,record.artistname,record.imgURL,record.liveaudio)">
 <div class="ion-text-center" id="fullPlayer" >
 
     <ion-tabs>
@@ -72,44 +46,44 @@
             <ion-icon class="iconsearch" name="search"></ion-icon>
         </ion-buttons>
         <ion-buttons slot="start">
-            <ion-button (click)="minimize()">
+            <ion-button (click)="minimize2()">
                 <ion-icon class="iconback" name="chevron-down-outline"></ion-icon>
                 <svg style="width:24px;height:24;" viewbox="0 0 24 24" slot="icon-only">
-            <path fill="currentColor"  >
-  
-            </path>
-          </svg>
+          <path fill="currentColor"  >
+
+          </path>
+        </svg>
             </ion-button>
 
         </ion-buttons>
 
     </ion-toolbar>
 
-    <img src="{{currImage}}" alt="" id="currImg">
+    <img src="{{currImage2}}" alt="" id="currImg">
 
 
     <p>
-        {{currRecordname}}
+        {{currRecordname2}}
     </p>
     <u>
-        {{currArtistname}}
-    </u>
+      {{currArtistname2}} 
+  </u>
 
     <ion-item lines="nome">
-        <ion-range #range (touchmove)="touchMove()" (touchend)="touchEnd()" (touchstart)="touchStart()" max="{{maxRangeValue}}" [(ngModel)]="currRangeTime">
+        <ion-range #range (touchmove)="touchMove()" (touchend)="touchEnd()" (touchstart)="touchStart()" max="{{maxRangeValue2}}" [(ngModel)]="currRangeTime2">
             <ion-label slot="start">
                 <ion-text>
                     <b>
-              {{currSecsText}}
-            </b>
+            {{currSecsText2}}
+          </b>
                 </ion-text>
 
             </ion-label>
             <ion-label slot="end">
                 <ion-text>
                     <b>
-              {{durationText}}
-            </b>
+            {{durationText2}}
+          </b>
                 </ion-text>
             </ion-label>
 
@@ -136,47 +110,83 @@
     </ion-list-header>
     <ion-item>
         <ion-thumbnail slot="start">
-            <img src="{{upNextImg}}" />
+            <img src="{{upNextImg2}}" />
 
         </ion-thumbnail>
         <ion-label>
             <h2>
-                {{upNextRecordname}}
+                {{upNextRecordname2}}
             </h2>
             <p>
-                {{upNextArtistname}}
+                {{upNextArtistname2}}
             </p>
         </ion-label>
     </ion-item>
 
 </div>
+<div id="miniPlayer" *ngIf="isPlaying || !isShow">
+    <ion-toolbar>
+        <ion-item>
+            <ion-thumbnail slot="start" (click)="maximize2()">
+                <img src="{{currImage2}}" />
+            </ion-thumbnail>
+            <ion-label (click)="maximize2()">
+                <h2>
+                    {{currRecordname2}}
+                </h2>
+                <p>{{currArtistname2}}</p>
 
-<ion-toolbar id="miniPlayer">
-    <ion-item>
-        <ion-thumbnail slot="start" (click)="maximize()">
-            <img src="{{currImage}}" />
-        </ion-thumbnail>
-        <ion-label (click)="maximize()">
-            <h2>
-                {{currRecordname}}
-            </h2>
-            <p>{{currArtistname}}</p>
+            </ion-label>
+            <ion-button fill="clear" mode="ios" *ngIf="!isPlaying" (click)="play()">
+                <ion-icon name="play" style="font-size: x-large;"></ion-icon>
+            </ion-button>
 
-        </ion-label>
-        <ion-button fill="clear" mode="ios" *ngIf="!isPlaying" (click)="play()">
-            <ion-icon name="play" style="font-size: x-large;"></ion-icon>
-        </ion-button>
+            <ion-button fill="clear" mode="ios" *ngIf="isPlaying" (click)="pause()">
+                <ion-icon name="pause" style="font-size: x-large;"></ion-icon>
+            </ion-button>
 
-        <ion-button fill="clear" mode="ios" *ngIf="isPlaying" (click)="pause()">
-            <ion-icon name="pause" style="font-size: x-large;"></ion-icon>
-        </ion-button>
-
-        <ion-button fill="clear" mode="ios" (click)="cancel()">
-            <ion-icon name="close" style="font-size: x-large;"></ion-icon>
-        </ion-button>
+            <ion-button fill="clear" mode="ios" (click)="cancel()">
+                <ion-icon name="close" style="font-size: x-large;"></ion-icon>
+            </ion-button>
 
 
-    </ion-item>
+        </ion-item>
 
-    <ion-progress-bar value="{{progress}}"></ion-progress-bar>
-</ion-toolbar>
+        <ion-progress-bar value="{{progress}}"></ion-progress-bar>
+    </ion-toolbar>
+</div>
+
+</ion-content>
+
+
+
+
+
+
+
+
+
+<!-- <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="schedule">
+        <ion-icon name="calendar"></ion-icon>
+        <ion-label>Schedule</ion-label>
+        <ion-badge>6</ion-badge>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="speakers">
+        <ion-icon name="person-circle"></ion-icon>
+        <ion-label>Speakers</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="map">
+        <ion-icon name="map"></ion-icon>
+        <ion-label>Map</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="about">
+        <ion-icon name="information-circle"></ion-icon>
+        <ion-label>About</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs> -->

@@ -18,40 +18,57 @@ import { digest } from '@angular/compiler/src/i18n/digest';
   styleUrls: ['./view-users3.page.scss'],
 })
 export class ViewUsers3Page implements OnInit {
+  
+  public items: any;
+//////////////////////////////////////////////////////
+currRecordname2;
+currRecord2: HTMLAudioElement;
+upNextRecordname2;
+upPrevLiveaudio;
+///////////////////////////////////////////////////////
+  selectedCards: any;
+  user: any = {};
+  immagine = [];
+
+  recordname:any;
+  records: any;
+  imgURL2:any=[];
+  
+ 
+
   @Input() src: string;
 
   @ViewChild("range", {static:false}) range: IonRange;
 
-  currRecordname;
-  currArtistname;
-  currImage;
+  
+  currArtistname2;
+  currImage2;
 
   progress= 0;
   isPlaying =false;
   
   isTouched = false;
 
-  currSecsText;
-  durationText;
+  isShow=true;
 
-  currRangeTime;
-  maxRangeValue;
+  currSecsText2;
+  durationText2;
 
-  currRecord: HTMLAudioElement;
+  currRangeTime2;
+  maxRangeValue2;
 
-  upNextImg;
-  upNextRecordname;
-  upNextArtistname;
-  upNextDigitalaudio;
+  currSong: HTMLAudioElement;
 
-  upPrevImg;
-  upPrevTitle;
-  upPrevArtistname;
-  upPrevLiveaudio;
+  upNextImg2;
+  upNextArtistname2;
+  upNextLiveaudio;
+
+  upPrevImg2;
+  upPrevTitle2;
+  upPrevSubtitle2;
 
   audio:any;
 
-  records:any;
   message: any;
   mp3s: any[0];
   artistCurrent: any = {};
@@ -89,38 +106,38 @@ export class ViewUsers3Page implements OnInit {
  
   }
 
-  playSong(Recordname, artistname, imgURL, record) {
-    if(this.currRecord !=null){
-      this.currRecord.pause(); 
+  playSong2(Recordname, artistname2, imgURL2, record) {
+    if(this.currRecord2 !=null){
+      this.currRecord2.pause(); 
      }
    
    
      document.getElementById("fullPlayer").style.bottom = "0px";
-     this.currRecordname = Recordname;
-     this.currArtistname = artistname;
-     this.currImage = imgURL;
+     this.currRecordname2 = Recordname;
+     this.currArtistname2 = artistname2;
+     this.currImage2 = imgURL2;
      
     
-     this.currRecord = new Audio(record);
+     this.currRecord2 = new Audio(record);
      
-     this.currRecord.play().then(() => {
-     this.durationText = this.sToTime(this.currRecord.duration);
-     this.maxRangeValue = Number(this.currRecord.duration.toFixed(2).toString().substring(0, 5));
+     this.currRecord2.play().then(() => {
+     this.durationText2 = this.sToTime(this.currRecord2.duration);
+     this.maxRangeValue2= Number(this.currRecord2.duration.toFixed(2).toString().substring(0, 5));
    
-     var index= this.records.findIndex(x => x.Recordname == this.currRecordname);
+     var index= this.records.findIndex(x => x.Recordname == this.currRecordname2);
      
    
      if((index +1) == this.records.length) {
-       this.upNextImg = this.records[0].imgURL;
-       this.upNextRecordname = this.records[0].Recordname;
-       this.upNextArtistname = this.records[0].artistname;
-       this.upNextDigitalaudio = this.records[0].liveaudio;
+       this.upNextImg2 = this.records[0].imgURL2;
+       this.upNextRecordname2 = this.records[0].Recordname;
+       this.upNextArtistname2 = this.records[0].artistname2;
+       this.upNextLiveaudio = this.records[0].liveaudio;
      }
      else{
-       this.upNextImg = this.records[index +1].imgURL;
-       this.upNextRecordname = this.records[index +1].Recordname;
-       this.upNextArtistname = this.records[index +1].artistname;
-       this.upNextDigitalaudio = this.records[index +1].liveaudio;
+       this.upNextImg2 = this.records[index +1].imgURL2;
+       this.upNextRecordname2 = this.records[index +1].Recordname;
+       this.upNextArtistname2 = this.records[index +1].artistname2;
+       this.upNextLiveaudio = this.records[index +1].liveaudio;
      }
      this.isPlaying = true;
 
@@ -128,14 +145,14 @@ export class ViewUsers3Page implements OnInit {
      
 
      
-     this.currRecord.addEventListener("timeupdate", () => {
+     this.currRecord2.addEventListener("timeupdate", () => {
       if(!this.isTouched){
-     this.currRangeTime = Number(this.currRecord.currentTime.toFixed(2).toString().substring(0,  5));
-     this.currSecsText = this.sToTime(this.currRecord.currentTime);
-     this.progress = (Math.floor(this.currRecord.currentTime) / Math.floor(this.currRecord.duration));
+     this.currRangeTime2 = Number(this.currRecord2.currentTime.toFixed(2).toString().substring(0,  5));
+     this.currSecsText2 = this.sToTime(this.currRecord2.currentTime);
+     this.progress = (Math.floor(this.currRecord2.currentTime) / Math.floor(this.currRecord2.duration));
    
    
-     if (this.currRecord.currentTime == this.currRecord.duration) {
+     if (this.currRecord2.currentTime == this.currRecord2.duration) {
        this.playNext();
      }
     }
@@ -154,82 +171,83 @@ export class ViewUsers3Page implements OnInit {
    playNext(){
      
     
-     var index = this.records.findIndex(x => x.Recordname == this.currRecordname);
+     var index = this.records.findIndex(x => x.Recordname == this.currRecordname2);
    
      if ((index + 1 )== this.records.length){
-       this.playSong(this.records[0].Recordname, this.records[0].artistname,this.records[0].imgURL,this.records[0].liveaudio);
+       this.playSong2(this.records[0].Recordname, this.records[0].artistname2,this.records[0].imgURL2,this.records[0].liveaudio);
      }
      else {
        var nextIndex = index +1;
-       this.playSong(this.records[nextIndex].Songname, this.records[nextIndex].artistname,this.records[nextIndex].imgURL,this.records[nextIndex].liveaudio);
+       this.playSong2(this.records[nextIndex].Recordname, this.records[nextIndex].artistname2,this.records[nextIndex].imgURL2,this.records[nextIndex].liveaudio);
    
      }
    
    }
    
    playPrev(){
-     var index = this.records.findIndex(x => x.Recordname == this.currRecordname);
+     var index = this.records.findIndex(x => x.Recordname == this.currRecordname2);
    
      if (index == 0) {
       var lastIndex = this.records.length - 1;
-       this.playSong(this.records[lastIndex].Recordname, this.records[lastIndex].artistname,this.records[lastIndex].imgURL, this.records[lastIndex].liveaudio);
+       this.playSong2(this.records[lastIndex].Recordname, this.records[lastIndex].artistname2,this.records[lastIndex].imgURL2, this.records[lastIndex].liveaudio);
    
    }
      
    else {
      var prevIndex = index -1;
-     this.playSong(this.records[prevIndex].Recordname, this.records[prevIndex].artistname,this.records[prevIndex].imgURL, this.records[prevIndex].liveaudio);
+     this.playSong2(this.records[prevIndex].Recordname, this.records[prevIndex].artistname2,this.records[prevIndex].imgURL2, this.records[prevIndex].liveaudio);
    
    }
    
    }
    
-   minimize(){
+   minimize2(){
      document.getElementById("fullPlayer").style.bottom = "-1000px";
      document.getElementById("miniPlayer").style.bottom = "0px";
    }
-   maximize(){
+   maximize2(){
      document.getElementById("fullPlayer").style.bottom = "0px";
      document.getElementById("miniPlayer").style.bottom = "-100px";
    
    }
-   pause (){
-     this.currRecord.pause();
+   pause(){
+     this.currRecord2.pause();
      this.isPlaying = false;
    }
    play(){
-     this.currRecord.play();
+     this.currRecord2.play();
      this.isPlaying = true;
    }
    cancel(){
     document.getElementById("miniPlayer").style.bottom = "-100px";
-    this.currImage = "";
-    this.currRecordname = "";
-    this.currArtistname = "";
+    this.currImage2 = "";
+    this.currRecordname2 = "";
+    this.currArtistname2 = "";
     this.progress = 0;
-    this.currRecord.pause();
+    this.currRecord2.pause();
     this.isPlaying = false;
   }
   
    touchStart(){
      this.isTouched = true;
-     this.currRangeTime = Number(this.range.value);
+     this.currRangeTime2 = Number(this.range.value);
    }
    touchMove(){
-     this.currSecsText = this.sToTime(this.range.value);
+     this.currSecsText2 = this.sToTime(this.range.value);
    }
    touchEnd(){
    this.isTouched = false;
-   this.currRecord.currentTime = Number(this.range.value);
-   this.currSecsText = this.sToTime(this.currRecord.currentTime)
-   this.currRangeTime = Number(this.currRecord.currentTime.toFixed(2).toString().substring(0,  5 ));
+   this.currRecord2.currentTime = Number(this.range.value);
+   this.currSecsText2 = this.sToTime(this.currRecord2.currentTime)
+   this.currRangeTime2 = Number(this.currRecord2.currentTime.toFixed(2).toString().substring(0,  5 ));
    if (this.isPlaying){
-     this.currRecord.play();
+     this.currRecord2.play();
    }
   }
+
   async logout(){
-    this.currRecord.pause();
+    this.currRecord2.pause();
     await this.afAuth.signOut();
-    this.router.navigateByUrl('/view-users');
+    this.router.navigateByUrl('/view-users3');
   }
 }

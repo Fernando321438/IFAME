@@ -14,7 +14,7 @@
 <ion-content [fullscreen]="true">
 
     <ion-card button="true">
-        <ion-img [src]="artistCurrent.imgURL"></ion-img>
+        <ion-img [src]="artistCurrent.imgURL2"></ion-img>
     </ion-card>
 
     <ion-label>
@@ -25,7 +25,7 @@
     
     <ion-item lines="full">
         <ion-label position="floating">Artist Name</ion-label>
-        <ion-input placeholder="Insert  Artist Name"  type="text" class="input" [(ngModel)]="artistCurrent.artistname" #name required>
+        <ion-input placeholder="Insert  Artist Name"  type="text" class="input" [(ngModel)]="artistCurrent.artistname2" #name required>
         </ion-input>
     </ion-item>
 
@@ -34,8 +34,8 @@
         <ion-input placeholder="Insert Record Name" type="text" class="input" [(ngModel)]="artistCurrent.recordname" #name required>
         </ion-input>
     </ion-item>
-    <label for="id">Choose your Image of Song:</label>
-    <input class="upload" type="file" id="id">
+    <label for="id2">Choose your Image of Song:</label>
+    <input class="upload" type="file" id="id2">
     <br><br><br>
     <ion-button (click)="uploadLiveImage()">Upload Live Image </ion-button>
 
@@ -46,6 +46,8 @@
     <ion-button id="fileUpload" (click)="StopRecording()" >
         Stop</ion-button>
     <br><br><br>
+
+    <label for="id">Choose your Live Song:</label>
     <input type="file" id="id"  required>
     <ion-button id="id" (click)="uploadfile()" >Send Live Song </ion-button>
     <br><br><br>

@@ -67,11 +67,11 @@ export class LivePage {
   }
 
   async SaveNameRecord() {
-    if (this.artistCurrent.recordname && this.artistCurrent.imgURL && this.artistCurrent.liveaudio && this.artistCurrent.artistname ) {
+    if (this.artistCurrent.recordname && this.artistCurrent.imgURL2 && this.artistCurrent.liveaudio && this.artistCurrent.artistname2 ) {
       const datages = {
         Recordname: this.artistCurrent.recordname,
-        artistname:this.artistCurrent.artistname,
-        imgURL: this.artistCurrent.imgURL,
+        artistname2:this.artistCurrent.artistname2,
+        imgURL2: this.artistCurrent.imgURL2,
         liveaudio: this.artistCurrent.liveaudio,
            createdAt: Date.now(),
       };
@@ -181,7 +181,7 @@ export class LivePage {
  
   //------------------------------------
   async uploadLiveImage(){
-    const file = (<HTMLInputElement>document.getElementById('id')).files[0];
+    const file = (<HTMLInputElement>document.getElementById('id2')).files[0];
  
     const ref = this.afs.ref('Live' +'/'+(await this.authObj.currentUser).uid+ '/' + this.artistCurrent.recordname +'/' + file.name);
  
@@ -189,7 +189,7 @@ export class LivePage {
  
       ref.getDownloadURL().subscribe(url => {
  
-        this.artistCurrent.imgURL = url;
+        this.artistCurrent.imgURL2 = url;
  
       })
     }).catch(e => {

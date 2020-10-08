@@ -286,175 +286,38 @@ ion-item {
   font-size: 30px;
   margin-top: 5px;
 }
-//-------------------------------
-/* .cards-background-page{
-  display: grid;
-  grid-template-columns: 1fr repeat(6, minmax(auto, 60px)) 1fr;
-  padding: 5px 5px 5px 5px;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-top: 10px;
-  --background:linear-gradient( #474747, #000000);
+/*  
+llllllllllllllllllllllllllllll */
 
-}
-ion-card{
-  margin: 10px;
-  display: grid;
-  grid-template-rows: flex;
-  grid-template-areas: "image" "text" "stats";
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  border-radius: 18px;
-  box-shadow: 5px 5px 15px rgba(0,0,0,0.9);
-  text-align: center;
-  // margin: 0 auto; 
-  float: none; 
-  flex: 0 1 100%;
-}
-ion-img{
-  grid-area: image;
-  background-size: cover;
-}
-.card_content{
-  padding: 20px;
-}
-.card-subtitle{
- margin-bottom: 25px;
- margin-top: auto;
- font-weight: bold;
- color: white;
- font-size: 25px;
- display: flex;
- font-family: Arial, Helvetica, sans-serif;
-}
-.card-title{
-  display: flex;
-  font-weight: 500;
-  color: white;
-  font-size: 18px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-.card-street{
-  display: flex;
-  font-weight: normal;
-  color: white;
-  font-size: 17px;
-  font-family: Arial, Helvetica, sans-serif;
-}
-@media screen and (min-width: 40em) {
-  .cards-background-page {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
- }
-
- ion-card{
-    flex: 0 1 calc(25% - 1em);
+#miniPlayer2{
+  box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px 10px 0 0;
+  transition: 0.5s;
+  bottom: -100px;
+  ion-progress-bar {
+      z-index: 10;
+  }
+  ion-button {
+      color: #080707;
   }
 }
 
-
-.header-md::after {
-display: none;
+#fullPlayer2 {
+  transition: 0.5s;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  background-color: #ffffff;
+  z-index: 20;
+  bottom: -1000px;
+  #currImg {
+      margin-top: 30px;
+      width: 200px;
+      height: 200px;
+      border-radius: 10px;
+  }
+  ion-text {
+      font-size: medium;
+  }
 }
-
-.tab{
-background-color: #000000;
-}
-
-.button{
-background-color: #000000;
-} */
-//---------------------------------------------
-/*   
-  .div{
-    width: 100%;
-height: 36px;
-position:absolute;
-top:100px; 
-left:200px; 
-
-  
-  .cards-background-page{
-      display: grid;
-      grid-template-columns: 1fr repeat(6, minmax(auto, 60px)) 1fr;
-      padding: 5px 5px 5px 5px;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin-top: 10px;
-      --background:linear-gradient( #474747, #000000);
-  
-  }
-    ion-card{
-      margin: 10px;
-      display: grid;
-      grid-template-rows: flex;
-      grid-template-areas: "image" "text" "stats";
-      font-family: Verdana, Geneva, Tahoma, sans-serif;
-      border-radius: 18px;
-      box-shadow: 5px 5px 15px rgba(0,0,0,0.9);
-      text-align: center;
-      // margin: 0 auto; 
-      float: none; 
-      flex: 0 1 100%;
-    }
-    ion-img{
-      grid-area: image;
-      background-size: cover;
-    }
-    .card_content{
-      padding: 20px;
-    }
-    .card-subtitle{
-     margin-bottom: 25px;
-     margin-top: auto;
-     font-weight: bold;
-     color: white;
-     font-size: 25px;
-     display: flex;
-     font-family: Arial, Helvetica, sans-serif;
-    }
-    .card-title{
-      display: flex;
-      font-weight: 500;
-      color: white;
-      font-size: 18px;
-      font-family: Verdana, Geneva, Tahoma, sans-serif;
-    }
-    .card-street{
-      display: flex;
-      font-weight: normal;
-      color: white;
-      font-size: 17px;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-    @media screen and (min-width: 40em) {
-      .cards-background-page {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-     }
-   
-     ion-card{
-        flex: 0 1 calc(25% - 1em);
-      }
-  }
-  
-  ion-icon{
-    color: #faf9f7;
-  }
-  
-  ion-tab-button{
-    --color-selected:#ffba00;
-  }
-  
-  .header-md::after {
-    display: none;
-  }
-  
-  .tab{
-    background-color: #000000;
-  }
-  
-  .button{
-    background-color: #000000;
-  } */

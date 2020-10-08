@@ -30,8 +30,9 @@ export class ViewUsersPage implements OnInit {
 //////////////////////////////////////////////////////
 currRecordname;
 currRecord: HTMLAudioElement;
+
 upNextRecordname;
-upPrevLiveaudio;
+
 ///////////////////////////////////////////////////////
   selectedCards: any;
   user: any = {};
@@ -59,7 +60,10 @@ upPrevLiveaudio;
   @Input() src: string;
 
   @ViewChild("range", {static:false}) range: IonRange;
+  @ViewChild("range", {static:false}) range2: IonRange;
 
+  isMostra=true;
+  isMostra2=true;
   currSongname;
   currArtistname;
   currImage;
@@ -70,6 +74,8 @@ upPrevLiveaudio;
   isTouched = false;
 
   isShow=true;
+  isShow2=true;
+
 
   currSecsText;
   durationText;
@@ -94,6 +100,29 @@ upPrevLiveaudio;
   message: any;
   mp3s: any[0];
   artistCurrent: any = {};
+  currRecord2: any;
+  currRecordname2: any;
+  currArtistname2: any;
+  currImage2: any;
+  maxRangeValue2: number;
+  durationText2: string;
+  upNextImg2: any;
+  upNextRecordname2: any;
+  upNextArtistname2: any;
+  upNextLiveaudio: any;
+  currRangeTime2: number;
+  currSecsText2: string;
+  isTouched2: boolean;
+  isPlaying2: any;
+  progress2: number;
+
+
+
+  upPrevImg2;
+  upPrevTitle2;
+  upPrevSubtitle2;
+  upPrevLiveaudio;
+
 
   constructor(private afs:AngularFirestore,private platform: Platform,
     private loadingCtrl: LoadingController,
@@ -200,22 +229,7 @@ setFiltered() {
      }
      this.isPlaying = true;
 
-/*      
-//-------------------------------
-if((index -1) == this.songs.length) {
-  this.upPrevImg = this.songs[0].imgURL;
-  this.upPrevTitle = this.songs[0].Songname;
-  this.upPrevSubtitle = this.songs[0].subtitle;
-  this.upPrevDigitalaudio = this.songs[0].digitalaudio;
-}
-else{
-  this.upPrevImg = this.songs[index -1].imgURL;
-  this.upPrevTitle = this.songs[index -1].Songname;
-  this.upPrevSubtitle = this.songs[index -1].subtitle;
-  this.upPrevDigitalaudio = this.songs[index -1].digitalaudio;
-}
-this.isPlaying = true;  */
-//---------------------------------
+
 })
      
 
@@ -321,54 +335,58 @@ this.isPlaying = true;  */
    if (this.isPlaying){
      this.currSong.play();
    }
-  }  
   
-  //record
+
+  }  
 
 
-  playSong2(Recordname, artistname, imgURL, record) {
+
+
+
+ 
+  playSong2(Recordname, artistname2, imgURL2, record) {
     if(this.currRecord !=null){
       this.currRecord.pause(); 
      }
    
    
-     document.getElementById("fullPlayer").style.bottom = "0px";
+     document.getElementById("fullPlayer2").style.bottom = "0px";
      this.currRecordname = Recordname;
-     this.currArtistname = artistname;
-     this.currImage = imgURL;
+     this.currArtistname = artistname2;
+     this.currImage = imgURL2;
      
     
      this.currRecord = new Audio(record);
      
      this.currRecord.play().then(() => {
-     this.durationText = this.sToTime2(this.currRecord.duration);
-     this.maxRangeValue = Number(this.currRecord.duration.toFixed(2).toString().substring(0, 5));
+     this.durationText2 = this.sToTime(this.currRecord.duration);
+     this.maxRangeValue2= Number(this.currRecord.duration.toFixed(2).toString().substring(0, 5));
    
-     var index= this.records.findIndex(x => x.Recordname == this.currRecordname);
+     var index2= this.records.findIndex(x => x.Recordname == this.currRecordname);
      
    
-     if((index +1) == this.records.length) {
-       this.upNextImg = this.records[0].imgURL;
-       this.upNextRecordname = this.records[0].Recordname;
-       this.upNextArtistname = this.records[0].artistname;
-       this.upNextDigitalaudio = this.records[0].liveaudio;
+     if((index2 +1) == this.records.length) {
+       this.upNextImg2 = this.records[0].imgURL2;
+       this.upNextRecordname2 = this.records[0].Recordname;
+       this.upNextArtistname2 = this.records[0].artistname2;
+       this.upNextLiveaudio = this.records[0].liveaudio;
      }
      else{
-       this.upNextImg = this.records[index +1].imgURL;
-       this.upNextRecordname = this.records[index +1].Recordname;
-       this.upNextArtistname = this.records[index +1].artistname;
-       this.upNextDigitalaudio = this.records[index +1].liveaudio;
+       this.upNextImg2 = this.records[index2 +1].imgURL2;
+       this.upNextRecordname2 = this.records[index2 +1].Recordname;
+       this.upNextArtistname2 = this.records[index2 +1].artistname2;
+       this.upNextLiveaudio = this.records[index2 +1].liveaudio;
      }
-     this.isPlaying = true;
+     this.isPlaying2 = true;
 
 })
      
 
      
      this.currRecord.addEventListener("timeupdate", () => {
-      if(!this.isTouched){
-     this.currRangeTime = Number(this.currRecord.currentTime.toFixed(2).toString().substring(0,  5));
-     this.currSecsText = this.sToTime2(this.currRecord.currentTime);
+      if(!this.isTouched2){
+     this.currRangeTime2 = Number(this.currRecord.currentTime.toFixed(2).toString().substring(0,  5));
+     this.currSecsText2 = this.sToTime(this.currRecord.currentTime);
      this.progress = (Math.floor(this.currRecord.currentTime) / Math.floor(this.currRecord.duration));
    
    
@@ -380,96 +398,96 @@ this.isPlaying = true;  */
     
    
      }
-     sToTime2(t){
-       return this.padZero(parseInt(String((t / (60)) % 60)))+ ":"+
-       this.padZero(parseInt(String((t) % 60)));
-     }
+      sToTime2(t){
+       return this.padZero2(parseInt(String((t / (60)) % 60)))+ ":"+
+       this.padZero2(parseInt(String((t) % 60)));
+     } 
    padZero2(v) {
      return (v < 10) ? "0" +v : v;
-   }
+   } 
          
    playNext2(){
      
     
-     var index = this.records.findIndex(x => x.Recordname == this.currRecordname);
+     var index2 = this.records.findIndex(x => x.Recordname == this.currRecordname);
    
-     if ((index + 1 )== this.records.length){
-       this.playSong2(this.records[0].Recordname, this.records[0].artistname,this.records[0].imgURL,this.records[0].liveaudio);
+     if ((index2 + 1 )== this.records.length){
+       this.playSong2(this.records[0].Recordname, this.records[0].artistname2,this.records[0].imgURL2,this.records[0].liveaudio);
      }
      else {
-       var nextIndex = index +1;
-       this.playSong2(this.records[nextIndex].Songname, this.records[nextIndex].artistname,this.records[nextIndex].imgURL,this.records[nextIndex].liveaudio);
+       var nextIndex2 = index2 +1;
+       this.playSong2(this.records[nextIndex2].Recordname, this.records[nextIndex2].artistname2,this.records[nextIndex2].imgURL2,this.records[nextIndex2].liveaudio);
    
      }
    
    }
    
    playPrev2(){
-     var index = this.records.findIndex(x => x.Recordname == this.currRecordname);
+     var index2 = this.records.findIndex(x => x.Recordname == this.currRecordname);
    
-     if (index == 0) {
-      var lastIndex = this.records.length - 1;
-       this.playSong2(this.records[lastIndex].Recordname, this.records[lastIndex].artistname,this.records[lastIndex].imgURL, this.records[lastIndex].liveaudio);
+     if (index2 == 0) {
+      var lastIndex2 = this.records.length - 1;
+       this.playSong2(this.records[lastIndex2].Recordname, this.records[lastIndex2].artistname2,this.records[lastIndex2].imgURL2, this.records[lastIndex2].liveaudio);
    
    }
      
    else {
-     var prevIndex = index -1;
-     this.playSong2(this.records[prevIndex].Recordname, this.records[prevIndex].artistname,this.records[prevIndex].imgURL, this.records[prevIndex].liveaudio);
+     var prevIndex2 = index2 -1;
+     this.playSong2(this.records[prevIndex2].Recordname, this.records[prevIndex2].artistname2,this.records[prevIndex2].imgURL2, this.records[prevIndex2].liveaudio);
    
    }
    
    }
    
    minimize2(){
-     document.getElementById("fullPlayer").style.bottom = "-1000px";
-     document.getElementById("miniPlayer").style.bottom = "0px";
+     document.getElementById("fullPlayer2").style.bottom = "-1000px";
+     document.getElementById("miniPlayer2").style.bottom = "0px";
    }
    maximize2(){
-     document.getElementById("fullPlayer").style.bottom = "0px";
-     document.getElementById("miniPlayer").style.bottom = "-100px";
+     document.getElementById("fullPlayer2").style.bottom = "0px";
+     document.getElementById("miniPlayer2").style.bottom = "-100px";
    
    }
    pause2(){
      this.currRecord.pause();
-     this.isPlaying = false;
+     this.isPlaying2 = false;
    }
    play2(){
      this.currRecord.play();
-     this.isPlaying = true;
+     this.isPlaying2 = true;
    }
    cancel2(){
-    document.getElementById("miniPlayer").style.bottom = "-100px";
+    document.getElementById("miniPlayer2").style.bottom = "-100px";
     this.currImage = "";
     this.currRecordname = "";
     this.currArtistname = "";
     this.progress = 0;
     this.currRecord.pause();
-    this.isPlaying = false;
+    this.isPlaying2 = false;
   }
   
-   touchStart2(){
-     this.isTouched = true;
-     this.currRangeTime = Number(this.range.value);
+  touchStart2(){
+     this.isTouched2 = true;
+     this.currRangeTime2 = Number(this.range.value);
    }
    touchMove2(){
-     this.currSecsText = this.sToTime2(this.range.value);
-   }
-   touchEnd2(){
-   this.isTouched = false;
+     this.currSecsText2 = this.sToTime(this.range.value);
+   } 
+    touchEnd2(){
+   this.isTouched2 = false;
    this.currRecord.currentTime = Number(this.range.value);
-   this.currSecsText = this.sToTime2(this.currRecord.currentTime)
-   this.currRangeTime = Number(this.currRecord.currentTime.toFixed(2).toString().substring(0,  5 ));
-   if (this.isPlaying){
+   this.currSecsText2 = this.sToTime(this.currRecord.currentTime)
+   this.currRangeTime2 = Number(this.currRecord.currentTime.toFixed(2).toString().substring(0,  5 ));
+   if (this.isPlaying2){
      this.currRecord.play();
    }
-  }
-
-
-
-   async logout(){
-     if( this.isPlaying = true){
+  }  
+  
+  async logout(){
+     if( this.isPlaying = true ,this.isPlaying2 = true){
       this.currSong.pause();
+      this.currRecord.pause();
+
       await this.afAuth.signOut();
       this.router.navigateByUrl('/login-register');
      }
