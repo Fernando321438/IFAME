@@ -399,7 +399,7 @@ setFiltered() {
    
      }
       sToTime2(t){
-       return this.padZero2(parseInt(String((t / (60)) % 60)))+ ":"+
+       return this.padZero2(parseInt(String((t/ (60)) % 60)))+ ":"+
        this.padZero2(parseInt(String((t) % 60)));
      } 
    padZero2(v) {
@@ -468,14 +468,13 @@ setFiltered() {
   
   touchStart2(){
      this.isTouched2 = true;
-     this.currRangeTime2 = Number(this.range.value);
    }
    touchMove2(){
-     this.currSecsText2 = this.sToTime(this.range.value);
+     this.currSecsText2 = this.sToTime(this.currRangeTime2);
    } 
     touchEnd2(){
    this.isTouched2 = false;
-   this.currRecord.currentTime = Number(this.range.value);
+   this.currRecord.currentTime = Number(this.currRangeTime2);
    this.currSecsText2 = this.sToTime(this.currRecord.currentTime)
    this.currRangeTime2 = Number(this.currRecord.currentTime.toFixed(2).toString().substring(0,  5 ));
    if (this.isPlaying2){
