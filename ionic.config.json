@@ -1,0 +1,9 @@
+{
+  "name": "Labelscoin-ionic",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "efb289f2"
+}

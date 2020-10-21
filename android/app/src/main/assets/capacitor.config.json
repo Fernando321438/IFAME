@@ -1,0 +1,35 @@
+{
+  "appId": "io.ionic.starter",
+  "appName": "Labelscoin-ionic",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {
+    "preferences": {
+      "ScrollEnabled": "false",
+      "fullscreen": "false",
+      "UseSwiftLanguageVersion": "5",
+      "android-minSdkVersion": "19",
+      "android-targetSdkVersion": "28",
+      "BackupWebStorage": "none",
+      "BackgroundColor": "0xffedf2f5",
+      "SplashMaintainAspectRatio": "true",
+      "FadeSplashScreenDuration": "300",
+      "SplashShowOnlyFirstTime": "false",
+      "SplashScreenSpinnerColor": "#0000ff",
+      "SplashScreen": "screen",
+      "AutoHideSplashScreen": "false",
+      "KeyboardDisplayRequiresUserAction": "false",
+      "KeyboardResizeMode": "native",
+      "Orientation": "portrait",
+      "target-device": "handset",
+      "DisableDeploy": "true",
+      "WKWebViewOnly": "true"
+    }
+  }
+}

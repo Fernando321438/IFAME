@@ -1,0 +1,39 @@
+<ion-header class="ion-no-border ion-no-shadow">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>{{ "PROFILES_PAGE.SIGN_IN" | translate }}</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+	<empty-list
+		message="PROFILES_PAGE.ADD_PROFILE_TEXT"
+		(clickButton)="openProfileCreate()"
+		*ngIf="isEmpty(); else content"
+	></empty-list>
+
+	<ng-template #content>
+		<ion-fab slot="fixed" vertical="bottom" horizontal="end">
+			<ion-fab-button color="primary" (click)="openProfileCreate()">
+				<ion-icon name="add"></ion-icon>
+			</ion-fab-button>
+		</ion-fab>
+
+		<ion-grid class="ion-no-padding h-full">
+			<ion-row>
+				<ion-col>
+					<address-list
+						[map]="addresses"
+						icon="ellipsis-vertical"
+						circleProperty="value"
+						(tapItem)="verify($event)"
+						(pressItem)="presentProfileActionSheet($event)"
+						(more)="presentProfileActionSheet($event)"
+					></address-list>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</ng-template>
+</ion-content>
