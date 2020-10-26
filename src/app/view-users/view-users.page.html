@@ -44,8 +44,9 @@
 </ion-segment> -->
     <ion-infinite-scroll>
         <div *ngIf="live">
-            <ion-card *ngFor="let record of records" button="true" (click)="playSong2(record.Recordname,record.artistname2,record.imgURL2,record.liveaudio)" (click)="this.currSong.pause()">
-                <ion-img src={{record.imgURL2}}></ion-img>
+            <ion-card *ngFor="let record of records" button="true"
+                (click)="playSong2(record.Recordname,record.artistname2,record.imgURL2,record.liveaudio)" (click)="controllorecord()" >
+                <ion-img src={{record.imgURL2}} ></ion-img>
                 <div class="card_content">
                     <p class="card-title">{{record.Recordname}}</p>
                 </div>
@@ -59,9 +60,11 @@
 
     <ion-infinite-scroll>
         <div *ngIf="music">
-            <ion-card *ngFor="let song of songs" button="true" (click)="playSong(song.Songname,song.artistname,song.imgURL,song.digitalaudio)" (click)="this.currRecord.pause()">
+            <ion-card *ngFor="let song of songs" button="true"
+                (click)="playSong(song.Songname,song.artistname,song.imgURL,song.digitalaudio)" (click)="controllosong()"
+                >
 
-                <ion-img src={{song.imgURL}}></ion-img>
+                <ion-img src={{song.imgURL}} ></ion-img>
                 <div class="card_content">
                     <p class="card-title">{{song.Songname}}</p>
                 </div>
@@ -73,15 +76,17 @@
 
 
 
-<div *ngIf="isMostra||!isMostra2" class="ion-text-center" id="fullPlayer"><!-- mettere una variabile per ngif con isMostra -->
+<div *ngIf="isMostra||!isMostra2" class="ion-text-center" id="fullPlayer">
+    <!-- mettere una variabile per ngif con isMostra -->
 
     <ion-tabs>
         <!-- Tab bar -->
 
         <ion-tab-bar slot="bottom">
-            
+
             <td>
-                <ion-tab-button [ngClass]="{'activated' : buttonActive}" id="shuffle" tab="shuffle" (click)="getRandomSong()">
+                <ion-tab-button [ngClass]="{'activated' : buttonActive}" id="shuffle" tab="shuffle"
+                    >
                     <ion-icon name="shuffle"></ion-icon>
                     <ion-label>Shuffle</ion-label>
                 </ion-tab-button>
@@ -102,17 +107,18 @@
     </ion-tabs>
 
     <ion-toolbar>
-            
-                <ion-icon  type="button"  class="searches" #first ion-button color="white" (click)="btnActivate(first)" id="love" name="heart"></ion-icon>
-        
+
+        <ion-icon type="button" class="searches" #first ion-button color="white" (click)="btnActivate(first)" id="love"
+            name="heart"></ion-icon>
+
         <ion-buttons slot="start">
             <ion-button (click)="minimize()">
                 <ion-icon class="iconback" name="chevron-down-outline"></ion-icon>
                 <svg style="width:24px;height:24;" viewbox="0 0 24 24" slot="icon-only">
-          <path fill="currentColor"  >
+                    <path fill="currentColor">
 
-          </path>
-        </svg>
+                    </path>
+                </svg>
             </ion-button>
 
         </ion-buttons>
@@ -126,24 +132,25 @@
         {{currSongname}}
     </p>
     <u>
-      {{currArtistname}}
-  </u>
+        {{currArtistname}}
+    </u>
 
     <ion-item lines="nome">
-        <ion-range #range (touchmove)="touchMove()" (touchend)="touchEnd()" (touchstart)="touchStart()" max="{{maxRangeValue}}" [(ngModel)]="currRangeTime">
+        <ion-range #range (touchmove)="touchMove()" (touchend)="touchEnd()" (touchstart)="touchStart()"
+            max="{{maxRangeValue}}" [(ngModel)]="currRangeTime">
             <ion-label slot="start">
                 <ion-text>
                     <b>
-            {{currSecsText}}
-          </b>
+                        {{currSecsText}}
+                    </b>
                 </ion-text>
 
             </ion-label>
             <ion-label slot="end">
                 <ion-text>
                     <b>
-            {{durationText}}
-          </b>
+                        {{durationText}}
+                    </b>
                 </ion-text>
             </ion-label>
 
@@ -187,10 +194,10 @@
 <div id="miniPlayer" *ngIf="isPlaying || !isShow ">
     <ion-toolbar>
         <ion-item>
-            <ion-thumbnail slot="start" (click)="maximize()" >
+            <ion-thumbnail slot="start" (click)="maximize()">
                 <img src="{{currImage}}" />
             </ion-thumbnail>
-            <ion-label (click)="maximize()" >
+            <ion-label (click)="maximize()">
                 <h2>
                     {{currSongname}}
                 </h2>
@@ -223,13 +230,13 @@
 
 
 
-<div  *ngIf="!isMostra||isMostra2" class="ion-text-center" id="fullPlayer2">
+<div *ngIf="!isMostra||isMostra2" class="ion-text-center" id="fullPlayer2">
 
     <ion-tabs>
         <!-- Tab bar -->
 
         <ion-tab-bar slot="bottom">
-           
+
             <td>
                 <ion-tab-button id="shuffle" tab="shuffle">
                     <ion-icon name="shuffle"></ion-icon>
@@ -252,16 +259,17 @@
     </ion-tabs>
 
     <ion-toolbar>
-        <ion-icon  type="button"  class="searches" #first ion-button color="white" (click)="btnActivate(first)" id="love" name="heart"></ion-icon>
-        
+        <ion-icon type="button" class="searches" #first ion-button color="white" (click)="btnActivate(first)" id="love"
+            name="heart"></ion-icon>
+
         <ion-buttons slot="start">
             <ion-button (click)="minimize2()">
                 <ion-icon class="iconback" name="chevron-down-outline"></ion-icon>
                 <svg style="width:24px;height:24;" viewbox="0 0 24 24" slot="icon-only">
-          <path fill="currentColor"  >
+                    <path fill="currentColor">
 
-          </path>
-        </svg>
+                    </path>
+                </svg>
             </ion-button>
 
         </ion-buttons>
@@ -275,24 +283,25 @@
         {{currRecordname}}
     </p>
     <u>
-      {{currArtistname}}
-  </u>
+        {{currArtistname}}
+    </u>
 
     <ion-item lines="nome">
-        <ion-range #range (touchmove)="touchMove2()" (touchend)="touchEnd2()" (touchstart)="touchStart2()" max="{{maxRangeValue2}}" [(ngModel)]="currRangeTime2">
+        <ion-range #range (touchmove)="touchMove2()" (touchend)="touchEnd2()" (touchstart)="touchStart2()"
+            max="{{maxRangeValue2}}" [(ngModel)]="currRangeTime2">
             <ion-label slot="start">
                 <ion-text>
                     <b>
-            {{currSecsText2}}
-          </b>
+                        {{currSecsText2}}
+                    </b>
                 </ion-text>
 
             </ion-label>
             <ion-label slot="end">
                 <ion-text>
                     <b>
-            {{durationText2}}
-          </b>
+                        {{durationText2}}
+                    </b>
                 </ion-text>
             </ion-label>
 
@@ -336,10 +345,10 @@
 <div id="miniPlayer2" *ngIf="isPlaying2 || !isShow2 ">
     <ion-toolbar>
         <ion-item>
-            <ion-thumbnail slot="start" (click)="maximize2()" >
+            <ion-thumbnail slot="start" (click)="maximize2()">
                 <img src="{{currImage}}" />
             </ion-thumbnail>
-            <ion-label (click)="maximize2()" >
+            <ion-label (click)="maximize2()">
                 <h2>
                     {{currRecordname}}
                 </h2>

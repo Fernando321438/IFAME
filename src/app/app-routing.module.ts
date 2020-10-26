@@ -33,10 +33,6 @@ const routes: Routes = [
     loadChildren: () => import('./registration-artist/registration-artist.module').then( m => m.RegistrationArtistPageModule)
   },
   {
-    path: 'registration-crypto',
-    loadChildren: () => import('./registration-crypto/registration-crypto.module').then( m => m.RegistrationCryptoPageModule)
-  },
-  {
     path: 'geolocalization',
     loadChildren: () => import('./geolocalization/geolocalization.module').then( m => m.GeolocalizationPageModule)
   },
@@ -47,10 +43,6 @@ const routes: Routes = [
   {
     path: 'view-users',
     loadChildren: () => import('./view-users/view-users.module').then( m => m.ViewUsersPageModule)
-  },
-  {
-    path: 'view-crypto',
-    loadChildren: () => import('./view-crypto/view-crypto.module').then( m => m.ViewCryptoPageModule)
   },
   {
     path: 'view-musiccreators',
@@ -72,14 +64,7 @@ const routes: Routes = [
     path: 'live',
     loadChildren: () => import('./live/live.module').then( m => m.LivePageModule)
   },
-  {
-    path: 'view-users2',
-    loadChildren: () => import('./view-users2/view-users2.module').then( m => m.ViewUsers2PageModule)
-  },
-  {
-    path: 'view-users3',
-    loadChildren: () => import('./view-users3/view-users3.module').then( m => m.ViewUsers3PageModule)
-  },
+  
    
   
   

@@ -161,6 +161,7 @@ upNextRecordname;
    
    
    }
+
     
    btnActivate(ionicButton) {
     if(ionicButton.color === 'white'){
@@ -267,6 +268,16 @@ setFiltered() {
     
    
      }
+     controllosong(){
+       if(this.currRecord){
+         this.currRecord.pause();
+       
+       } 
+      if(!this.currRecord){
+        this.playSong;
+       }
+      
+     }
      sToTime(t){
        return this.padZero(parseInt(String((t / (60)) % 60)))+ ":"+
        this.padZero(parseInt(String((t) % 60)));
@@ -275,7 +286,7 @@ setFiltered() {
      return (v < 10) ? "0" +v : v;
    }
          
-   playNext(){
+   playNext(){ 
      
     
      var index = this.songs.findIndex(x => x.Songname == this.currSongname);
@@ -290,9 +301,10 @@ setFiltered() {
      }
      if(this.buttonActive==true){
        this.getRandomSong;
+
      }
      else{
-
+          this.playSong(this.songs[0].Songname, this.songs[0].artistname,this.songs[0].imgURL,this.songs[0].digitalaudio);
      }
    
    }
@@ -325,7 +337,7 @@ setFiltered() {
      this.isPlaying2=false;
 
    }
-   pause (){
+   pause(){
      this.currSong.pause();
      this.isPlaying = false;
      this.isShow=false;
@@ -366,8 +378,8 @@ setFiltered() {
   }  
 
 getRandomSong(){
-
-  this.songs= Math.random();
+ 
+  /* return Math.floor(Math.random() * Math.floor(this.songs)); */
 
 }
 
@@ -428,10 +440,16 @@ getRandomSong(){
     
    
      }
-      sToTime2(t){
-       return this.padZero2(parseInt(String((t/ (60)) % 60)))+ ":"+
-       this.padZero2(parseInt(String((t) % 60)));
-     } 
+     controllorecord(){
+      if(this.currSong){
+        this.currSong.pause();
+      
+      } 
+     if(!this.currSong){
+       this.playSong2;
+      }
+     
+    }
    padZero2(v) {
      return (v < 10) ? "0" +v : v;
    } 
@@ -522,17 +540,31 @@ getRandomSong(){
   }  
   
   async logout(){
-     if( this.isPlaying = true ,this.isPlaying2 = true){
-      this.currSong.pause();
+     
+    if(this.currRecord){
+  
       this.currRecord.pause();
+    await this.afAuth.signOut();
+    this.router.navigateByUrl('/login-register');} 
+    
 
-      await this.afAuth.signOut();
-      this.router.navigateByUrl('/login-register');
-     }
-     else{
+  if(!this.currRecord){
+  
+  await this.afAuth.signOut();
+  this.router.navigateByUrl('/login-register');}
+
+   if(this.currSong){
+  
+      this.currSong.pause();
     await this.afAuth.signOut();
     this.router.navigateByUrl('/login-register');}
-    
-  }
 
+    if(!this.currSong){
+  
+      await this.afAuth.signOut();
+      this.router.navigateByUrl('/login-register');}
+    
 }
+  }
+ 
+
