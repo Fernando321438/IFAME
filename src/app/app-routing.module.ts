@@ -64,6 +64,10 @@ const routes: Routes = [
     path: 'live',
     loadChildren: () => import('./live/live.module').then( m => m.LivePageModule)
   },
+  {
+    path: 'choice-language',
+    loadChildren: () => import('./choice-language/choice-language.module').then( m => m.ChoiceLanguagePageModule)
+  },
   
    
   
