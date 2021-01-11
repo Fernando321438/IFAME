@@ -1,0 +1,46 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<ion-buttons (click)="logout()" class="logout">
+    <ion-icon class="icon" name="log-out-outline"></ion-icon>
+</ion-buttons>
+<ion-header class="logotoolbar">
+</ion-header>
+<ion-content class="sfondo">
+    <p class="logo">
+    </p>
+    <div class="login-form">
+        <div class="sign-in-htm">
+
+
+            <div class="group">
+                <input placeholder="Name" id="user" type="text" class="input" [(ngModel)]="user.name">
+            </div>
+            <div class="group">
+                <input placeholder="Surname" id="user" type="text" class="input" [(ngModel)]="user.surname">
+            </div>
+            <div class="group">
+                <input placeholder="Phone Number" id="user" type="text" class="input" [(ngModel)]="user.phone_number">
+            </div>
+
+
+            <div class="group">
+                <input placeholder="Email" id="user" type="text" class="input" [(ngModel)]="user.email">
+            </div>
+            <div class="group">
+                <input placeholder="Password" id="user" type="password" class="input" data-type="password" [(ngModel)]="user.password">
+            </div>
+            <div class="group">
+                <input placeholder="validatepassword" id="user" type="password" class="input" data-type="password" [(ngModel)]="user.validatepassword">
+            </div>
+
+            <div>
+                <button (click)="signUp()" mode="ios" mode="md" class="center">
+                    <h1>
+                        Registration
+                    </h1>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+</ion-content>
