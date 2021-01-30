@@ -1,0 +1,189 @@
+.logout {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin-top: 5px;
+    margin-right: 7px;
+    color: #7d7d7d;
+}
+
+.icon {
+    font-size: 40px;
+    margin-top: 5px;
+    background: #ffffff;
+}
+
+.sfondo {
+    --background: linear-gradient(#ffffff, #ffffffd0);
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: 100% 100%;
+}
+
+.logo {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    width: 230px;
+    height: 162px;
+    background-position: center;
+    background-size: 100% 100%;
+}
+
+.divider {
+    display: flex;
+    &:before,
+    &:after {
+        content: "";
+        flex: 1;
+    }
+}
+
+.line {
+    align-items: center;
+    margin: 1em -1em;
+    color: #5b5b5b;
+    &:before,
+    &:after {
+        height: 1px;
+        margin: 0 1em;
+    }
+}
+
+.one-line {
+    &:before,
+    &:after {
+        background: hsl(212, 100%, 61%);
+    }
+}
+
+.auth-form ion-grid,
+.auth-form ion-row {
+    height: 100%;
+    justify-content: center;
+}
+
+.title-reg {
+    min-width: 601px;
+}
+
+.button-artist {
+    --background: #ffbb0000;
+    --background-activated: #00000000;
+    --border-color: rgb(104, 104, 104);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    height: 180px;
+    width: 300px;
+    --border-radius: 10px;
+    --box-shadow: 0px;
+    outline: 0;
+}
+
+.button-users {
+    --background: #ffbb0000;
+    --background-activated: #00000000;
+    --border-color: rgb(104, 104, 104);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    height: 180px;
+    width: 300px;
+    --border-radius: 10px;
+    --box-shadow: 0px;
+    outline: 0;
+}
+
+.button-MusicCreators {
+    --background: #ffbb0000;
+    --background-activated: #00000000;
+    --border-color: rgb(104, 104, 104);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    height: 180px;
+    width: 300px;
+    --border-radius: 10px;
+    --box-shadow: 0px;
+    outline: 0;
+}
+
+.button-Crypto {
+    --background: #ffbb0000;
+    --background-activated: #00000000;
+    --border-color: rgb(104, 104, 104);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    height: 180px;
+    width: 300px;
+    --border-radius: 10px;
+    --box-shadow: 0px;
+    outline: 0;
+}
+
+.pos-bottoni {
+    padding-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.text-artist {
+    margin-left: 125px;
+    font-size: 20px;
+    color: rgb(104, 104, 104);
+}
+
+.text-users {
+    margin-right: 125px;
+    font-size: 20px;
+    color: rgb(104, 104, 104);
+}
+
+.text-MusicCreators {
+    margin-left: 125px;
+    font-size: 20px;
+    color: rgb(104, 104, 104);
+}
+
+.icon-artist {
+    background-image: auto;
+    position: absolute;
+    left: 0px;
+    height: 105px;
+    width: 124px;
+    color: rgb(104, 104, 104);
+}
+
+.icon-users {
+    background-image: auto;
+    position: absolute;
+    left: 90px;
+    height: 105px;
+    width: 107px;
+    color: rgb(104, 104, 104);
+}
+
+.icon-MusisCreators {
+    background-image: auto;
+    position: absolute;
+    left: 0px;
+    height: 105px;
+    width: 124px;
+    color: rgb(103, 103, 103);
+}
+
+.version {
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(0, 0, 0);
+}
