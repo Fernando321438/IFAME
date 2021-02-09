@@ -1,0 +1,37 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<ion-buttons (click)="logout()" class="logout">
+    <ion-icon class="icon" name="log-out-outline"></ion-icon>
+</ion-buttons>
+<ion-header class="logotoolbar">
+</ion-header>
+<ion-content class="sfondo">
+    <p class="logo" ><ion-img src="../../assets/icon/Shoma .png"></ion-img>
+    
+
+    </p>
+    <ion-grid class="pos-bottoni">
+        <ion-col>
+            <ion-button class="button-artist" [routerLink]="['/registration-artist']" fill="outline">
+                <ion-text class="text-artist">Artist</ion-text>
+                <ion-icon name="musical-notes-outline"></ion-icon>            </ion-button>
+
+            <span class="divider line one-line"> OR </span>
+
+            <ion-button class="button-users" [routerLink]="['/registration']" fill='outline' >
+                <ion-text class="text-users">Users</ion-text>
+                <ion-icon name="play-circle-outline"></ion-icon>            
+            </ion-button>
+
+            <span class="divider line one-line"> OR </span>
+
+            <ion-button class="button-MusicCreators" [routerLink]="['/registration-musiccreators']" fill='outline'>
+                <ion-text class="text-MusicCreators">Music <br> Management</ion-text>
+                <ion-icon   name="reader-outline" ></ion-icon>        
+                    
+            </ion-button>
+           
+        </ion-col>
+    </ion-grid>
+    <p class="version">
+        Powered by Labelscoin™  </p>
+</ion-content>
