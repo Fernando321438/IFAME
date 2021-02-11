@@ -31,8 +31,8 @@ class HomePage extends HookWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  'Tap to Shoma',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  'Search',
+                  style: TextStyle(color: Colors.white, fontSize: 30),
                 ),
                 SizedBox(
                   height: 40,
