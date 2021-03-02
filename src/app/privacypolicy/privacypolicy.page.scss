@@ -35,6 +35,7 @@ ion-toolbar {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: rgb(0, 0, 0);
 }
+
 .sfondo {
     width: 100%;
     height: 100%;
@@ -42,8 +43,13 @@ ion-toolbar {
     left: 0;
     --background: linear-gradient(#ffffff, #ffffffd0);
 }
-.version2{ 
-        text-align: center;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-        color: rgb(0, 0, 0);
-    }
+
+.version2 {
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(0, 0, 0);
+}
+
+.testo1 {
+    width: 20%;
+}
