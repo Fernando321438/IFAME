@@ -34,6 +34,10 @@ class HomePage extends HookWidget {
                   'Search',
                   style: TextStyle(color: Colors.white, fontSize: 30),
                 ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Text('Powered By Labelscoin™'),
+                ),
                 SizedBox(
                   height: 40,
                 ),
