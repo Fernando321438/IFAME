@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.shomav3">
    <application
-        android:label="shomav3"
+        android:label="Shoma - שׁוֹמַעַת® Song Finder Beta"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
