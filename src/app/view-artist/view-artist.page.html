@@ -1,0 +1,40 @@
+<ion-toolbar>
+  <ion-buttons (click)="logout()" class="logout">
+    <ion-icon class="icon" name="log-out-outline"></ion-icon>
+  </ion-buttons>
+  
+</ion-toolbar><meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+
+<ion-content class="sfondo" >
+  <p class="logo" ><ion-img src="../../assets/icon/Shoma .png"></ion-img>
+    
+
+  </p>
+  <br>  <br>  <br>  <br>
+
+
+
+  <ion-row>
+    <ion-grid>
+      <ion-col>
+        <button fill="outline" mode="ios" mode="md" class="center"  [routerLink]="['/live']">
+          <h1>
+            LIVE
+          </h1>
+        </button>
+        <br>
+ 
+        <span class="divider line one-line" color="white"> OR </span>
+ 
+      <button fill="outline" mode="ios" mode="md" class="center" color="white"  [routerLink]="['/recorder']" >
+          <h1>
+            RECORDING
+          </h1>
+        </button>
+      </ion-col>
+    </ion-grid>
+  </ion-row>
+  <p class="version">
+    Powered by Labelscoin™  </p>
+</ion-content>
